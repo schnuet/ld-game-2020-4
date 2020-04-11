@@ -9,7 +9,7 @@
 
 ## Folder structure
 
-To be defined. 
+To be defined.
 E.g.:
 
     objects     # all instanceable scenes
@@ -17,3 +17,9 @@ E.g.:
     rooms       # scenes that contain a playable environment, like levels/screens/etc...
     sounds      # short sound files
     sprites     # all sprites of the game
+
+## Code conventions
+
+For this project, we will be following the Godot naming conventions. ([See GDScript style guide](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_styleguide.html#doc-gdscript-styleguide))
+
+    GDScript: Classes (nodes) use PascalCase, variables and functions use snake_case, and constants use ALL_CAPS.
