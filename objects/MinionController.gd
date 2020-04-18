@@ -9,6 +9,7 @@ export(float) var min_y_distance = 1
 export(float) var min_x_distance = 0.5
 var nav2D : Navigation2D
 
+var is_at_ladder = false
 
 var target_pos
 
@@ -43,17 +44,25 @@ func _physics_process(delta):
 		return
 	
 	var vec_to_target_pos = path[1] - position
-	var x_dir = 0
 	
-	if vec_to_target_pos.x > 0:
-		x_dir = 1
-	elif vec_to_target_pos.x < 0:
-		x_dir = -1
-
-	velocity.x = x_dir * walk_speed
-	velocity.y += GRAVITY * delta	
-
-	velocity = move_and_slide(velocity)
+	var should_use_ladder = _should_use_lader(vec_to_target_pos)
+	
+	if should_use_ladder == 0:
+	
+		var x_dir = 0
+		
+		if vec_to_target_pos.x > 0:
+			x_dir = 1
+		elif vec_to_target_pos.x < 0:
+			x_dir = -1
+	
+		velocity.x = x_dir * walk_speed
+		velocity.y += GRAVITY * delta	
+	
+		velocity = move_and_slide(velocity)
+	
+	#elif should_use_ladder == 1:
+		
 
 func is_at_target():
 	var extents = $CollisionShape2D.shape.extents
@@ -62,3 +71,31 @@ func is_at_target():
 		if abs(position.y - target_pos.y) <= (extents.y * 2):
 			return true
 	return false
+
+# returns 0 for "should not use", 1 for "should go down", -1 for "should go up"
+func _should_use_lader(to_target):
+	if abs(to_target.y) > abs(to_target.x):
+		if to_target.y > 0:
+			return 1
+		else:
+			return -1
+	return 0
+	
+
+func _on_Area2D_body_entered(body):
+	if target_pos == null:
+		return
+	var path = nav2D.get_simple_path(position, target_pos)
+	if path.empty():
+		return
+		
+	var vec_to_target_pos = path[1] - position
+	if abs(vec_to_target_pos.y) > abs(vec_to_target_pos.x):
+		print("Use Ladder")
+	
+	is_at_ladder = true
+	print("At Ladder")
+
+
+func _on_Area2D_body_exited(body):
+	print("Exit Ladder")
