@@ -4,6 +4,13 @@ const GRAVITY = 200.0
 const WALK_SPEED = 100
 
 var velocity = Vector2()
+var is_on_ladder = false
+
+func enter_ladder():
+	print("Enter ladder")
+	
+func exit_ladder():
+	print("Exit ladder")
 
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY
