@@ -28,7 +28,7 @@ func _physics_process(delta):
 
 	if velocity.x != 0:
 		$AnimatedSprite.play()
-		$AnimatedSprite.flip_h = true if velocity.x < 0 else false
+		$AnimatedSprite.flip_h = velocity.x < 0
 	else:
 		$AnimatedSprite.frame = 0
 		$AnimatedSprite.stop()
@@ -44,4 +44,4 @@ func _physics_process(delta):
 		else:
 			velocity.y = 0
 
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
