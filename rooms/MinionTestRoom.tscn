@@ -18,8 +18,7 @@ script/source = "extends Node2D
 
 export(Vector2) var end
 var nav2D : Navigation2D
-
-onready var kidney = $Stations/KidneyStation
+onready var minion = $Minion
 var path = []
 
 # Declare member variables here. Examples:
@@ -34,32 +33,20 @@ func _input(event):
 			# If it's the right button, set the ending point
 			end = event.position
 			print_debug(\"Clicked\")
-			if !kidney.idle_minions.empty():
-				for minion in kidney.idle_minions:
-					minion.move_to_pos(end)
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_K:
-			kidney.perform_action()
+			minion.move_to_pos(end)
+		# Reset the sprite position       
 		
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
-	kidney.nav2D = nav2D
 	minion.nav2D = nav2D
-	for station in find_node(\"Stations\").get_children():
-		station.connect(\"worker_requested\", self, \"on_worker_requested\")
-		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 
-func on_worker_requested(station):
-	print(\"Worker-request received \", station)
 
-func on_worker_removed(station):
-	print(\"Worker-remove received\", station)
 
 func _process(delta):
 	# Get the list of points that compose the path
-	#path = nav2D.get_simple_path(minion.position, end)	
+	path = nav2D.get_simple_path(minion.position, end)	
 	# Update the node so the _draw() function is called
 	update()
 

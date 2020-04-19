@@ -24,14 +24,14 @@ animations = [ {
 "name": "create",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "standard",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "prepare",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "standard",
 "speed": 5.0
 } ]
 
@@ -44,4 +44,4 @@ frames = SubResource( 1 )
 animation = "create"
 
 [node name="NewMinionPosition" type="Node2D" parent="." index="5"]
-position = Vector2( 48, 120 )
+position = Vector2( 48, 128 )
