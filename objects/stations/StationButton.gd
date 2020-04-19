@@ -1,12 +1,25 @@
 extends Area2D
 
+tool
+
 signal button_action_triggered
 
 var state = 'idle'
 var is_hovered = false
 var is_active = false
 
+export var enabled = true setget set_enabled, get_enabled;
+
 func _process(_delta):
+
+	# don't run this while in editor
+	if Engine.editor_hint:
+		return;
+
+	# don't run if disabled
+	if not enabled:
+		return;
+
 	is_active = Input.is_action_pressed("trigger_action") and is_hovered
 
 	if Input.is_action_just_pressed("trigger_action") and is_hovered:
@@ -25,3 +38,10 @@ func _on_Button_body_entered(body):
 func _on_Button_body_exited(body):
 	if body.name == "Player":
 		is_hovered = false
+
+func set_enabled(value):
+	enabled = value;
+	visible = value;
+
+func get_enabled():
+	return enabled;
