@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://objects/stations/HeartStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
@@ -8,9 +8,6 @@
 [ext_resource path="res://sprites/stations/heart/room_heart_pump4.png" type="Texture" id=6]
 [ext_resource path="res://sprites/stations/heart/room_heart_pump5.png" type="Texture" id=7]
 [ext_resource path="res://sprites/stations/heart/room_heart_pump3.png" type="Texture" id=8]
-[ext_resource path="res://sprites/stations/icons/icon_add_minion-sheet.png" type="Texture" id=9]
-[ext_resource path="res://objects/stations/StationButton.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sprites/stations/icons/icon_remove_minion.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -29,18 +26,3 @@ frames = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AddMinionStationButton" parent="." index="6" instance=ExtResource( 10 )]
-
-[node name="Sprite" parent="AddMinionStationButton" index="1"]
-texture = ExtResource( 9 )
-
-[node name="RemoveMinionStationButton2" parent="." index="7" instance=ExtResource( 10 )]
-position = Vector2( 28, 0 )
-
-[node name="Sprite" parent="RemoveMinionStationButton2" index="1"]
-texture = ExtResource( 11 )
-
-[editable path="AddMinionStationButton"]
-
-[editable path="RemoveMinionStationButton2"]
