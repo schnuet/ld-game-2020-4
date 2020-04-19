@@ -19,8 +19,10 @@ script/source = "extends Node2D
 export(Vector2) var end
 var nav2D : Navigation2D
 
+onready var minion = $Minion
 onready var kidney = $Stations/KidneyStation
 var path = []
+var idle_minions = []
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -40,13 +42,12 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_K:
 			kidney.perform_action()
-		
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
 	kidney.nav2D = nav2D
-	minion.nav2D = nav2D
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
@@ -54,17 +55,19 @@ func _ready():
 
 func on_worker_requested(station):
 	print(\"Worker-request received \", station)
+	var m = idle_minions.pop_front()
+	m.move_to_pos(station.global_position)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
-	
+
 func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);
 	station.receive_protein_from($Player, 1);
 
 func _process(delta):
 	# Get the list of points that compose the path
-	#path = nav2D.get_simple_path(minion.position, end)	
+	#path = nav2D.get_simple_path(minion.position, end)
 	# Update the node so the _draw() function is called
 	update()
 
@@ -77,6 +80,9 @@ func _draw():
 # room connections
 func _on_StomachStation_player_requested_protein():
 	$Stations/StomachStation.give_protein_to($Player, 1);
+
+func _on_KidneyStation_minion_created(minion):
+	idle_minions.append(minion)
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -203,3 +209,4 @@ position = Vector2( 48, 384 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
+[connection signal="minion_created" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_created"]
