@@ -18,18 +18,22 @@ var upgrade_level = 0;
 var action_timer_time = 1; # in seconds
 
 signal worker_requested;
-
+signal worker_removed
 
 func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateLabels();
-	find_node("AddMinionStationButton").connect("button_action_triggered", self, "request_worker")
+	$AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
+	$RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
 
 # worker methods
 
 func request_worker():
 	emit_signal("worker_requested", self);
+
+func remove_worker():
+	emit_signal("worker_removed", self)
 
 func add_worker(worker):
 	assigned_workers.append(worker);
