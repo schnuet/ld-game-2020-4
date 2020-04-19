@@ -8,9 +8,11 @@ var is_on_ladder = false
 
 func enter_ladder():
 	print("Enter ladder")
+	is_on_ladder = true
 	
 func exit_ladder():
 	print("Exit ladder")
+	is_on_ladder = false
 
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY
@@ -21,5 +23,13 @@ func _physics_process(delta):
 		velocity.x =  WALK_SPEED
 	else:
 		velocity.x = 0
+
+	if is_on_ladder:
+		if Input.is_action_pressed("up"):
+			velocity.y = -WALK_SPEED
+		elif Input.is_action_pressed("down"):
+			velocity.y = WALK_SPEED
+		else:
+			velocity.y = 0
 
 	move_and_slide(velocity)
