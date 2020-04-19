@@ -1,27 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/stations/StomachStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_producing_1.png" type="Texture" id=3]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_producing_2.png" type="Texture" id=4]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_producing_3.png" type="Texture" id=5]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_producing_4.png" type="Texture" id=6]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_idle_empty.png" type="Texture" id=7]
-[ext_resource path="res://sprites/stations/stomach/stomach_room_idle.png" type="Texture" id=8]
+[ext_resource path="res://sprites/stations/stomach/stomach_room2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/stations/stomach/stomach_room_idle.png" type="Texture" id=4]
+[ext_resource path="res://sprites/stations/stomach/stomach_room1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/stations/stomach/stomach_room3.png" type="Texture" id=6]
+[ext_resource path="res://sprites/stations/stomach/stomach_room4.png" type="Texture" id=7]
+[ext_resource path="res://objects/stations/stationButtons/TakeProteinStationButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/stations/StomachStation/StomachStationButtons.gd" type="Script" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "idle_empty",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "producing",
 "speed": 5.0
@@ -31,7 +27,7 @@ animations = [ {
 script = ExtResource( 1 )
 max_protein = 15
 
-[node name="AnimatedSprite" parent="." index="0"]
+[node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
 animation = "producing"
 
@@ -42,12 +38,18 @@ autostart = true
 [node name="EnergyTimer" type="Timer" parent="." index="6"]
 autostart = true
 
+[node name="StationButtons" parent="." index="7"]
+script = ExtResource( 9 )
+
 [node name="AddMinionStationButton" parent="StationButtons" index="0"]
+visible = false
 enabled = false
 
 [node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+visible = false
 enabled = false
-[connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
-[connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
+
+[node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
+[connection signal="button_action_triggered" from="StationButtons/TakeProteinStationButton" to="." method="_on_TakeProteinStationButton_button_action_triggered"]

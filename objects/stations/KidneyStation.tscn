@@ -2,46 +2,44 @@
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/KidneyStation.gd" type="Script" id=2]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation1.png" type="Texture" id=3]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation2.png" type="Texture" id=4]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion2.png" type="Texture" id=5]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation10.png" type="Texture" id=6]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation5.png" type="Texture" id=7]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation7.png" type="Texture" id=8]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation6.png" type="Texture" id=9]
-[ext_resource path="res://sprites/stations/kidney/kidney_room.png" type="Texture" id=10]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion1.png" type="Texture" id=11]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation5.png" type="Texture" id=3]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion2.png" type="Texture" id=6]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation4.png" type="Texture" id=7]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation6.png" type="Texture" id=8]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation1.png" type="Texture" id=9]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation7.png" type="Texture" id=10]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation3.png" type="Texture" id=11]
 [ext_resource path="res://sprites/stations/kidney/kidney_room_preparation8.png" type="Texture" id=12]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion3.png" type="Texture" id=13]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation4.png" type="Texture" id=14]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation3.png" type="Texture" id=15]
-[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation9.png" type="Texture" id=16]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation9.png" type="Texture" id=13]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_create minion1.png" type="Texture" id=14]
+[ext_resource path="res://sprites/stations/kidney/kidney_room_preparation10.png" type="Texture" id=15]
+[ext_resource path="res://sprites/stations/kidney/room_kidney_idle.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 11 ), ExtResource( 5 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "create",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 16 ) ],
 "loop": true,
-"name": "prepare",
+"name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ) ],
 "loop": true,
-"name": "standard",
+"name": "prepare",
 "speed": 5.0
 } ]
 
 [node name="KidneyStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="AnimatedMachine" type="AnimatedSprite" parent="." index="4"]
-position = Vector2( 64, 64 )
+[node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
-animation = "create"
 
 [node name="NewMinionPosition" type="Node2D" parent="." index="5"]
 position = Vector2( 48, 128 )
