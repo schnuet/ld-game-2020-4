@@ -128,8 +128,9 @@ func _move_horizontal(direction, delta_time):
 	velocity.x = current_movement_dir * walk_speed
 	if abs(velocity.x * delta_time) > abs(direction.x):
 		position.x += direction.x
-	else:
-		velocity = move_and_slide(velocity)
+	else:		
+		direction.y = 0
+		position = position.move_toward(position + direction, delta_time * walk_speed)
 
 func _is_at_target():
 	var coll_shape = $CollisionShape2D
