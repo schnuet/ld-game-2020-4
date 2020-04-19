@@ -19,11 +19,8 @@ enum CollectingState {
 
 var current_state = CollectingState.Idle
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	minion.nav2D = nav2D
-	minion.resource_store = resource_store
-	minion.animation_handler = animation_handler
+func set_navigation_2d(nav2d):
+	minion.nav2D
 
 func go_to_station(position:Vector2):
 	pass

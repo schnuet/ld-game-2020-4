@@ -32,15 +32,14 @@ func _input(event):
 			# If it's the right button, set the ending point
 			end = event.position
 			print_debug(\"Clicked\")
-			minion.move_to_pos(end)
+			minion.go_to_station(end)
 		# Reset the sprite position       
 		
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
-	minion.nav2D = nav2D
-
+	minion.set_navigation_2d(nav2D)
 
 
 func _process(delta):
