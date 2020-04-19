@@ -17,19 +17,19 @@ var upgrade_level = 0;
 # action
 var action_timer_time = 1; # in seconds
 
-signal request_worker;
+signal worker_requested;
 
 
 func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateLabels();
-
+	find_node("AddMinionStationButton").connect("button_action_triggered", self, "request_worker")
 
 # worker methods
 
 func request_worker():
-	emit_signal("request_worker");
+	emit_signal("worker_requested", self);
 
 func add_worker(worker):
 	assigned_workers.append(worker);
