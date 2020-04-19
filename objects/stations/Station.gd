@@ -66,4 +66,17 @@ func perform_action():
 func _on_ActionTimer_timeout():
 	$ActionTimer.wait_time = action_timer_time;
 	trigger_action();
-	pass # Replace with function body.
+	
+func add_action_trigger_listener(body, method_as_string):
+	if (!is_connected("action_triggered", body, method_as_string)):
+		connect("action_triggered", body, method_as_string);
+		return true;
+	else:
+		return false;
+
+func remove_action_trigger_listener(body, method_as_string):
+	if (is_connected("action_triggered", body, method_as_string)):
+		disconnect("action_triggered", body, method_as_string);
+		return true;
+	else:
+		return false;
