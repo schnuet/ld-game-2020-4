@@ -29,13 +29,21 @@ func _on_ProteinStash_body_exited(body):
 
 func _on_EnergyStash_trigger(body):
 	if (!$EnergyStash.visible): return false;
-	var energy = $ResourceStore.take_energy(1);
-	body.ResourceStore.add_energy(energy);
+	
+	if (body.ResourceStore.energy > 0):
+		$ResourceStore.add_energy(body.ResourceStore.take_energy(1));
+	else:
+		var energy = $ResourceStore.take_energy(1);
+		body.ResourceStore.add_energy(energy);
 
 func _on_ProteinStash_trigger(body):
 	if (!$ResourceStore.visible): return false;
-	var protein = $ResourceStore.take_protein(1);
-	body.ResourceStore.add_protein(protein);
+	
+	if (body.ResourceStore.protein > 0):
+		$ResourceStore.add_protein(body.ResourceStore.take_protein(1));
+	else:
+		var protein = $ResourceStore.take_protein(1);
+		body.ResourceStore.add_protein(protein);
 
 
 
