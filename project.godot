@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Game",
 "language": "GDScript",
 "path": "res://rooms/start.gd"
+}, {
+"base": "Area2D",
+"class": "Station",
+"language": "GDScript",
+"path": "res://objects/stations/Station.gd"
 } ]
 _global_script_class_icons={
-"Game": ""
+"Game": "",
+"Station": ""
 }
 
 [application]
@@ -28,8 +34,8 @@ config/icon="res://icon.png"
 
 window/size/width=960
 window/size/height=540
-window/size/test_width=1440
-window/size/test_height=810
+window/size/test_width=960
+window/size/test_height=540
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
