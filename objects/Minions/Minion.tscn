@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://objects/Minions/MinionController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/minions/purple/fetusminion_walk_right_purple.png" type="Texture" id=2]
+[ext_resource path="res://sprites/minions/purple/fetusminion_walk_left_steaksheetpurple.png" type="Texture" id=3]
+[ext_resource path="res://objects/resources/ResourceStore.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -34,6 +36,38 @@ region = Rect2( 160, 0, 32, 32 )
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
+"name": "empty_walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
 "name": "default",
 "speed": 5.0
 } ]
@@ -52,3 +86,11 @@ shape = SubResource( 1 )
 [node name="EmptyWalkAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )
 frames = SubResource( 8 )
+animation = "empty_walk"
+
+[node name="EnergyWalkAnimation" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -24 )
+frames = SubResource( 15 )
+
+[node name="ResourceStore" parent="." instance=ExtResource( 4 )]

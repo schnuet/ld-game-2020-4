@@ -1,13 +1,17 @@
 extends KinematicBody2D
 
-const GRAVITY = 200.0
+var velocity:Vector2 = Vector2()
 
-var velocity = Vector2()
-
-export(int) var walk_speed = 100
-var nav2D : Navigation2D
+export var walk_speed:int = 100
+var nav2D:Navigation2D
 
 onready var empty_walk_animation = $EmptyWalkAnimation
+onready var energy_walk_animation = $EnergyWalkAnimation
+onready var resource_store = $ResourceStore
+
+export var debug_energystore:int = 0
+
+var active_animation:AnimatedSprite
 
 var is_at_ladder = false
 var ladder_top
@@ -38,7 +42,8 @@ func move_to_pos(pos):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#nav2D = get_tree().get_node("Navigation2D")
+	resource_store.energy = debug_energystore
+	_activate_needed_animation()
 	pass
 
 
@@ -152,16 +157,28 @@ func _ladder_usage_direction(to_target):
 	return 0
 	
 
-func _handle_visualization():
+func _handle_visualization():	
+	_activate_needed_animation()
+		
 	if current_movement_dir == 0:
-		empty_walk_animation.stop()
-		empty_walk_animation.frame = 0
+		active_animation.stop()
+		active_animation.frame = 0
 	else:
 		if current_movement_dir == -1:
-			empty_walk_animation.flip_h = true
+			active_animation.flip_h = true
 		else:
-			empty_walk_animation.flip_h = false
-		empty_walk_animation.play()
+			active_animation.flip_h = false
+		active_animation.play()
+
+func _activate_needed_animation():
+	if resource_store.energy > 0:
+		active_animation = energy_walk_animation
+		empty_walk_animation.visible = false
+		energy_walk_animation.visible = true
+	else:
+		active_animation = empty_walk_animation
+		empty_walk_animation.visible = true
+		energy_walk_animation.visible = false
 
 	
 func enter_ladder(top_pos, bottom_pos, id):
