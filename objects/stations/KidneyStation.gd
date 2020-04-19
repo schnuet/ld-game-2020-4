@@ -1,5 +1,7 @@
 extends "res://objects/stations/Station.gd"
 
+signal minion_created
+
 var Minion = preload("res://objects/Minions/Minion.tscn");
 var nav2D : Navigation2D
 
