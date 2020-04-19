@@ -12,6 +12,7 @@ var nav2D : Navigation2D
 var is_at_ladder = false
 var ladder_top
 var ladder_bottom
+var current_ladder_id
 
 var current_ladder_movement = 0
 
@@ -47,7 +48,7 @@ func _physics_process(delta):
 	if target_pos == null:
 		return
 		
-	if is_at_target():
+	if _is_at_target():
 		print("At target")
 		target_pos = null
 		return
@@ -61,16 +62,17 @@ func _physics_process(delta):
 	
 	var ladder_usage_direction = _ladder_usage_direction(vec_to_target_pos)
 	if current_state == State.AtLadder:
-	
+		#print_debug("At Ladder")
 		if ladder_usage_direction == 0:
 	
-			_move_horizontal(vec_to_target_pos)	
+			_move_horizontal(vec_to_target_pos, delta)	
 			
 		else:
 			current_state = State.OnLadder
 			current_ladder_movement = ladder_usage_direction
 	
 	elif current_state == State.OnLadder:
+		#print_debug("On Ladder")
 		if current_ladder_movement == 1:
 			if position.is_equal_approx(ladder_bottom):
 				current_state = State.OnGround
@@ -96,11 +98,11 @@ func _physics_process(delta):
 				position = position.move_toward(ladder_top, walk_speed * delta)
 	
 	elif current_state == State.OnGround:
-		
-		_move_horizontal(vec_to_target_pos)
+		#print_debug("On Ground")
+		_move_horizontal(vec_to_target_pos, delta)
 			
 
-func _move_horizontal(delta_target):
+func _move_horizontal(delta_target, delta_time):
 	var x_dir = 0
 		
 	if delta_target.x > 0:
@@ -109,14 +111,16 @@ func _move_horizontal(delta_target):
 		x_dir = -1
 
 	velocity.x = x_dir * walk_speed
-	
-	velocity = move_and_slide(velocity)
+	if abs(velocity.x * delta_time) > abs(delta_target.x):
+		position.x += delta_target.x
+	else:
+		velocity = move_and_slide(velocity)
 
-func is_at_target():
+func _is_at_target():
 	var extents = $CollisionShape2D.shape.extents
 	
-	if abs(position.x - target_pos.x) < (extents.x / 2):
-		if abs(position.y - target_pos.y) <= (extents.y * 2):
+	if abs(global_position.x - target_pos.x) < (extents.x / 2):
+		if abs(global_position.y - target_pos.y) <= (extents.y * 2):
 			return true
 	return false
 
@@ -129,13 +133,19 @@ func _ladder_usage_direction(to_target):
 			return -1
 	return 0
 	
-func enter_ladder(top_pos, bottom_pos):
-	ladder_top = top_pos
-	ladder_bottom = bottom_pos
-	
-	if current_state != State.OnLadder:
+func enter_ladder(top_pos, bottom_pos, id):
+	if id != current_ladder_id:
+		current_ladder_id = id
 		current_state = State.AtLadder
+		print_debug("Enter ladder:", id)
+		ladder_top = top_pos
+		ladder_bottom = bottom_pos
+	
+	
 	
 
-func exit_ladder():
-	current_state = State.OnGround
+func exit_ladder(id):
+	if id == current_ladder_id:
+		current_ladder_id = ""
+		current_state = State.OnGround
+		print_debug("Leave ladder:", id)
