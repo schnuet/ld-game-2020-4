@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Station
+
 # limits
 export var max_energy = 10;
 export var max_protein = 10;
@@ -9,9 +11,10 @@ export var protein_needed_for_update = 10;
 export var energy_needed_for_action = 0;
 
 var assigned_workers = [];
+export var max_minions = 2;
 
 # update
-var can_be_updated setget , get_can_be_updated;
+var can_be_updated setget ,get_can_be_updated;
 var upgrade_level = 0;
 
 # action
@@ -24,7 +27,7 @@ signal station_protein_requested;
 func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
-	$ResourceDisplay.updateLabels();
+	$ResourceDisplay.updateRects();
 	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
 	$StationButtons/RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
 	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
@@ -54,15 +57,19 @@ func get_can_be_updated():
 	return $ResourceStore.protein >= protein_needed_for_update;
 	
 func update():
-	if (!can_be_updated):
+	if (!get_can_be_updated()):
 		return false;
 	else:
 		perform_update();
 
 func perform_update():
+	print("performing station update");
 	$ResourceStore.take_protein(protein_needed_for_update);
 	upgrade_level += 1;
-
+	protein_needed_for_update *= 2;
+	$ResourceStore.set_max_protein(protein_needed_for_update);
+	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
+	$ActionTimer.wait_time *= 0.8;
 
 
 # action methods
@@ -99,20 +106,11 @@ func receive_protein_from(body, amount = 1):
 		$ResourceStore.add_protein(protein_taken);
 
 
-
-# add listeners for an action trigger
-
-func add_action_trigger_listener(body, method_as_string):
-	if (!is_connected("action_triggered", body, method_as_string)):
-		connect("action_triggered", body, method_as_string);
-		return true;
+# listen for resource update readyness
+func _on_ResourceStore_protein_amount_changed(amount):
+	if (get_can_be_updated()):
+		print("starting station update");
+		update();
 	else:
-		return false;
-
-func remove_action_trigger_listener(body, method_as_string):
-	if (is_connected("action_triggered", body, method_as_string)):
-		disconnect("action_triggered", body, method_as_string);
-		return true;
-	else:
-		return false;
-
+		print("station update not ready yet: " + str(protein_needed_for_update));
+		print("available:" + str(amount));
