@@ -18,14 +18,17 @@ var upgrade_level = 0;
 var action_timer_time = 1; # in seconds
 
 signal worker_requested;
-signal worker_removed
+signal worker_removed;
+signal station_protein_requested;
 
 func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateLabels();
-	$AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
-	$RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
+	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
+	$StationButtons/RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
+	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
+
 
 # worker methods
 
@@ -37,6 +40,12 @@ func remove_worker():
 
 func add_worker(worker):
 	assigned_workers.append(worker);
+
+
+# protein movement signals
+	
+func add_protein():
+	emit_signal("station_protein_requested", self);
 
 
 # update methods
@@ -76,6 +85,21 @@ func perform_action():
 	pass;
 
 
+
+# move protein to another object
+func give_protein_to(body, amount = 1):
+	var protein_taken = $ResourceStore.take_protein(amount);
+	if (protein_taken):
+		body.get_node("ResourceStore").add_protein(protein_taken);
+
+# get protein from another object
+func receive_protein_from(body, amount = 1):
+	var protein_taken = body.get_node("ResourceStore").take_protein(amount);
+	if (protein_taken):
+		$ResourceStore.add_protein(protein_taken);
+
+
+
 # add listeners for an action trigger
 
 func add_action_trigger_listener(body, method_as_string):
@@ -91,3 +115,4 @@ func remove_action_trigger_listener(body, method_as_string):
 		return true;
 	else:
 		return false;
+

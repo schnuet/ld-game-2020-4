@@ -13,13 +13,6 @@ func _on_GetProteinStationButton_button_action_triggered():
 	emit_signal("player_requested_protein");
 
 
-# move protein to another object
-func transfer_protein(body, amount = 1):
-	var protein_taken = $ResourceStore.take_protein(amount);
-	if (protein_taken):
-		body.get_node("ResourceStore").add_protein(protein_taken);
-
-
 # add resources on timeout
 
 func _on_ProteinTimer_timeout():

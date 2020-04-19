@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://objects/stations/StomachStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://sprites/stations/stomach/stomach_room_producing_4.png" type="Texture" id=6]
 [ext_resource path="res://sprites/stations/stomach/stomach_room_idle_empty.png" type="Texture" id=7]
 [ext_resource path="res://sprites/stations/stomach/stomach_room_idle.png" type="Texture" id=8]
-[ext_resource path="res://objects/stations/StationButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sprites/stations/icons/icon_add_minion-sheet.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,14 +16,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "idle_empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "producing",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle_empty",
 "speed": 5.0
 } ]
 
@@ -43,17 +41,7 @@ autostart = true
 
 [node name="EnergyTimer" type="Timer" parent="." index="6"]
 autostart = true
-
-[node name="StationButtons" type="Node2D" parent="." index="7"]
-
-[node name="GetProteinStationButton" parent="StationButtons" index="0" instance=ExtResource( 9 )]
-
-[node name="Sprite" parent="StationButtons/GetProteinStationButton" index="1"]
-texture = ExtResource( 10 )
 [connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
 [connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
-[connection signal="button_action_triggered" from="StationButtons/GetProteinStationButton" to="." method="_on_GetProteinStationButton_button_action_triggered"]
-
-[editable path="StationButtons/GetProteinStationButton"]
