@@ -3,6 +3,10 @@ extends KinematicBody2D
 var velocity:Vector2 = Vector2()
 
 export var walk_speed:int = 100
+export var idle_speed:int = 15
+export var time_to_idle:float = 1
+export var idle_range:float = 20
+export var idle_dir_change_time = 2
 var nav2D:Navigation2D
 
 onready var resource_store = $ResourceStore
@@ -21,31 +25,43 @@ var current_ladder_movement = 0
 
 var target_pos
 
-enum State {
+enum MovingState {
 	AtLadder,
 	OnLadder,
-	OnGround
+	OnGround	
 }
 
+enum MissionState {
+	AtTarget,
+	InIdleTransition,
+	Idle,
+	GoingToTarget
+}
+
+
+
 var current_movement_dir = 0
+var current_moving_state = MovingState.OnGround
+var current_mission_state = MissionState.Idle
+var current_idle_dir = 0
+var current_idle_dir_time = 0
 
-
-var current_state = State.OnGround
+var scene_timer:SceneTreeTimer
 
 func move_to_pos(pos):
 	
 	current_ladder_movement = 0
 	var path = nav2D.get_simple_path(global_position, pos)
-	if path.empty():
-		target_pos = null
-	else:		
+	if !path.empty():		
 		target_pos = path[path.size() - 1]
+		current_mission_state = MissionState.GoingToTarget
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	resource_store.energy = debug_energystore
 	animation_handler.update_visualization(0, resource_store.energy)
+	target_pos = global_position
 
 
 func _process(delta):
@@ -58,13 +74,36 @@ func _physics_process(delta):
 	if target_pos == null:
 		return
 		
-	if _is_at_target():
-		print("At target")
-		target_pos = null
+	if _is_at_target() && current_mission_state == MissionState.GoingToTarget:			
 		current_movement_dir = 0
+		current_mission_state = MissionState.AtTarget
+	
+				
+	if current_mission_state == MissionState.AtTarget:
+		scene_timer = get_tree().create_timer(time_to_idle)
+		current_mission_state = MissionState.InIdleTransition
+	elif current_mission_state == MissionState.InIdleTransition:
+		if scene_timer.time_left <= 0:
+			current_mission_state = MissionState.Idle
+	elif current_mission_state == MissionState.Idle:
+		current_idle_dir_time += delta
+		if current_idle_dir_time >= idle_dir_change_time:
+			current_idle_dir_time = 0	
+			randomize()
+			current_idle_dir = randi() % 3 - 1
+			if target_pos.x + idle_range <= global_position.x && current_idle_dir == 1:
+				current_idle_dir = -1
+			elif target_pos.x - idle_range >= global_position.x && current_idle_dir == -1:
+				current_idle_dir = 1
+		
+		global_position += current_idle_dir * Vector2.RIGHT * idle_speed * delta
+		global_position.x = clamp(global_position.x, target_pos.x - idle_range, target_pos.x + idle_range)
+		animation_handler.update_idle_visualization(current_idle_dir, resource_store.energy)
+			
+		
 	else:	
 		var path = nav2D.get_simple_path(position, target_pos)	
-		
+			
 		if path.empty():
 			return
 		var vec_to_target_pos = path[1] - position		
@@ -75,22 +114,22 @@ func _physics_process(delta):
 func _handle_movement(direction, delta_time):
 	
 	
-	if current_state == State.AtLadder:
+	if current_moving_state == MovingState.AtLadder:
 		var ladder_usage_direction = _ladder_usage_direction(direction)		
 		if ladder_usage_direction == 0:	
 			_move_horizontal(direction, delta_time)	
 			
 		else:
-			current_state = State.OnLadder
+			current_moving_state = MovingState.OnLadder
 			current_ladder_movement = ladder_usage_direction
 	
-	elif current_state == State.OnLadder:
+	elif current_moving_state == MovingState.OnLadder:
 		#print_debug("On Ladder")
 		if current_ladder_movement == 0:
 			current_ladder_movement = _ladder_usage_direction(direction)
 		if current_ladder_movement == 1:
 			if position.is_equal_approx(ladder_bottom):
-				current_state = State.AtLadder
+				current_moving_state = MovingState.AtLadder
 			
 			elif is_equal_approx(position.x, ladder_bottom.x) == false:				
 				var x_pos = move_toward(position.x, ladder_bottom.x, walk_speed * delta_time)
@@ -102,7 +141,7 @@ func _handle_movement(direction, delta_time):
 			
 		else:
 			if position.is_equal_approx(ladder_top):
-				current_state = State.AtLadder
+				current_moving_state = MovingState.AtLadder
 				
 			elif is_equal_approx(position.x, ladder_top.x) == false:				
 				var x_pos = move_toward(position.x, ladder_top.x, walk_speed * delta_time)
@@ -112,7 +151,7 @@ func _handle_movement(direction, delta_time):
 			else:
 				position = position.move_toward(ladder_top, walk_speed * delta_time)
 	
-	elif current_state == State.OnGround:
+	elif current_moving_state == MovingState.OnGround:
 		#print_debug("On Ground")
 		_move_horizontal(direction, delta_time)
 			
@@ -136,7 +175,7 @@ func _is_at_target():
 	var coll_shape = $CollisionShape2D
 	var extents = coll_shape.shape.extents
 	var x_extent = extents.x / 2
-	if current_state == State.OnLadder:
+	if current_moving_state == MovingState.OnLadder:
 		x_extent = extents.x * 2
 	
 	if abs(coll_shape.global_position.x - target_pos.x) < (x_extent):
@@ -160,7 +199,7 @@ func _ladder_usage_direction(to_target):
 func enter_ladder(top_pos, bottom_pos, id):
 	if id != current_ladder_id:
 		current_ladder_id = id
-		current_state = State.AtLadder
+		current_moving_state = MovingState.AtLadder
 		print_debug("Enter ladder:", id)
 		ladder_top = top_pos
 		ladder_bottom = bottom_pos	
@@ -169,5 +208,5 @@ func enter_ladder(top_pos, bottom_pos, id):
 func exit_ladder(id):
 	if id == current_ladder_id:
 		current_ladder_id = ""
-		current_state = State.OnGround
+		current_moving_state = MovingState.OnGround
 		print_debug("Leave ladder:", id)
