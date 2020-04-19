@@ -17,7 +17,7 @@ func _process(_delta):
 		return;
 
 	# don't run if disabled
-	if not enabled:
+	if not enabled or not visible:
 		return;
 
 	is_active = Input.is_action_pressed("trigger_action") and is_hovered
