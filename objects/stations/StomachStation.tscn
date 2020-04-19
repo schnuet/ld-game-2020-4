@@ -75,9 +75,18 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="ProteinTimer" type="Timer" parent="." index="7"]
+wait_time = 2.5
+autostart = true
+
+[node name="EnergyTimer" type="Timer" parent="." index="8"]
+autostart = true
 [connection signal="body_entered" from="EnergyStash" to="." method="_on_EnergyStash_body_entered"]
 [connection signal="body_exited" from="EnergyStash" to="." method="_on_EnergyStash_body_exited"]
 [connection signal="body_entered" from="ProteinStash" to="." method="_on_ProteinStash_body_entered"]
 [connection signal="body_exited" from="ProteinStash" to="." method="_on_ProteinStash_body_exited"]
 [connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
 [connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
+[connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]

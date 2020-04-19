@@ -1,13 +1,28 @@
 extends "res://objects/stations/Station.gd"
 
-var protein_created_on_action = 1;
-var energy_created_on_action = 1;
+var energy_step_time setget set_energy_step_time, get_energy_step_time;
+var protein_step_time setget set_protein_step_time, get_protein_step_time;
 
-# performed on each action tick:
-func perform_action():
-	$ResourceStore.add_protein(protein_created_on_action);
-	$ResourceStore.add_energy(energy_created_on_action);
 
+func _on_ProteinTimer_timeout():
+	$ResourceStore.add_protein(1);
+	
+func _on_EnergyTimer_timeout():
+	$ResourceStore.add_energy(1);
+
+
+
+func get_energy_step_time():
+	return $EnergyTimer.wait_time;
+
+func set_energy_step_time(value):
+	$EnergyTimer.wait_time = value;
+
+func get_protein_step_time():
+	return $ProteinTimer.wait_time;
+	
+func set_protein_step_time(value):
+	$ProteinTimer.wait_time = value;
 
 
 # listening to character enter on resource stashes
