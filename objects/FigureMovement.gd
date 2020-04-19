@@ -26,6 +26,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 
+	if velocity.x != 0:
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
+
 	if Input.is_action_just_pressed("trigger_action"):
 		emit_signal("action_triggered")
 
