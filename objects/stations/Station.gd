@@ -53,6 +53,12 @@ func perform_update():
 
 # action methods
 
+# activate action when action timer runs out:
+func _on_ActionTimer_timeout():
+	$ActionTimer.wait_time = action_timer_time;
+	trigger_action();
+
+# perform the action if there's enough energy for it:
 func trigger_action():
 	if ($ResourceStore.energy < energy_needed_for_action):
 		return false;
@@ -60,13 +66,13 @@ func trigger_action():
 		$ResourceStore.take_energy(energy_needed_for_action);
 		perform_action();
 
+# do the action
 func perform_action():
 	pass;
 
-func _on_ActionTimer_timeout():
-	$ActionTimer.wait_time = action_timer_time;
-	trigger_action();
-	
+
+# add listeners for an action trigger
+
 func add_action_trigger_listener(body, method_as_string):
 	if (!is_connected("action_triggered", body, method_as_string)):
 		connect("action_triggered", body, method_as_string);
