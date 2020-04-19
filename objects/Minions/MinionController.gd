@@ -5,9 +5,8 @@ var velocity:Vector2 = Vector2()
 export var walk_speed:int = 100
 var nav2D:Navigation2D
 
-onready var empty_walk_animation = $EmptyWalkAnimation
-onready var energy_walk_animation = $EnergyWalkAnimation
 onready var resource_store = $ResourceStore
+onready var animation_handler = $AnimationHandler
 
 export var debug_energystore:int = 0
 
@@ -43,8 +42,7 @@ func move_to_pos(pos):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	resource_store.energy = debug_energystore
-	_activate_needed_animation()
-	pass
+	animation_handler.update_visualization(0, resource_store.energy)
 
 
 func _process(delta):
@@ -71,7 +69,7 @@ func _physics_process(delta):
 		
 		_handle_movement(vec_to_target_pos, delta)
 		
-	_handle_visualization()
+	animation_handler.update_visualization(current_movement_dir, resource_store.energy)
 
 func _handle_movement(direction, delta_time):
 	
@@ -156,30 +154,6 @@ func _ladder_usage_direction(to_target):
 			return -1
 	return 0
 	
-
-func _handle_visualization():	
-	_activate_needed_animation()
-		
-	if current_movement_dir == 0:
-		active_animation.stop()
-		active_animation.frame = 0
-	else:
-		if current_movement_dir == -1:
-			active_animation.flip_h = true
-		else:
-			active_animation.flip_h = false
-		active_animation.play()
-
-func _activate_needed_animation():
-	if resource_store.energy > 0:
-		active_animation = energy_walk_animation
-		empty_walk_animation.visible = false
-		energy_walk_animation.visible = true
-	else:
-		active_animation = empty_walk_animation
-		empty_walk_animation.visible = true
-		energy_walk_animation.visible = false
-
 	
 func enter_ladder(top_pos, bottom_pos, id):
 	if id != current_ladder_id:

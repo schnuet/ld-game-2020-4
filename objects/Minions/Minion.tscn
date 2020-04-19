@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://objects/Minions/MinionController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/minions/purple/fetusminion_walk_right_purple.png" type="Texture" id=2]
 [ext_resource path="res://sprites/minions/purple/fetusminion_walk_left_steaksheetpurple.png" type="Texture" id=3]
 [ext_resource path="res://objects/resources/ResourceStore.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Minions/AnimationHandler.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -83,14 +84,17 @@ walk_speed = 250
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
-[node name="EmptyWalkAnimation" type="AnimatedSprite" parent="."]
+[node name="ResourceStore" parent="." instance=ExtResource( 4 )]
+
+[node name="AnimationHandler" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="EmptyWalkAnimation" type="AnimatedSprite" parent="AnimationHandler"]
 position = Vector2( 0, -16 )
 frames = SubResource( 8 )
 animation = "empty_walk"
 
-[node name="EnergyWalkAnimation" type="AnimatedSprite" parent="."]
+[node name="EnergyWalkAnimation" type="AnimatedSprite" parent="AnimationHandler"]
 visible = false
 position = Vector2( 0, -24 )
 frames = SubResource( 15 )
-
-[node name="ResourceStore" parent="." instance=ExtResource( 4 )]
