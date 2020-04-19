@@ -8,8 +8,8 @@ func _ready():
 	pass # Replace with function body.
 
 func perform_action():
-	add_protein(protein_created_on_action);
-	add_energy(energy_created_on_action);
+	$ResourceStore.add_protein(protein_created_on_action);
+	$ResourceStore.add_energy(energy_created_on_action);
 
 
 

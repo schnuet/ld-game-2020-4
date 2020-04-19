@@ -1,9 +1,5 @@
 extends Area2D
 
-# the amount of ressources saved in the station
-var energy = 0;
-var protein = 0;
-
 # limits
 export var max_energy = 10;
 export var max_protein = 10;
@@ -24,40 +20,6 @@ var action_timer_time = 1; # in seconds
 signal request_worker;
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-func _process(delta):
-	if (energy > energy_needed_for_action):
-		pass
-
-
-# add energy and protein
-
-func add_protein(x):
-	protein = min(protein + x, max_protein);
-	return protein;
-
-func add_energy(x):
-	energy = min(energy + x, max_energy);
-	return energy;
-
-
-# get energy and protein
-
-func take_energy(x = 1):
-	if (x > energy): return 0;
-	energy -= x;
-	return x;
-
-func take_protein(x = 1):
-	if (x > protein): return 0;
-	protein -= x;
-	return x;
-
-
-
 # worker methods
 
 func request_worker():
@@ -67,12 +29,15 @@ func add_worker(worker):
 	assigned_workers.append(worker);
 
 
+func _ready():
+	$ResourceStore.max_energy = max_energy;
+	$ResourceStore.max_protein = max_protein;
 
 # update methods
 
 
 func get_can_be_updated():
-	return protein >= protein_needed_for_update;
+	return $ResourceStore.protein >= protein_needed_for_update;
 	
 func update():
 	if (!can_be_updated):
@@ -81,7 +46,7 @@ func update():
 		perform_update();
 
 func perform_update():
-	protein -= protein_needed_for_update;
+	$ResourceStore.take_protein(protein_needed_for_update);
 	upgrade_level += 1;
 
 
@@ -89,10 +54,10 @@ func perform_update():
 # action methods
 
 func trigger_action():
-	if (energy < energy_needed_for_action):
+	if ($ResourceStore.energy < energy_needed_for_action):
 		return false;
 	else:
-		energy -= energy_needed_for_action;
+		$ResourceStore.take_energy(energy_needed_for_action);
 		perform_action();
 
 func perform_action():
