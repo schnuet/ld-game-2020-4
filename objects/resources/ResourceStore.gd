@@ -10,10 +10,6 @@ signal energy_amount_changed;
 signal max_protein_changed;
 signal max_energy_changed;
 
-var can_add_protein setget , get_can_add_protein;
-var protein_is_full setget , get_is_protein_full;
-var energy_is_full setget , get_is_energy_full;
-
 # add energy and protein
 
 func add_energy(x:int):
@@ -42,7 +38,7 @@ func take_protein(x:int = 1):
 	return x;
 
 
-# set max 
+# set max
 
 func set_max_energy(amount):
 	max_energy = amount;
@@ -55,14 +51,11 @@ func set_max_protein(amount):
 func has_energy():
 	return energy > 0
 
-
-# getters
-
-func get_can_add_protein():
+func can_add_protein():
 	return protein < max_protein;
 
-func get_is_protein_full():
+func protein_is_full():
 	return protein >= max_protein;
 
-func get_is_energy_full():
-	return energy >= max_energy;
+func energy_is_full():
+	return energy >= max_energy

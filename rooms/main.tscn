@@ -1,6 +1,5 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://objects/Minions/Minion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Test.gd" type="Script" id=2]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/tiles/Collision.png" type="Texture" id=4]
@@ -21,13 +20,14 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+var Minion = preload(\"res://objects/Minions/Minion.tscn\");
+
 export(Vector2) var end
 var nav2D : Navigation2D
 
-onready var minion = $Minion
 onready var kidney = $Stations/KidneyStation
-var path = []
 var idle_minions = []
+var path = []
 
 func _input(event):
 	# If the user press a mouse button
@@ -37,9 +37,9 @@ func _input(event):
 			# If it's the right button, set the ending point
 			end = event.position
 			print_debug(\"Clicked\")
-			if !kidney.idle_minions.empty():
-				for minion in kidney.idle_minions:
-					minion.move_to_pos(end)
+			if !idle_minions.empty():
+				for minion in idle_minions:
+					minion.go_to_position(end)
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_K:
 			kidney.perform_action()
@@ -48,16 +48,15 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
-	kidney.nav2D = nav2D
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 
 func on_worker_requested(station):
-	print(\"Worker-request received \", station)
 	var m = idle_minions.pop_front()
-	m.move_to_pos(station.global_position)
+	if m != null:
+		m.assign_to_station(station)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
@@ -65,6 +64,9 @@ func on_worker_removed(station):
 func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);
 	station.receive_protein_from($Player, 1);
+
+func get_energy_source():
+	return $Stations/StomachStation
 
 func _process(delta):
 	# Get the list of points that compose the path
@@ -82,8 +84,15 @@ func _draw():
 func _on_StomachStation_player_requested_protein():
 	$Stations/StomachStation.give_protein_to($Player, 1);
 
-func _on_KidneyStation_minion_created(minion):
-	idle_minions.append(minion)
+func _on_KidneyStation_minion_creation_requested():
+	var minion = Minion.instance()
+	minion.god = self
+	minion.set_navigation_2d($Navigation2D)
+	minion.global_position = $Stations/KidneyStation/NewMinionPosition.global_position
+	get_tree().root.add_child(minion)
+	idle_minions.push_back(minion)
+	emit_signal(\"minion_created\", minion)
+
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -224,4 +233,4 @@ position = Vector2( 240, 242 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
-[connection signal="minion_created" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_created"]
+[connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]

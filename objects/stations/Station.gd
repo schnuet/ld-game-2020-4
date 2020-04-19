@@ -46,16 +46,15 @@ func add_worker(worker):
 
 
 # protein movement signals
-	
+
 func add_protein():
 	emit_signal("station_protein_requested", self);
-
 
 # update methods
 
 func get_can_be_updated():
 	return $ResourceStore.protein >= protein_needed_for_update;
-	
+
 func update():
 	if (!get_can_be_updated()):
 		return false;
@@ -112,5 +111,15 @@ func _on_ResourceStore_protein_amount_changed(amount):
 		print("starting station update");
 		update();
 	else:
-		print("station update not ready yet: " + str(protein_needed_for_update));
-		print("available:" + str(amount));
+		return false;
+
+func remove_action_trigger_listener(body, method_as_string):
+	if (is_connected("action_triggered", body, method_as_string)):
+		disconnect("action_triggered", body, method_as_string);
+		return true;
+	else:
+		return false;
+
+
+func get_position_for_minions():
+	return $MinionPosition.global_position

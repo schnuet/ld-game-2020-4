@@ -122,6 +122,8 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+[node name="MinionPosition" type="Node2D" parent="."]
+position = Vector2( 64, 128 )
 [connection signal="timeout" from="ActionTimer" to="." method="_on_ActionTimer_timeout"]
 [connection signal="energy_amount_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_energy_amount_changed"]
 [connection signal="max_energy_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_max_energy_changed"]

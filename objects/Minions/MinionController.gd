@@ -99,21 +99,21 @@ func _physics_process(delta):
 			current_idle_dir_time = 0	
 			randomize()
 			current_movement_dir = randi() % 3 - 1
-			if target_pos.x + idle_range <= global_position.x && current_movement_dir == 1:
+			if target_pos.x + idle_range <= _get_position().x && current_movement_dir == 1:
 				current_movement_dir = -1
-			elif target_pos.x - idle_range >= global_position.x && current_movement_dir == -1:
+			elif target_pos.x - idle_range >= _get_position().x && current_movement_dir == -1:
 				current_movement_dir = 1
-		
-		global_position += current_movement_dir * Vector2.RIGHT * idle_speed * delta
-		global_position.x = clamp(global_position.x, target_pos.x - idle_range, target_pos.x + idle_range)
-		
+		var pos = _get_position()
+		pos += current_movement_dir * Vector2.RIGHT * idle_speed * delta
+		pos.x = clamp(pos.x, target_pos.x - idle_range, target_pos.x + idle_range)
+		_set_position(pos)
 		
 	else:	
-		var path = nav2D.get_simple_path(position, target_pos)	
+		var path = nav2D.get_simple_path(_get_position(), target_pos)	
 			
 		if path.empty():
 			return
-		var vec_to_target_pos = path[1] - position		
+		var vec_to_target_pos = path[1] - _get_position()		
 		_handle_movement(vec_to_target_pos, delta)
 		
 	animation_handler.update_visualization(current_movement_dir, resource_store.energy)
@@ -135,28 +135,32 @@ func _handle_movement(direction, delta_time):
 		if current_ladder_movement == 0:
 			current_ladder_movement = _ladder_usage_direction(direction)
 		if current_ladder_movement == 1:
-			if position.is_equal_approx(ladder_bottom):
+			if _get_position().is_equal_approx(ladder_bottom):
 				current_moving_state = MovingState.AtLadder
 			
-			elif is_equal_approx(position.x, ladder_bottom.x) == false:				
-				var x_pos = move_toward(position.x, ladder_bottom.x, walk_speed * delta_time)
-				var next_pos = Vector2(x_pos, position.y)
-				next_pos.y +=  walk_speed * delta_time
-				position = next_pos	
+			elif is_equal_approx(_get_position().x, ladder_bottom.x) == false:				
+				var x_pos = move_toward(_get_position().x, ladder_bottom.x, walk_speed * delta_time)
+				var next_pos = Vector2(x_pos, _get_position().y)
+				next_pos.y +=  walk_speed * delta_time				
+				_set_position(next_pos)
 			else:
-				position = position.move_toward(ladder_bottom, walk_speed * delta_time)
+				var pos = _get_position()
+				pos = pos.move_toward(ladder_bottom, walk_speed * delta_time)
+				_set_position(pos)
 			
 		else:
-			if position.is_equal_approx(ladder_top):
+			if _get_position().is_equal_approx(ladder_top):
 				current_moving_state = MovingState.AtLadder
 				
-			elif is_equal_approx(position.x, ladder_top.x) == false:				
-				var x_pos = move_toward(position.x, ladder_top.x, walk_speed * delta_time)
-				var next_pos = Vector2(x_pos, position.y)
+			elif is_equal_approx(_get_position().x, ladder_top.x) == false:				
+				var x_pos = move_toward(_get_position().x, ladder_top.x, walk_speed * delta_time)
+				var next_pos = Vector2(x_pos, _get_position().y)
 				next_pos.y -=  walk_speed * delta_time
-				position = next_pos	
+				_set_position(next_pos)
 			else:
-				position = position.move_toward(ladder_top, walk_speed * delta_time)
+				var pos = _get_position()
+				pos = pos.move_toward(ladder_top, walk_speed * delta_time)
+				_set_position(pos)
 	
 	elif current_moving_state == MovingState.OnGround:
 		#print_debug("On Ground")
@@ -167,7 +171,7 @@ func _get_position():
 	return minion.global_position
 	
 func _set_position(global_pos):
-	minion.global_pos
+	minion.global_position = global_pos
 
 func _move_horizontal(direction, delta_time):
 	current_movement_dir = 0
@@ -179,10 +183,14 @@ func _move_horizontal(direction, delta_time):
 
 	velocity.x = current_movement_dir * walk_speed
 	if abs(velocity.x * delta_time) > abs(direction.x):
-		position.x += direction.x
+		var pos = _get_position()
+		pos.x += direction.x
+		_set_position(pos)
 	else:		
 		direction.y = 0
-		position = position.move_toward(position + direction, delta_time * walk_speed)
+		var pos = _get_position()
+		pos = pos.move_toward(pos + direction, delta_time * walk_speed)
+		_set_position(pos)
 
 func _is_at_target():
 	var coll_shape = collision_shape
@@ -203,7 +211,7 @@ func _ladder_usage_direction(to_target):
 		if to_target.y > 0:			
 			return 1
 		else:
-			if (global_position + to_target).y < ladder_top.y:
+			if (_get_position() + to_target).y < ladder_top.y:
 				return 0
 			return -1
 	return 0
