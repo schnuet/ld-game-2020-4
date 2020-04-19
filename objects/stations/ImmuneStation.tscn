@@ -1,0 +1,171 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/stations/ImmuneStation.gd" type="Script" id=2]
+[ext_resource path="res://sprites/stations/immune/Orville_level3_5minions.png" type="Texture" id=3]
+[ext_resource path="res://sprites/stations/immune/Orville_level3_4minions.png" type="Texture" id=4]
+[ext_resource path="res://sprites/stations/immune/Orville_level3_3minions.png" type="Texture" id=5]
+[ext_resource path="res://sprites/stations/immune/Orville_level1_1minions.png" type="Texture" id=6]
+[ext_resource path="res://sprites/stations/immune/Orville_level2_1minions.png" type="Texture" id=7]
+[ext_resource path="res://sprites/stations/immune/Orville_level2_2minions.png" type="Texture" id=8]
+[ext_resource path="res://sprites/stations/immune/Orville_level2_3minions.png" type="Texture" id=9]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 7 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 7 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 9 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 9 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 6 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "level3_5minions",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "level2_2minions",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "level2_1minion",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "level2_3minions",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "level1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "level3_3minions",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "level3_4minions",
+"speed": 5.0
+} ]
+
+[node name="ImmuneStation" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="RoomMachine" parent="." index="3"]
+frames = SubResource( 29 )
+animation = "level1"
+
+[node name="ResourceDisplay" parent="." index="5"]
+resourceStorePath = NodePath("../../ImmuneStation/ResourceStore")
