@@ -44,7 +44,7 @@ var current_movement_dir = 0
 var current_moving_state = MovingState.OnGround
 var current_mission_state = MissionState.Idle
 var current_idle_dir = 0
-var current_idle_dir_time = 0
+var current_idle_dir_time = 1000
 
 var scene_timer:SceneTreeTimer
 
@@ -90,16 +90,15 @@ func _physics_process(delta):
 		if current_idle_dir_time >= idle_dir_change_time:
 			current_idle_dir_time = 0	
 			randomize()
-			current_idle_dir = randi() % 3 - 1
-			if target_pos.x + idle_range <= global_position.x && current_idle_dir == 1:
-				current_idle_dir = -1
-			elif target_pos.x - idle_range >= global_position.x && current_idle_dir == -1:
-				current_idle_dir = 1
+			current_movement_dir = randi() % 3 - 1
+			if target_pos.x + idle_range <= global_position.x && current_movement_dir == 1:
+				current_movement_dir = -1
+			elif target_pos.x - idle_range >= global_position.x && current_movement_dir == -1:
+				current_movement_dir = 1
 		
-		global_position += current_idle_dir * Vector2.RIGHT * idle_speed * delta
+		global_position += current_movement_dir * Vector2.RIGHT * idle_speed * delta
 		global_position.x = clamp(global_position.x, target_pos.x - idle_range, target_pos.x + idle_range)
-		animation_handler.update_idle_visualization(current_idle_dir, resource_store.energy)
-			
+		
 		
 	else:	
 		var path = nav2D.get_simple_path(position, target_pos)	
