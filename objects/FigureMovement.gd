@@ -45,3 +45,9 @@ func _physics_process(delta):
 			velocity.y = 0
 
 	velocity = move_and_slide(velocity)
+
+func _on_ResourceStore_energy_amount_changed(amount):
+	$Steak.visible = amount > 0
+
+func _on_ResourceStore_protein_amount_changed(amount):
+	$Energy.visible = amount > 0
