@@ -1,7 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/stations/StomachStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
 [node name="StomachStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+max_protein = 15
+
+[node name="EnergyStash" type="Area2D" parent="." index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnergyStash" index="0"]
+position = Vector2( 32, 112 )
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="EnergyStash" index="1"]
+margin_left = 16.0
+margin_top = 96.0
+margin_right = 48.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
