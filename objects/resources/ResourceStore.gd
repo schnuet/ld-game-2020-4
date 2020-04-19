@@ -47,3 +47,6 @@ func set_max_protein(amount):
 
 func has_energy():
 	return energy > 0
+
+func energy_is_full():
+	return energy >= max_energy

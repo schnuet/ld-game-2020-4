@@ -47,7 +47,6 @@ func add_worker(worker):
 func add_protein():
 	emit_signal("station_protein_requested", self);
 
-
 # update methods
 
 func get_can_be_updated():
@@ -116,3 +115,6 @@ func remove_action_trigger_listener(body, method_as_string):
 	else:
 		return false;
 
+
+func get_position_for_minions():
+	return $MinionPosition.global_position

@@ -21,8 +21,8 @@ export(Vector2) var end
 var nav2D : Navigation2D
 
 onready var kidney = $Stations/KidneyStation
-var path = []
 var idle_minions = []
+var path = []
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -36,9 +36,9 @@ func _input(event):
 			# If it's the right button, set the ending point
 			end = event.position
 			print_debug(\"Clicked\")
-			if !kidney.idle_minions.empty():
-				for minion in kidney.idle_minions:
-					minion.go_to_station(end)
+			if !idle_minions.empty():
+				for minion in idle_minions:
+					minion.go_to_position(end)
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_K:
 			kidney.perform_action()
@@ -46,8 +46,7 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	nav2D = get_node(\"Navigation2D\")
-	kidney.nav2D = nav2D
+	nav2D = get_node(\"Navigation2D\")	
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
@@ -65,6 +64,9 @@ func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);
 	station.receive_protein_from($Player, 1);
 
+func get_energy_source():
+	return $Stations/StomachStation
+	
 func _process(delta):
 	# Get the list of points that compose the path
 	#path = nav2D.get_simple_path(minion.position, end)
@@ -81,9 +83,6 @@ func _draw():
 func _on_StomachStation_player_requested_protein():
 	$Stations/StomachStation.give_protein_to($Player, 1);
 
-func _on_KidneyStation_minion_created(minion):
-	idle_minions.append(minion)
-
 func _on_KidneyStation_minion_creation_requested():
 	var minion = Minion.instance()
 	minion.god = self
@@ -92,6 +91,7 @@ func _on_KidneyStation_minion_creation_requested():
 	get_tree().root.add_child(minion)
 	idle_minions.push_back(minion)
 	emit_signal(\"minion_created\", minion)
+	
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]

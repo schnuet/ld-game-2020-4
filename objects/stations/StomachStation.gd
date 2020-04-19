@@ -36,3 +36,11 @@ func get_protein_step_time():
 	
 func set_protein_step_time(value):
 	$ProteinTimer.wait_time = value;
+
+
+#energy methods
+func has_energy():
+	return $ResourceStore.has_energy()
+	
+func take_energy():
+	return $ResourceStore.take_energy()
