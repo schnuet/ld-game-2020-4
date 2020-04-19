@@ -36,7 +36,10 @@ func move_to_pos(pos):
 	
 	current_ladder_movement = 0
 	var path = nav2D.get_simple_path(global_position, pos)
-	target_pos = path[path.size() - 1]
+	if path.empty():
+		target_pos = null
+	else:		
+		target_pos = path[path.size() - 1]
 
 
 # Called when the node enters the scene tree for the first time.
