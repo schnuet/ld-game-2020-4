@@ -26,7 +26,7 @@ func _ready():
 	minion.animation_handler = animation_handler
 
 func go_to_station(position:Vector2):
-	
+	pass
 
 func collect_energy(target:Vector2, energy_source:Vector2):
 	collecting_energy = true
@@ -45,7 +45,7 @@ func _on_MinionController_target_pos_reached():
 	_collect_energy()
 	_go_back_if_energy_collected()
 
-func _
+
 
 func _collect_energy():
 	if current_energy_station != null:
