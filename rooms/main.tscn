@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://objects/Minions/Minion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Test.gd" type="Script" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://objects/stations/StomachStation.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/stations/KidneyStation.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/stations/HeartStation.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/stations/BrainStation.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/stations/ImmuneStation.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/stations/MovingStation.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/stations/LungStation.tscn" type="PackedScene" id=16]
+[ext_resource path="res://objects/stations/FatStation.tscn" type="PackedScene" id=17]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -23,10 +28,6 @@ onready var minion = $Minion
 onready var kidney = $Stations/KidneyStation
 var path = []
 var idle_minions = []
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
 
 func _input(event):
 	# If the user press a mouse button
@@ -156,7 +157,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
-end = null
 
 [node name="kronenberg" type="Sprite" parent="."]
 position = Vector2( 480, 270 )
@@ -164,6 +164,7 @@ z_index = -1
 texture = ExtResource( 9 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 script = ExtResource( 2 )
 
 [node name="Navigation" type="TileMap" parent="Navigation2D"]
@@ -187,7 +188,6 @@ position = Vector2( 440, 432 )
 position = Vector2( 152, 432 )
 
 [node name="Collisions" type="TileMap" parent="Navigation2D"]
-visible = false
 tile_set = ExtResource( 8 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -203,6 +203,21 @@ position = Vector2( 192, 384 )
 
 [node name="HeartStation" parent="Stations" instance=ExtResource( 12 )]
 position = Vector2( 48, 384 )
+
+[node name="BrainStation" parent="Stations" instance=ExtResource( 13 )]
+position = Vector2( 304, 96 )
+
+[node name="ImmuneStation" parent="Stations" instance=ExtResource( 14 )]
+position = Vector2( 160, 96 )
+
+[node name="LungStation" parent="Stations" instance=ExtResource( 16 )]
+position = Vector2( 98, 242 )
+
+[node name="MovingStation" parent="Stations" instance=ExtResource( 15 )]
+position = Vector2( 384, 240 )
+
+[node name="FatStation" parent="Stations" instance=ExtResource( 17 )]
+position = Vector2( 240, 242 )
 
 [node name="Minion" parent="." instance=ExtResource( 1 )]
 
