@@ -5,9 +5,9 @@ const GRAVITY = 200.0
 var velocity = Vector2()
 
 export(int) var walk_speed = 100
-export(float) var min_y_distance = 1
-export(float) var min_x_distance = 0.5
 var nav2D : Navigation2D
+
+onready var empty_walk_animation = $EmptyWalkAnimation
 
 var is_at_ladder = false
 var ladder_top
@@ -24,6 +24,7 @@ enum State {
 	OnGround
 }
 
+var current_movement_dir = 0
 
 
 var current_state = State.OnGround
@@ -54,21 +55,26 @@ func _physics_process(delta):
 	if _is_at_target():
 		print("At target")
 		target_pos = null
-		return
-	
-	var path = nav2D.get_simple_path(position, target_pos)	
-	
-	if path.empty():
-		return
+		current_movement_dir = 0
+	else:	
+		var path = nav2D.get_simple_path(position, target_pos)	
 		
-	var vec_to_target_pos = path[1] - position
+		if path.empty():
+			return
+			
+		var vec_to_target_pos = path[1] - position
+		
+		_handle_movement(vec_to_target_pos, delta)
+		
+	_handle_visualization()
+
+func _handle_movement(direction, delta_time):
+	
 	
 	if current_state == State.AtLadder:
-		var ladder_usage_direction = _ladder_usage_direction(vec_to_target_pos)
-		#print_debug("At Ladder")
-		if ladder_usage_direction == 0:
-	
-			_move_horizontal(vec_to_target_pos, delta)	
+		var ladder_usage_direction = _ladder_usage_direction(direction)		
+		if ladder_usage_direction == 0:	
+			_move_horizontal(direction, delta_time)	
 			
 		else:
 			current_state = State.OnLadder
@@ -77,47 +83,47 @@ func _physics_process(delta):
 	elif current_state == State.OnLadder:
 		#print_debug("On Ladder")
 		if current_ladder_movement == 0:
-			current_ladder_movement = _ladder_usage_direction(vec_to_target_pos)
+			current_ladder_movement = _ladder_usage_direction(direction)
 		if current_ladder_movement == 1:
 			if position.is_equal_approx(ladder_bottom):
 				current_state = State.AtLadder
 			
 			elif is_equal_approx(position.x, ladder_bottom.x) == false:				
-				var x_pos = move_toward(position.x, ladder_bottom.x, walk_speed * delta)
+				var x_pos = move_toward(position.x, ladder_bottom.x, walk_speed * delta_time)
 				var next_pos = Vector2(x_pos, position.y)
-				next_pos.y +=  walk_speed * delta
+				next_pos.y +=  walk_speed * delta_time
 				position = next_pos	
 			else:
-				position = position.move_toward(ladder_bottom, walk_speed * delta)
+				position = position.move_toward(ladder_bottom, walk_speed * delta_time)
 			
 		else:
 			if position.is_equal_approx(ladder_top):
 				current_state = State.AtLadder
 				
 			elif is_equal_approx(position.x, ladder_top.x) == false:				
-				var x_pos = move_toward(position.x, ladder_top.x, walk_speed * delta)
+				var x_pos = move_toward(position.x, ladder_top.x, walk_speed * delta_time)
 				var next_pos = Vector2(x_pos, position.y)
-				next_pos.y -=  walk_speed * delta
+				next_pos.y -=  walk_speed * delta_time
 				position = next_pos	
 			else:
-				position = position.move_toward(ladder_top, walk_speed * delta)
+				position = position.move_toward(ladder_top, walk_speed * delta_time)
 	
 	elif current_state == State.OnGround:
 		#print_debug("On Ground")
-		_move_horizontal(vec_to_target_pos, delta)
+		_move_horizontal(direction, delta_time)
 			
 
-func _move_horizontal(delta_target, delta_time):
-	var x_dir = 0
+func _move_horizontal(direction, delta_time):
+	current_movement_dir = 0
 		
-	if delta_target.x > 0:
-		x_dir = 1
-	elif delta_target.x < 0:
-		x_dir = -1
+	if direction.x > 0:
+		current_movement_dir = 1
+	elif direction.x < 0:
+		current_movement_dir = -1
 
-	velocity.x = x_dir * walk_speed
-	if abs(velocity.x * delta_time) > abs(delta_target.x):
-		position.x += delta_target.x
+	velocity.x = current_movement_dir * walk_speed
+	if abs(velocity.x * delta_time) > abs(direction.x):
+		position.x += direction.x
 	else:
 		velocity = move_and_slide(velocity)
 
@@ -144,6 +150,19 @@ func _ladder_usage_direction(to_target):
 				return 0
 			return -1
 	return 0
+	
+
+func _handle_visualization():
+	if current_movement_dir == 0:
+		empty_walk_animation.stop()
+		empty_walk_animation.frame = 0
+	else:
+		if current_movement_dir == -1:
+			empty_walk_animation.flip_h = true
+		else:
+			empty_walk_animation.flip_h = false
+		empty_walk_animation.play()
+
 	
 func enter_ladder(top_pos, bottom_pos, id):
 	if id != current_ladder_id:
