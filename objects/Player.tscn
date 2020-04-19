@@ -12,7 +12,7 @@
 [ext_resource path="res://objects/resources/ResourceStore.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18.426, 25.574 )
+extents = Vector2( 5.42603, 23.574 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
