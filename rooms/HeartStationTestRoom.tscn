@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/stations/HeartStation.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rooms/HeartStationTestRoom.gd" type="Script" id=3]
+[ext_resource path="res://objects/stations/StationButton.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 103.451, 10 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="HeartStation" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -1.74951 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 73.4882, 88.0685 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 64.1493, 135.297 )
+shape = SubResource( 1 )
+
+[node name="StationButton" parent="." instance=ExtResource( 4 )]
+[connection signal="button_action_triggered" from="StationButton" to="." method="_on_StationButton_button_action_triggered"]
