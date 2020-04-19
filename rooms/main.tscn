@@ -50,12 +50,17 @@ func _ready():
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
+		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 
 func on_worker_requested(station):
 	print(\"Worker-request received \", station)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
+	
+func on_station_protein_requested(station):
+	print(\"Station requested protein\", station);
+	station.receive_protein_from($Player, 1);
 
 func _process(delta):
 	# Get the list of points that compose the path
@@ -71,7 +76,7 @@ func _draw():
 
 # room connections
 func _on_StomachStation_player_requested_protein():
-	$Stations/StomachStation.transfer_protein($Player, 1);
+	$Stations/StomachStation.give_protein_to($Player, 1);
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -145,6 +150,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
+end = null
 
 [node name="kronenberg" type="Sprite" parent="."]
 position = Vector2( 480, 270 )
