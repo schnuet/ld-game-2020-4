@@ -17,12 +17,12 @@ func _on_Area2D_body_entered(body):
 		var top_position = Vector2(global_pos.x, global_pos.y - relative_ladder_top)		
 		body.enter_ladder(top_position, bottom_position, area_2d.name)
 	elif (body.name == "Player"):
-		body.enter_ladder()
+		body.enter_ladder(name)
 
 
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("Minion"):
 		body.exit_ladder(area_2d.name)
 	elif (body.name == "Player"):
-		body.exit_ladder()
+		body.exit_ladder(name)
 
