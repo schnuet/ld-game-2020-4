@@ -18,3 +18,4 @@ func _create_minion():
 	minion.global_position = $NewMinionPosition.global_position
 	get_tree().root.add_child(minion)
 	idle_minions.push_back(minion)
+	emit_signal("minion_created", minion)

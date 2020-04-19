@@ -19,8 +19,10 @@ script/source = "extends Node2D
 export(Vector2) var end
 var nav2D : Navigation2D
 
+onready var minion = $Minion
 onready var kidney = $Stations/KidneyStation
 var path = []
+var idle_minions = []
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -46,13 +48,14 @@ func _input(event):
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
 	kidney.nav2D = nav2D
-	minion.nav2D = nav2D
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 
 func on_worker_requested(station):
 	print(\"Worker-request received \", station)
+	var m = idle_minions.pop_front()
+	m.move_to_pos(station.global_position)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
@@ -68,6 +71,10 @@ func _draw():
 	for p in path:
 		#print_debug(p)
 		draw_circle(p, 10, Color(1, 1, 1))
+
+
+func _on_KidneyStation_minion_created(minion):
+	idle_minions.append(minion)
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -192,3 +199,4 @@ position = Vector2( 48, 384 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
+[connection signal="minion_created" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_created"]
