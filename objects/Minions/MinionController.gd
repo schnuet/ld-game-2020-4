@@ -199,8 +199,8 @@ func _is_at_target():
 	if current_moving_state == MovingState.OnLadder:
 		x_extent = extents.x * 2
 	
-	if abs(coll_shape.position.x - target_pos.x) < (x_extent):
-		if abs(coll_shape.position.y - target_pos.y) <= (extents.y * 1.1):
+	if abs(coll_shape.global_position.x - target_pos.x) < (x_extent):
+		if abs(coll_shape.global_position.y - target_pos.y) <= (extents.y * 1.1):
 			return true
 	return false
 

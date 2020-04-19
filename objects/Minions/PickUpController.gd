@@ -2,7 +2,6 @@ extends Node2D
 
 onready var minion = $MinionController
 onready var resource_store = $ResourceStore
-onready var animation_handler = $AnimationHandler
 var nav2D:Navigation2D
 
 var target_station:Vector2
