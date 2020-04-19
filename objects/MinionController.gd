@@ -29,7 +29,10 @@ enum State {
 var current_state = State.OnGround
 
 func move_to_pos(pos):
-	target_pos = pos
+	
+	current_ladder_movement = 0
+	var path = nav2D.get_simple_path(global_position, pos)
+	target_pos = path[path.size() - 1]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,8 +63,8 @@ func _physics_process(delta):
 		
 	var vec_to_target_pos = path[1] - position
 	
-	var ladder_usage_direction = _ladder_usage_direction(vec_to_target_pos)
 	if current_state == State.AtLadder:
+		var ladder_usage_direction = _ladder_usage_direction(vec_to_target_pos)
 		#print_debug("At Ladder")
 		if ladder_usage_direction == 0:
 	
@@ -73,6 +76,8 @@ func _physics_process(delta):
 	
 	elif current_state == State.OnLadder:
 		#print_debug("On Ladder")
+		if current_ladder_movement == 0:
+			current_ladder_movement = _ladder_usage_direction(vec_to_target_pos)
 		if current_ladder_movement == 1:
 			if position.is_equal_approx(ladder_bottom):
 				current_state = State.AtLadder
@@ -117,10 +122,14 @@ func _move_horizontal(delta_target, delta_time):
 		velocity = move_and_slide(velocity)
 
 func _is_at_target():
-	var extents = $CollisionShape2D.shape.extents
+	var coll_shape = $CollisionShape2D
+	var extents = coll_shape.shape.extents
+	var x_extent = extents.x / 2
+	if current_state == State.OnLadder:
+		x_extent = extents.x * 2
 	
-	if abs(global_position.x - target_pos.x) < (extents.x / 2):
-		if abs(global_position.y - target_pos.y) <= (extents.y * 2):
+	if abs(coll_shape.global_position.x - target_pos.x) < (x_extent):
+		if abs(coll_shape.global_position.y - target_pos.y) <= (extents.y * 1.1):
 			return true
 	return false
 
@@ -128,9 +137,11 @@ func _is_at_target():
 func _ladder_usage_direction(to_target):
 	var dir = to_target.normalized().dot(Vector2.UP)
 	if abs(dir) > 0.8:
-		if to_target.y > 0:
+		if to_target.y > 0:			
 			return 1
 		else:
+			if (global_position + to_target).y < ladder_top.y:
+				return 0
 			return -1
 	return 0
 	
