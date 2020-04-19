@@ -28,10 +28,7 @@ func _physics_process(delta):
 
 	if velocity.x != 0:
 		$AnimatedSprite.play()
-		if velocity.x < 0:
-			$AnimatedSprite.flip_h = true
-		else:
-			$AnimatedSprite.flip_h = false
+		$AnimatedSprite.flip_h = velocity.x < 0
 	else:
 		$AnimatedSprite.frame = 0
 		$AnimatedSprite.stop()
@@ -47,4 +44,10 @@ func _physics_process(delta):
 		else:
 			velocity.y = 0
 
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
+
+func _on_ResourceStore_energy_amount_changed(amount):
+	$Steak.visible = amount > 0
+
+func _on_ResourceStore_protein_amount_changed(amount):
+	$Energy.visible = amount > 0
