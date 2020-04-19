@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://objects/Minions/MinionController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/minions/purple/fetusminion_walk_right_purple.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/minions/standard/fetusminion_walk_rightt.png" type="Texture" id=7]
 [ext_resource path="res://sprites/minions/standard/fetusminion_walk_left_steaksheet.png" type="Texture" id=8]
 [ext_resource path="res://sprites/minions/yellow/fetusminion_walk_left_steaksheetyellow.png" type="Texture" id=9]
+[ext_resource path="res://objects/Minions/PickUpController.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -199,8 +200,7 @@ animations = [ {
 position = Vector2( 328, 224 )
 collision_layer = 2
 collision_mask = 2
-script = ExtResource( 1 )
-walk_speed = 250
+script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
@@ -221,3 +221,8 @@ visible = false
 position = Vector2( 0, -24 )
 frames = SubResource( 39 )
 animation = "standard"
+
+[node name="MinionController" type="Node2D" parent="."]
+script = ExtResource( 1 )
+[connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
+[connection signal="target_pos_reached" from="MinionController" to="." method="_on_MinionController_target_pos_reached"]

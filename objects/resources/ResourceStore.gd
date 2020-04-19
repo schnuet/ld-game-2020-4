@@ -44,3 +44,6 @@ func set_max_energy(amount):
 func set_max_protein(amount):
 	max_protein = amount;
 	emit_signal("max_protein_changed", amount);
+
+func has_energy():
+	return energy > 0

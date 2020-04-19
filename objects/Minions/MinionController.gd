@@ -7,10 +7,12 @@ export var idle_speed:int = 15
 export var time_to_idle:float = 1
 export var idle_range:float = 20
 export var idle_dir_change_time = 2
-var nav2D:Navigation2D
 
-onready var resource_store = $ResourceStore
-onready var animation_handler = $AnimationHandler
+signal target_pos_reached
+
+var nav2D:Navigation2D
+var resource_store
+var animation_handler
 
 export var debug_energystore:int = 0
 
@@ -43,7 +45,6 @@ enum MissionState {
 var current_movement_dir = 0
 var current_moving_state = MovingState.OnGround
 var current_mission_state = MissionState.Idle
-var current_idle_dir = 0
 var current_idle_dir_time = 1000
 
 var scene_timer:SceneTreeTimer
@@ -77,6 +78,7 @@ func _physics_process(delta):
 	if _is_at_target() && current_mission_state == MissionState.GoingToTarget:			
 		current_movement_dir = 0
 		current_mission_state = MissionState.AtTarget
+		emit_signal("target_pos_reached")
 	
 				
 	if current_mission_state == MissionState.AtTarget:
