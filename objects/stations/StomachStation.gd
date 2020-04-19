@@ -7,10 +7,11 @@ var protein_step_time setget set_protein_step_time, get_protein_step_time;
 signal player_requested_protein;
 
 
-# add resource to player
 
-func _on_GetProteinStationButton_button_action_triggered():
+# add resource to player
+func _on_TakeProteinStationButton_button_action_triggered():
 	emit_signal("player_requested_protein");
+
 
 
 # add resources on timeout
