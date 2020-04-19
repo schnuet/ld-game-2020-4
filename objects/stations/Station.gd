@@ -20,6 +20,12 @@ var action_timer_time = 1; # in seconds
 signal request_worker;
 
 
+func _ready():
+	$ResourceStore.max_energy = max_energy;
+	$ResourceStore.max_protein = max_protein;
+	$ResourceDisplay.updateLabels();
+
+
 # worker methods
 
 func request_worker():
@@ -29,12 +35,7 @@ func add_worker(worker):
 	assigned_workers.append(worker);
 
 
-func _ready():
-	$ResourceStore.max_energy = max_energy;
-	$ResourceStore.max_protein = max_protein;
-
 # update methods
-
 
 func get_can_be_updated():
 	return $ResourceStore.protein >= protein_needed_for_update;
