@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sprites/player/walk/spr_professor_walk2.png" type="Texture" id=1]
-[ext_resource path="res://objects/FigureMovement.gd" type="Script" id=2]
+[ext_resource path="res://objects/Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/player/walk/spr_professor_walk7.png" type="Texture" id=3]
 [ext_resource path="res://sprites/player/walk/spr_professor_walk8.png" type="Texture" id=4]
 [ext_resource path="res://sprites/player/walk/spr_professor_walk3.png" type="Texture" id=5]
