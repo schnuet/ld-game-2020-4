@@ -54,9 +54,8 @@ func _ready():
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 
 func on_worker_requested(station):
-	print(\"Worker-request received \", station)
 	var m = idle_minions.pop_front()
-	m.go_to_station(station.global_position)
+	m.assign_to_station(station)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
@@ -86,6 +85,7 @@ func _on_KidneyStation_minion_created(minion):
 
 func _on_KidneyStation_minion_creation_requested():
 	var minion = Minion.instance()
+	minion.god = self
 	minion.set_navigation_2d($Navigation2D)
 	minion.global_position = $Stations/KidneyStation/NewMinionPosition.global_position
 	get_tree().root.add_child(minion)

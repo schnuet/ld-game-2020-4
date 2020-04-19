@@ -3,6 +3,7 @@ extends Node2D
 onready var minion = $MinionController
 onready var resource_store = $ResourceStore
 var nav2D:Navigation2D
+var god
 
 var target_station:Vector2
 
@@ -30,6 +31,9 @@ func set_navigation_2d(nav2d):
 func go_to_station(position:Vector2):
 	minion.move_to_pos(position)
 
+func assign_to_station(station):
+	print("Minion assigned to ", station, " with god ", god)
+
 func collect_energy(target:Vector2, energy_source:Vector2):
 	collecting_energy = true
 	target_station = target
@@ -38,7 +42,7 @@ func collect_energy(target:Vector2, energy_source:Vector2):
 
 func enter_energy_source(resource_store):
 	current_energy_station = resource_store
-	
+
 func exit_energy_source():
 	current_energy_station = null
 
