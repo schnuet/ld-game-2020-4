@@ -6,8 +6,8 @@ func _ready():
 
 func _on_Ladder_body_entered(body):
 	if (body.name == "Player"):
-		body.enter_ladder()
+		body.enter_ladder(name)
 
 func _on_Ladder_body_exited(body):
 	if (body.name == "Player"):
-		body.exit_ladder()
+		body.exit_ladder(name)
