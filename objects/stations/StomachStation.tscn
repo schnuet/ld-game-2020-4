@@ -11,16 +11,43 @@ script = ExtResource( 1 )
 max_protein = 15
 
 [node name="EnergyStash" type="Area2D" parent="." index="3"]
+position = Vector2( 32, 128 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnergyStash" index="0"]
-position = Vector2( 32, 112 )
+position = Vector2( 0, -16 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ColorRect" type="ColorRect" parent="EnergyStash" index="1"]
-margin_left = 16.0
-margin_top = 96.0
-margin_right = 48.0
-margin_bottom = 128.0
+margin_left = -16.0
+margin_top = -32.0
+margin_right = 16.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="ProteinStash" type="Area2D" parent="." index="4"]
+position = Vector2( 72, 128 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProteinStash" index="0"]
+position = Vector2( 0, -16 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="ProteinStash" index="1"]
+margin_left = -16.0
+margin_top = -32.0
+margin_right = 16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="EnergyStash" to="." method="_on_EnergyStash_body_entered"]
+[connection signal="body_exited" from="EnergyStash" to="." method="_on_EnergyStash_body_exited"]
+[connection signal="body_entered" from="ProteinStash" to="." method="_on_ProteinStash_body_entered"]
+[connection signal="body_exited" from="ProteinStash" to="." method="_on_ProteinStash_body_exited"]
