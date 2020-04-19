@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal action_triggered
+
 const GRAVITY = 200.0
 const WALK_SPEED = 100
 
@@ -23,6 +25,9 @@ func _physics_process(delta):
 		velocity.x =  WALK_SPEED
 	else:
 		velocity.x = 0
+
+	if Input.is_action_just_pressed("trigger_action"):
+		emit_signal("action_triggered")
 
 	if is_on_ladder:
 		if Input.is_action_pressed("up"):
