@@ -51,3 +51,5 @@ __meta__ = {
 [connection signal="body_exited" from="EnergyStash" to="." method="_on_EnergyStash_body_exited"]
 [connection signal="body_entered" from="ProteinStash" to="." method="_on_ProteinStash_body_entered"]
 [connection signal="body_exited" from="ProteinStash" to="." method="_on_ProteinStash_body_exited"]
+[connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
+[connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
