@@ -3,22 +3,11 @@ extends CollisionShape2D
 export(int) var relative_ladder_top
 
 var area_2d
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	area_2d = get_parent()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 
 
 func _on_Area2D_body_entered(body):
@@ -27,9 +16,13 @@ func _on_Area2D_body_entered(body):
 		var bottom_position = Vector2(global_pos.x, global_pos.y + shape.extents.y)
 		var top_position = Vector2(global_pos.x, global_pos.y - relative_ladder_top)		
 		body.enter_ladder(top_position, bottom_position, area_2d.name)
+	elif (body.name == "Player"):
+		body.enter_ladder()
 
 
 func _on_Area2D_body_exited(body):
 	if body.is_in_group("Minion"):
 		body.exit_ladder(area_2d.name)
+	elif (body.name == "Player"):
+		body.exit_ladder()
 
