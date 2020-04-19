@@ -15,6 +15,7 @@ func _ready():
 	_select_random_animation_color()
 
 func _select_random_animation_color():
+	randomize()
 	var rnd_number = randi() % 3
 	var animation
 	if rnd_number == 0:
@@ -38,6 +39,21 @@ func update_visualization(movement_dir:int, energy_count:int):
 			active_animation.flip_h = true
 		else:
 			active_animation.flip_h = false
+		active_animation.speed_scale = 1
+		active_animation.play()
+
+func update_idle_visualization(movement_dir:int, energy_count:int):	
+	_activate_needed_animation(energy_count)
+		
+	if movement_dir == 0:
+		active_animation.stop()
+		active_animation.frame = 0
+	else:
+		if movement_dir == -1:
+			active_animation.flip_h = true
+		else:
+			active_animation.flip_h = false
+		active_animation.speed_scale = 1
 		active_animation.play()
 
 
