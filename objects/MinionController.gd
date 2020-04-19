@@ -75,7 +75,7 @@ func _physics_process(delta):
 		#print_debug("On Ladder")
 		if current_ladder_movement == 1:
 			if position.is_equal_approx(ladder_bottom):
-				current_state = State.OnGround
+				current_state = State.AtLadder
 			
 			elif is_equal_approx(position.x, ladder_bottom.x) == false:				
 				var x_pos = move_toward(position.x, ladder_bottom.x, walk_speed * delta)
@@ -87,7 +87,7 @@ func _physics_process(delta):
 			
 		else:
 			if position.is_equal_approx(ladder_top):
-				current_state = State.OnGround
+				current_state = State.AtLadder
 				
 			elif is_equal_approx(position.x, ladder_top.x) == false:				
 				var x_pos = move_toward(position.x, ladder_top.x, walk_speed * delta)
@@ -126,7 +126,8 @@ func _is_at_target():
 
 # returns 0 for "should not use", 1 for "should go down", -1 for "should go up"
 func _ladder_usage_direction(to_target):
-	if abs(to_target.y) > abs(to_target.x):
+	var dir = to_target.normalized().dot(Vector2.UP)
+	if abs(dir) > 0.8:
 		if to_target.y > 0:
 			return 1
 		else:
