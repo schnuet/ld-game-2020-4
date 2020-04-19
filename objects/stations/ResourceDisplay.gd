@@ -3,41 +3,38 @@ extends Node2D
 export (NodePath) var resourceStorePath;
 var resourceStore;
 
+var energy_rect_max_width = 22;
+var protein_rect_max_width = 22;
+
+
 func _ready():
 	resourceStore = get_node(resourceStorePath);
-	updateLabels();
+	protein_rect_max_width = $RectProtein.rect_size.x;
+	energy_rect_max_width = $RectEnergy.rect_size.x;
+	updateRects();
 	
-func updateLabels():
-	updateEnergyLabel(resourceStore.energy);
-	updateMaxEnergyLabel(resourceStore.max_energy);
-	updateProteinLabel(resourceStore.protein);
-	updateMaxProteinLabel(resourceStore.max_protein);
-
-# update labels
-
-func updateEnergyLabel(amount):
-	$EnergyLabel.text = str(amount);
+func updateRects():
+	updateEnergyRect();
+	updateProteinRect();
 	
-func updateMaxEnergyLabel(amount):
-	$MaxEnergyLabel.text = "/" + str(amount) + " Energy";
 
-func updateProteinLabel(amount):
-	$ProteinLabel.text = str(amount);
-	
-func updateMaxProteinLabel(amount):
-	$MaxProteinLabel.text = "/" + str(amount) + " Protein";
+func updateEnergyRect():
+	$RectEnergy.rect_size.x = (float(resourceStore.energy) / float(resourceStore.max_energy)) * energy_rect_max_width;
+
+func updateProteinRect():
+	$RectProtein.rect_size.x = (float(resourceStore.protein) / float(resourceStore.max_protein)) * energy_rect_max_width;
 
 
 # attach label changing when values change
 
 func _on_ResourceStore_energy_amount_changed(amount):
-	updateEnergyLabel(amount);
+	updateRects();
 
 func _on_ResourceStore_max_energy_changed(amount):
-	updateMaxEnergyLabel(amount);
+	updateRects();
 
 func _on_ResourceStore_protein_amount_changed(amount):
-	updateProteinLabel(amount);
+	updateRects();
 
 func _on_ResourceStore_max_protein_changed(amount):
-	updateMaxProteinLabel(amount);
+	updateRects();
