@@ -3,13 +3,29 @@ extends Node2D
 onready var empty_walk_animation = $EmptyWalkAnimation
 onready var energy_walk_animation = $EnergyWalkAnimation
 
+export var purple_anim_name:String = "purple"
+export var yellow_anim_name:String = "yellow"
+export var standard_anim_name:String = "standard"
+
 var active_animation:AnimatedSprite
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_select_random_animation_color()
 
+func _select_random_animation_color():
+	var rnd_number = randi() % 3
+	var animation
+	if rnd_number == 0:
+		animation = standard_anim_name
+	elif rnd_number == 1:
+		animation = purple_anim_name
+	elif rnd_number == 2:
+		animation = yellow_anim_name
+	empty_walk_animation.animation = animation
+	energy_walk_animation.animation = animation
+	
 
 func update_visualization(movement_dir:int, energy_count:int):	
 	_activate_needed_animation(energy_count)

@@ -64,9 +64,7 @@ func _physics_process(delta):
 		
 		if path.empty():
 			return
-			
-		var vec_to_target_pos = path[1] - position
-		
+		var vec_to_target_pos = path[1] - position		
 		_handle_movement(vec_to_target_pos, delta)
 		
 	animation_handler.update_visualization(current_movement_dir, resource_store.energy)
@@ -161,9 +159,7 @@ func enter_ladder(top_pos, bottom_pos, id):
 		current_state = State.AtLadder
 		print_debug("Enter ladder:", id)
 		ladder_top = top_pos
-		ladder_bottom = bottom_pos
-	
-	
+		ladder_bottom = bottom_pos	
 	
 
 func exit_ladder(id):
