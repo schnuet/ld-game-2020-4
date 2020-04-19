@@ -13,6 +13,8 @@ signal target_pos_reached
 var nav2D:Navigation2D
 var resource_store
 var animation_handler
+var collision_shape
+var minion
 
 export var debug_energystore:int = 0
 
@@ -60,9 +62,13 @@ func move_to_pos(pos):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	resource_store = get_node("../ResourceStore")
+	animation_handler = get_node("../AnimationHandler")
+	collision_shape = get_node("../CollisionShape2D")
+	minion = get_parent()
 	resource_store.energy = debug_energystore
 	animation_handler.update_visualization(0, resource_store.energy)
-	target_pos = global_position
+	target_pos = _get_position()
 
 
 func _process(delta):
@@ -157,6 +163,12 @@ func _handle_movement(direction, delta_time):
 		_move_horizontal(direction, delta_time)
 			
 
+func _get_position():
+	return minion.global_position
+	
+func _set_position(global_pos):
+	minion.global_pos
+
 func _move_horizontal(direction, delta_time):
 	current_movement_dir = 0
 		
@@ -173,7 +185,7 @@ func _move_horizontal(direction, delta_time):
 		position = position.move_toward(position + direction, delta_time * walk_speed)
 
 func _is_at_target():
-	var coll_shape = $CollisionShape2D
+	var coll_shape = collision_shape
 	var extents = coll_shape.shape.extents
 	var x_extent = extents.x / 2
 	if current_moving_state == MovingState.OnLadder:
