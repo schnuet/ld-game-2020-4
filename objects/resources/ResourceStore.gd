@@ -7,6 +7,8 @@ export var max_protein:int = 1;
 
 signal protein_amount_changed;
 signal energy_amount_changed;
+signal max_protein_changed;
+signal max_energy_changed;
 
 # add energy and protein
 
@@ -34,3 +36,11 @@ func take_protein(x:int = 1):
 	protein -= x;
 	emit_signal("protein_amount_changed", protein);
 	return x;
+
+func set_max_energy(amount):
+	max_energy = amount;
+	emit_signal("max_energy_changed", amount);
+
+func set_max_protein(amount):
+	max_protein = amount;
+	emit_signal("max_protein_changed", amount);
