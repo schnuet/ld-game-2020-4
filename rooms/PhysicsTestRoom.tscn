@@ -29,4 +29,8 @@ position = Vector2( 72.1741, -94.3815 )
 shape = SubResource( 2 )
 
 [node name="Ladder" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1, 2 )
+
+[node name="Ladder2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 2 )
 [connection signal="action_triggered" from="Player" to="." method="_on_Player_action_triggered"]
