@@ -35,6 +35,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 6 )
 frames = SubResource( 2 )
+speed_scale = 2.0
 
 [node name="ResourceStore" parent="." instance=ExtResource( 10 )]
 
