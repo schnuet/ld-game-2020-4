@@ -178,4 +178,4 @@ position = Vector2( 48, 384 )
 [node name="Minion" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 397.759, 460.06 )
+position = Vector2( 398, 472 )
