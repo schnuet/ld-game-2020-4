@@ -14,7 +14,7 @@ func perform_action():
 
 func _create_minion():
 	var minion = Minion.instance()
-	minion.nav2D = nav2D
+	minion.set_navigation_2d(nav2D)
 	minion.global_position = $NewMinionPosition.global_position
 	get_tree().root.add_child(minion)
 	idle_minions.push_back(minion)

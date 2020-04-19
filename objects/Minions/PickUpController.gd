@@ -19,11 +19,17 @@ enum CollectingState {
 
 var current_state = CollectingState.Idle
 
+func enter_ladder(top_pos, bottom_pos, id):
+	minion.enter_ladder(top_pos, bottom_pos, id)
+
+func exit_ladder(id):
+	minion.exit_ladder(id)
+
 func set_navigation_2d(nav2d):
-	minion.nav2D
+	$MinionController.nav2D = nav2d
 
 func go_to_station(position:Vector2):
-	pass
+	minion.move_to_pos(position)
 
 func collect_energy(target:Vector2, energy_source:Vector2):
 	collecting_energy = true

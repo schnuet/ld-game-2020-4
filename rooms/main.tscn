@@ -38,7 +38,7 @@ func _input(event):
 			print_debug(\"Clicked\")
 			if !kidney.idle_minions.empty():
 				for minion in kidney.idle_minions:
-					minion.move_to_pos(end)
+					minion.go_to_station(end)
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_K:
 			kidney.perform_action()
@@ -48,6 +48,7 @@ func _input(event):
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
 	kidney.nav2D = nav2D
+	minion.set_navigation_2d(nav2D)
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
@@ -56,7 +57,7 @@ func _ready():
 func on_worker_requested(station):
 	print(\"Worker-request received \", station)
 	var m = idle_minions.pop_front()
-	m.move_to_pos(station.global_position)
+	m.go_to_station(station.global_position)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
@@ -156,7 +157,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
-end = null
 
 [node name="kronenberg" type="Sprite" parent="."]
 position = Vector2( 480, 270 )
