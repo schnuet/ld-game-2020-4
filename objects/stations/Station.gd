@@ -18,6 +18,8 @@ var assigned_workers = [];
 var can_be_updated setget , get_can_be_updated;
 var upgrade_level = 0;
 
+# action
+var action_timer_time = 1; # in seconds
 
 signal request_worker;
 
@@ -97,4 +99,6 @@ func perform_action():
 	pass;
 
 func _on_ActionTimer_timeout():
+	$ActionTimer.wait_time = action_timer_time;
+	trigger_action();
 	pass # Replace with function body.
