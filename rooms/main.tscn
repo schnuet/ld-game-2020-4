@@ -43,9 +43,13 @@ func _ready():
 	minion.nav2D = nav2D
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
+		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 
 func on_worker_requested(station):
-	print(\"Request received \", station)
+	print(\"Worker-request received \", station)
+
+func on_worker_removed(station):
+	print(\"Worker-remove received\", station)
 
 func _process(delta):
 	# Get the list of points that compose the path
