@@ -1,6 +1,6 @@
 extends Node2D
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_up"):
 		if get_node("KinematicBody2D/ResourceStore").energy > 0:
 			get_node("KinematicBody2D/ResourceStore").take_energy(1)
