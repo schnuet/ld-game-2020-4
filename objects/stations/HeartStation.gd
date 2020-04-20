@@ -2,7 +2,7 @@ extends "res://objects/stations/Station.gd"
 
 # Heartstation can
 # 
-
+signal heart_dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,3 +14,11 @@ func _process(delta):
 	
 	pass
 
+func remove_energy(amount:int):
+	$ResourceStore.remove_energy(amount)
+
+
+func _on_energy_amount_changed(energy):
+	if $ResourceStore.has_energy() == false:
+		print_debug("Heart is dead!")
+		emit_signal("heart_dead")

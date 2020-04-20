@@ -22,6 +22,11 @@ func add_protein(x:int):
 	emit_signal("protein_amount_changed", protein);
 	return protein;
 
+# remove energy
+
+func remove_energy(amount:int):
+	energy = max(energy - amount, 0)
+	emit_signal("energy_amount_changed", energy);
 
 # get energy and protein
 
