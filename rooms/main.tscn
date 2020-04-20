@@ -61,7 +61,28 @@ func on_worker_requested(station):
 		station.on_minion_assigned(m)
 
 func on_worker_removed(station):
-	print(\"Worker-remove received\", station)
+	var assigned_minions = station.get_assigned_minions()
+	if assigned_minions.empty():
+		return
+		
+	var minion_removed = _try_to_remove_not_working_minion_from_station(station, assigned_minions)	
+	
+	if minion_removed == false:
+		_remove_minion_from_station(station, assigned_minions[0])
+
+# Minions without energy are not working
+func _try_to_remove_not_working_minion_from_station(station, assigned_minions):
+	for minion in assigned_minions:
+		if minion.is_carrying_energy_back() == false:
+			_remove_minion_from_station(station, minion)
+			minion.go_to_position($Stations/KidneyStation.get_position_for_minions())
+			return true
+	return false
+
+func _remove_minion_from_station(station, minion):
+	minion.go_to_position($Stations/KidneyStation.get_position_for_minions())
+	station.on_minion_removed(minion)
+	idle_minions.push_back(minion)
 
 func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);

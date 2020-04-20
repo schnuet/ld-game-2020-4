@@ -147,7 +147,8 @@ func can_assign_minion():
 func on_minion_assigned(minion):
 	$ResourceDisplay.update_worker_count();
 	
-
+func on_minion_removed(minion):
+	$ResourceDisplay.update_worker_count();
 
 # energy methods
 
