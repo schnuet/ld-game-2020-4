@@ -8,9 +8,8 @@ export var max_protein = 10;
 
 # required amounts
 export var protein_needed_for_update = 10;
-export var energy_needed_for_action = 0;
+export var energy_needed_for_action = 10;
 
-var assigned_workers = [];
 export var max_minions = 2;
 
 # update
@@ -28,6 +27,8 @@ func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateRects();
+	
+	# connect the station buttons to the trigger events
 	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
 	$StationButtons/RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
 	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
@@ -36,13 +37,12 @@ func _ready():
 # worker methods
 
 func request_worker():
-	emit_signal("worker_requested", self);
+	if (can_assign_minion()):
+		emit_signal("worker_requested", self);
 
 func remove_worker():
-	emit_signal("worker_removed", self)
-
-func add_worker(worker):
-	assigned_workers.append(worker);
+	if (get_assigned_minions().size() > 0):
+		emit_signal("worker_removed", self)
 
 
 # protein movement signals
@@ -58,13 +58,11 @@ func get_can_be_updated():
 func update():
 	if (!get_can_be_updated()):
 		return false;
-	else:
-		perform_update();
-
-func perform_update():
 	print("performing station update");
 	$ResourceStore.take_protein(protein_needed_for_update);
+
 	upgrade_level += 1;
+	max_minions += 1;
 	protein_needed_for_update *= 2;
 	$ResourceStore.set_max_protein(protein_needed_for_update);
 	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
@@ -122,4 +120,19 @@ func remove_action_trigger_listener(body, method_as_string):
 
 
 func get_position_for_minions():
-	return $MinionPosition.global_position
+	return $MinionPosition.global_position;
+
+func get_assigned_minions():
+	var all_minions = get_tree().get_nodes_in_group("Minion");
+	var filter_function = funcref(self, "is_minion_assigned_here");
+	var filtered_minions = Utils.filter(filter_function, all_minions);
+	return filtered_minions;
+
+func is_minion_assigned_here(minion):
+	var station = minion.assigned_station;
+	if (station != null):
+		return station == self;
+	return false;
+
+func can_assign_minion():
+	return get_assigned_minions().size() < max_minions;
