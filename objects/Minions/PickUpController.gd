@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Minion
+
 onready var minion = $MinionController
 onready var resource_store = $ResourceStore
 var nav2D:Navigation2D
@@ -19,7 +21,7 @@ enum CollectingState {
 }
 
 var current_state = CollectingState.Idle
-var assigned_station
+var assigned_station:Station
 
 func enter_ladder(top_pos, bottom_pos, id):
 	minion.enter_ladder(top_pos, bottom_pos, id)
@@ -83,7 +85,7 @@ func _go_back():
 
 func _put_energy_in_station_if_not_full():
 	if assigned_station.can_add_energy():
-			_put_energy_in_station()
+		_put_energy_in_station()
 
 func _put_energy_in_station():
 	current_state = CollectingState.Idle
