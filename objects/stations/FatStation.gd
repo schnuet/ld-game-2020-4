@@ -11,7 +11,6 @@ func _ready():
 	large_fat_store_height = $FatLevelDisplay/Level3/Rect.rect_size.y;
 
 
-
 func update():
 	.update();
 	
@@ -42,6 +41,10 @@ func take_energy():
 
 func _on_ResourceStore_energy_amount_changed(amount):
 	update_energy_level_display();
+	$RoomMachine.playing = true;
+
+func _on_RoomMachine_animation_finished():
+	$RoomMachine.playing = false;
 
 func update_energy_level_display():
 	var energy_percent = float($ResourceStore.energy) / float($ResourceStore.max_energy);

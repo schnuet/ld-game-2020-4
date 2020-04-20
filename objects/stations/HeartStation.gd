@@ -15,6 +15,8 @@ func _ready():
 	$ResourceStore.add_energy(energy_on_start)
 	$EnergyTimer.start(time_to_energy_consumption)
 	current_energy_consumption = initial_energy_consumption
+	
+	$RoomMachine.playing = true;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

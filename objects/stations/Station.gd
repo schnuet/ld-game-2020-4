@@ -278,3 +278,7 @@ func _on_StationButtons_player_entered(player):
 
 func _on_StationButtons_player_left():
 	$TextAnchor/DescriptionLabel.visible = false;
+
+
+func _on_RoomMachine_animation_finished():
+	pass;

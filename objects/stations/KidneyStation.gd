@@ -30,5 +30,9 @@ func get_all_minions():
 
 func create_minion():
 	if (!can_create_minion()): return false;
+	$RoomMachine.playing = true;
+
+
+func _on_RoomMachine_animation_finished():
+	$RoomMachine.stop();
 	emit_signal("minion_creation_requested");
-	print(get_all_minions().size());

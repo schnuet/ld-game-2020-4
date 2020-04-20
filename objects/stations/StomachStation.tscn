@@ -77,7 +77,8 @@ animations = [ {
 
 [node name="StomachStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-max_protein = 15
+max_protein = 20
+protein_needed_for_update = 20
 do_action_automatically = false
 description = "source for protein and energy"
 active = true
@@ -85,6 +86,9 @@ active = true
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 13 )
 animation = "level1"
+
+[node name="ResourceStore" parent="." index="4"]
+max_protein = 20
 
 [node name="ProteinTimer" type="Timer" parent="." index="5"]
 wait_time = 2.5
