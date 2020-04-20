@@ -26,6 +26,7 @@ animations = [ {
 [node name="StomachStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 max_protein = 15
+do_action_automatically = false
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
@@ -47,9 +48,6 @@ enabled = false
 [node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
 visible = false
 enabled = false
-
-[node name="PutProteinStationButton" parent="StationButtons" index="2"]
-enabled = true
 
 [node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
 enabled = true

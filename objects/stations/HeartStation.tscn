@@ -98,16 +98,8 @@ animations = [ {
 
 [node name="HeartStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+do_action_automatically = false
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 19 )
 animation = "level1"
-
-[node name="AddMinionStationButton" parent="StationButtons" index="0"]
-enabled = true
-
-[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
-enabled = true
-
-[node name="PutProteinStationButton" parent="StationButtons" index="2"]
-enabled = true
