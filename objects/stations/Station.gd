@@ -182,10 +182,12 @@ func add_energy(energy):
 
 func _on_Station_body_entered(body):
 	if body.name == "Player":
+		$Tween.stop_all()
 		$Tween.interpolate_property($MusicPlayer, "volume_db", -80, 0, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		$Tween.start()
 
 func _on_Station_body_exited(body):
 	if body.name == "Player":
+		$Tween.stop_all()
 		$Tween.interpolate_property($MusicPlayer, "volume_db", 0, -80, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		$Tween.start()
