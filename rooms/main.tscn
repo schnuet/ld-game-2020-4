@@ -142,8 +142,8 @@ func _on_KidneyStation_minion_creation_requested():
 	idle_minions.push_back(minion)
 	emit_signal(\"minion_created\", minion)
 
-func _on_MovingStation_update_position():
-	pass
+func _on_MovingStation_started_moving():
+	_reset_position()
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -289,3 +289,4 @@ stream = ExtResource( 18 )
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
 [connection signal="request_station_boost_add" from="Stations/LungStation" to="." method="_on_LungStation_request_station_boost_add"]
+[connection signal="started_moving" from="Stations/MovingStation" to="." method="_on_MovingStation_started_moving"]
