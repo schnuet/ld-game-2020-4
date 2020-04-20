@@ -4,10 +4,10 @@ class_name Station
 
 # limits
 export var max_energy = 10;
-export var max_protein = 10;
+export var max_protein = 3;
 
 # required amounts
-export var protein_needed_for_update = 10;
+export var protein_needed_for_update = 3;
 export var energy_needed_for_action = 10;
 
 export var max_minions = 2;
@@ -80,9 +80,9 @@ func _on_ResourceStore_protein_amount_changed(amount):
 		return false;
 
 func change_animation_to_level(level:int):
-	if (level == 2):
+	if (level == 1):
 		$RoomMachine.animation = "level2";
-	elif (level >= 3):
+	elif (level >= 2):
 		$RoomMachine.animation = "level3";
 
 
@@ -146,7 +146,6 @@ func can_assign_minion():
 
 func on_minion_assigned(minion):
 	$ResourceDisplay.update_worker_count();
-	
 
 
 # energy methods
