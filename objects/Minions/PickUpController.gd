@@ -77,6 +77,10 @@ func _collect_energy_if_available():
 		if energy_source.has_energy():
 			_collect_energy()
 			_go_back()
+		else:
+			var new_energy_source = god.get_energy_source()
+			if new_energy_source != energy_source:
+				go_collecting_energy()
 
 func _collect_energy():
 	var energy = energy_source.take_energy()
