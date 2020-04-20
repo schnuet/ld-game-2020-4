@@ -1,28 +1,123 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/LungStation.gd" type="Script" id=2]
-[ext_resource path="res://sprites/stations/lung/room_lung5.png" type="Texture" id=3]
-[ext_resource path="res://sprites/stations/lung/room_lung8.png" type="Texture" id=4]
-[ext_resource path="res://sprites/stations/lung/room_lung3.png" type="Texture" id=5]
-[ext_resource path="res://sprites/stations/lung/room_lung7.png" type="Texture" id=6]
-[ext_resource path="res://sprites/stations/lung/room_lung_.png" type="Texture" id=7]
-[ext_resource path="res://sprites/stations/lung/room_lung6.png" type="Texture" id=8]
-[ext_resource path="res://sprites/stations/lung/room_lung4.png" type="Texture" id=9]
-[ext_resource path="res://sprites/stations/lung/room_lung2.png" type="Texture" id=10]
-[ext_resource path="res://sprites/stations/lung/room_lung1.png" type="Texture" id=11]
+[ext_resource path="res://sprites/stations/new_stations/room_lung1sheet.png" type="Texture" id=3]
+[ext_resource path="res://sprites/stations/new_stations/room_lung2sheet.png" type="Texture" id=4]
+[ext_resource path="res://sprites/stations/new_stations/room_lung3sheet.png" type="Texture" id=5]
 [ext_resource path="res://sounds/Audio_room_lung.wav" type="AudioStream" id=12]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 3 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 3 )
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=25]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "idle",
+"name": "level3",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "level2",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 4 ) ],
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
-"name": "producing",
+"name": "level1",
 "speed": 10.0
 } ]
 
@@ -31,7 +126,8 @@ scale = Vector2( 1, 0.998343 )
 script = ExtResource( 2 )
 
 [node name="RoomMachine" parent="." index="3"]
-frames = SubResource( 1 )
+frames = SubResource( 25 )
+animation = "level3"
 
 [node name="ResourceDisplay" parent="." index="7"]
 resourceStorePath = NodePath("../../LungStation/ResourceStore")
@@ -39,6 +135,7 @@ resourceStorePath = NodePath("../../LungStation/ResourceStore")
 [node name="BoostTimer" type="Timer" parent="." index="10"]
 wait_time = 2.0
 one_shot = true
-[connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
-[node name="MusicPlayer" parent="." index="9"]
+
+[node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 12 )
+[connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]

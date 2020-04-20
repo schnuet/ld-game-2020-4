@@ -37,9 +37,7 @@ func get_all_stations():
 	
 	
 func start_boosting_animation():
-	$RoomMachine.animation = "producing";
 	$RoomMachine.playing = true;
 
 func stop_boosting_animation():
-	$RoomMachine.animation = "idle";
 	$RoomMachine.playing = false;
