@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://videos/kronenberg_gameover_final.ogv" type="VideoStream" id=1]
 [ext_resource path="res://rooms/GameOverScene.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Anmerkung 2020-04-21 010416.png" type="Texture" id=3]
 [ext_resource path="res://fonts/heavy_fontdata.tres" type="DynamicFontData" id=4]
 [ext_resource path="res://sprites/ui/restart_button.png" type="Texture" id=5]
+[ext_resource path="res://sprites/ui/V.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -23,7 +24,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-position = Vector2( 479.476, 274.25 )
+position = Vector2( 480, 265 )
 scale = Vector2( 0.805224, 0.805224 )
 texture = ExtResource( 3 )
 
@@ -51,6 +52,11 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="V" type="Sprite" parent="."]
+position = Vector2( 653.5, 332.75 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 6 )
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

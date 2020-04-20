@@ -4,7 +4,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$VideoPlayer.play();
-	$SecondsAliveLabel.text = "";
+	$SecondsAliveLabel.text = str(Utils.get_count()) + " seconds";
 	$SecondsAliveLabel.visible = false;
 	$RestartButton.visible = false;
 
@@ -13,6 +13,7 @@ func _on_VideoPlayer_finished():
 	$VideoPlayer.stop();
 	$SecondsAliveLabel.visible = true;
 	$Timer.start(1);
+	$V.visible = true;
 
 func _process(delta):
 	if (Input.is_action_pressed("trigger_action")):
