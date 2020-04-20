@@ -55,7 +55,6 @@ autostart = true
 position = Vector2( 64, 64 )
 frames = SubResource( 2 )
 animation = "idle"
-playing = true
 
 [node name="ResourceStore" parent="." instance=ExtResource( 3 )]
 max_energy = 10
@@ -149,7 +148,6 @@ __meta__ = {
 [node name="MinionPosition" type="Node2D" parent="."]
 position = Vector2( 64, 128 )
 
-
 [node name="BoostIndicator" type="Sprite" parent="."]
 visible = false
 position = Vector2( 110, 17 )
@@ -173,7 +171,7 @@ autoplay = true
 [connection signal="energy_amount_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_energy_amount_changed"]
 [connection signal="max_energy_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_max_energy_changed"]
 [connection signal="max_protein_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_max_protein_changed"]
-[connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
 [connection signal="protein_amount_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_protein_amount_changed"]
+[connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
 [connection signal="body_entered" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_entered"]
 [connection signal="body_exited" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_exited"]
