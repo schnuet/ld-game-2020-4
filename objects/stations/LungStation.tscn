@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/LungStation.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sprites/stations/lung/room_lung4.png" type="Texture" id=9]
 [ext_resource path="res://sprites/stations/lung/room_lung2.png" type="Texture" id=10]
 [ext_resource path="res://sprites/stations/lung/room_lung1.png" type="Texture" id=11]
+[ext_resource path="res://sounds/Audio_room_lung.wav" type="AudioStream" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -39,3 +40,5 @@ resourceStorePath = NodePath("../../LungStation/ResourceStore")
 wait_time = 2.0
 one_shot = true
 [connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
+[node name="MusicPlayer" parent="." index="9"]
+stream = ExtResource( 12 )

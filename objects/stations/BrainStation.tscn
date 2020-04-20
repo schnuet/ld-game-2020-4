@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/stations/brain/room_brain_C_9.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://sprites/stations/brain/room_brain_B_9.png" type="Texture" id=26]
 [ext_resource path="res://sprites/stations/brain/room_brain_A_7.png" type="Texture" id=27]
 [ext_resource path="res://objects/stations/BrainStation.gd" type="Script" id=28]
+[ext_resource path="res://sounds/audio_room_brain.wav" type="AudioStream" id=29]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -54,14 +55,8 @@ script = ExtResource( 28 )
 frames = SubResource( 1 )
 animation = "level1"
 
-[node name="AddMinionStationButton" parent="StationButtons" index="0"]
-enabled = true
-
-[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
-enabled = true
-
-[node name="PutProteinStationButton" parent="StationButtons" index="2"]
-enabled = true
-
 [node name="ResourceDisplay" parent="." index="7"]
 resourceStorePath = NodePath("../../BrainStation/ResourceStore")
+
+[node name="MusicPlayer" parent="." index="9"]
+stream = ExtResource( 29 )
