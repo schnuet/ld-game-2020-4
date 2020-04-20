@@ -54,6 +54,9 @@ func has_energy():
 func can_add_protein():
 	return protein < max_protein;
 
+func can_add_energy():
+	return energy < max_energy
+
 func protein_is_full():
 	return protein >= max_protein;
 

@@ -27,7 +27,7 @@ func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateRects();
-	
+
 	# connect the station buttons to the trigger events
 	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
 	$StationButtons/RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
@@ -147,6 +147,8 @@ func can_assign_minion():
 func on_minion_assigned(minion):
 	$ResourceDisplay.update_worker_count();
 
+func on_minion_removed(minion):
+	$ResourceDisplay.update_worker_count();
 
 # energy methods
 
