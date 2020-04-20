@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sounds/main_theme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://rooms/StartScreen.gd" type="Script" id=2]
+[ext_resource path="res://sprites/background/startscreen/Background1.png" type="Texture" id=3]
+[ext_resource path="res://sprites/background/startscreen/Background4.png" type="Texture" id=4]
+[ext_resource path="res://sprites/background/startscreen/Background3.png" type="Texture" id=5]
+[ext_resource path="res://sprites/background/startscreen/Background2.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource( 2 )
@@ -9,6 +21,11 @@ script = ExtResource( 2 )
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 autoplay = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 482.739, 275.109 )
+frames = SubResource( 1 )
+speed_scale = 0.5
 
 [node name="Button" type="Button" parent="."]
 margin_left = 423.249
