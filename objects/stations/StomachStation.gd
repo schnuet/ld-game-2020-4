@@ -17,6 +17,10 @@ func _on_TakeProteinStationButton_button_action_triggered():
 # add resources on timeout
 
 func _on_ProteinTimer_timeout():
+	if ($ResourceStore.protein >= $ResourceStore.max_protein):
+		$RoomMachine.playing = false;
+	else: 
+		$RoomMachine.playing = true;
 	$ResourceStore.add_protein(1);
 	
 func _on_EnergyTimer_timeout():

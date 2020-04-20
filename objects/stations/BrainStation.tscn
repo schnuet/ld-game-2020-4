@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/stations/brain/room_brain_C_9.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://sprites/stations/brain/room_brain_A_7.png" type="Texture" id=27]
 [ext_resource path="res://objects/stations/BrainStation.gd" type="Script" id=28]
 [ext_resource path="res://sounds/audio_room_brain.wav" type="AudioStream" id=29]
+[ext_resource path="res://sprites/stations/room_background_frame_right_corner.png" type="Texture" id=30]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -37,29 +38,30 @@ animations = [ {
 "name": "level2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 27 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "level1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "level3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 27 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "level1",
 "speed": 5.0
 } ]
 
 [node name="BrainStation" instance=ExtResource( 1 )]
 script = ExtResource( 28 )
+description = "produces room boosting token"
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
 animation = "level1"
 
-[node name="ResourceStore" parent="." index="4"]
-energy = 10
+[node name="Border" parent="." index="7"]
+texture = ExtResource( 30 )
 
-[node name="ResourceDisplay" parent="." index="7"]
+[node name="ResourceDisplay" parent="." index="8"]
 resourceStorePath = NodePath("../../BrainStation/ResourceStore")
 
-[node name="MusicPlayer" parent="." index="11"]
+[node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 29 )

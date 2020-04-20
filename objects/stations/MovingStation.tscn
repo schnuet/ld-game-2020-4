@@ -1,74 +1,75 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/MovingStation.gd" type="Script" id=2]
 [ext_resource path="res://sprites/stations/new_stations/moving_machine2sheet.png" type="Texture" id=3]
 [ext_resource path="res://sprites/stations/new_stations/moving_machinesheet.png" type="Texture" id=4]
 [ext_resource path="res://sprites/stations/new_stations/moving_machine3sheet.png" type="Texture" id=5]
+[ext_resource path="res://sprites/stations/room_background_frame_right_corner.png" type="Texture" id=6]
 [ext_resource path="res://sounds/audio_room_engine.wav" type="AudioStream" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 896, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 896, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
@@ -107,12 +108,12 @@ region = Rect2( 896, 0, 128, 128 )
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "level3",
+"name": "level2",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
-"name": "level2",
+"name": "level3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -123,13 +124,17 @@ animations = [ {
 
 [node name="MovingStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+description = "change terrain for more food"
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 25 )
 animation = "level1"
 
-[node name="ResourceDisplay" parent="." index="7"]
+[node name="Border" parent="." index="7"]
+texture = ExtResource( 6 )
+
+[node name="ResourceDisplay" parent="." index="8"]
 resourceStorePath = NodePath("../../MovingStation/ResourceStore")
 
-[node name="MusicPlayer" parent="." index="11"]
+[node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 12 )

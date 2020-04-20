@@ -10,35 +10,35 @@
 [ext_resource path="res://sounds/audio_room_stomach.wav" type="AudioStream" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
@@ -61,12 +61,12 @@ region = Rect2( 384, 0, 128, 128 )
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "level3",
+"name": "level2",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "level2",
+"name": "level3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
@@ -79,6 +79,7 @@ animations = [ {
 script = ExtResource( 1 )
 max_protein = 15
 do_action_automatically = false
+description = "source for protein and energy"
 active = true
 
 [node name="RoomMachine" parent="." index="3"]
@@ -105,7 +106,7 @@ enabled = false
 
 [node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
 
-[node name="MusicPlayer" parent="." index="13"]
+[node name="MusicPlayer" parent="." index="14"]
 stream = ExtResource( 10 )
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]

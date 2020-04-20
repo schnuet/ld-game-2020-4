@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sprites/stations/station_background.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/stations/Station.gd" type="Script" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://sprites/stations/icons/icon_lung.png" type="Texture" id=12]
 [ext_resource path="res://sprites/token/token_brain.png" type="Texture" id=13]
 [ext_resource path="res://objects/stations/stationButtons/AddBrainTokenStationButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sprites/stations/room_background_gray_2.png" type="Texture" id=15]
+[ext_resource path="res://sprites/stations/icons/icon_upgrade.png" type="Texture" id=16]
+[ext_resource path="res://sprites/ui/Lock.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 48 )
@@ -84,6 +87,11 @@ shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="OverlayInactive" type="Sprite" parent="."]
+visible = false
+position = Vector2( 64, 64 )
+texture = ExtResource( 15 )
 
 [node name="Border" type="Sprite" parent="."]
 position = Vector2( 64, 64 )
@@ -169,6 +177,36 @@ autoplay = true
 
 [node name="BrainTokenResetTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="BuildIcon" type="Sprite" parent="."]
+visible = false
+position = Vector2( 64, 61 )
+texture = ExtResource( 16 )
+hframes = 3
+
+[node name="LockIcon" type="Sprite" parent="."]
+visible = false
+position = Vector2( 64, 61 )
+texture = ExtResource( 17 )
+
+[node name="TextAnchor" type="Node2D" parent="."]
+position = Vector2( 36, -15 )
+z_index = 51
+
+[node name="DescriptionLabel" type="Label" parent="TextAnchor"]
+margin_left = -51.0
+margin_top = 4.0
+margin_right = 107.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 5 )
+text = "Description"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DescriptionTimer" type="Timer" parent="TextAnchor"]
+one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_Station_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Station_body_exited"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_ActionTimer_timeout"]
@@ -179,4 +217,6 @@ one_shot = true
 [connection signal="protein_amount_changed" from="ResourceStore" to="ResourceDisplay" method="_on_ResourceStore_protein_amount_changed"]
 [connection signal="body_entered" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_entered"]
 [connection signal="body_exited" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_exited"]
+[connection signal="player_entered" from="StationButtons" to="." method="_on_StationButtons_player_entered"]
+[connection signal="player_left" from="StationButtons" to="." method="_on_StationButtons_player_left"]
 [connection signal="timeout" from="BrainTokenResetTimer" to="." method="_on_BrainTokenResetTimer_timeout"]

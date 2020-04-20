@@ -7,71 +7,71 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 256, 128, 128 )
+region = Rect2( 0, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 256, 128, 128 )
+region = Rect2( 128, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 256, 128, 128 )
+region = Rect2( 256, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 256, 128, 128 )
+region = Rect2( 384, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 512, 256, 128, 128 )
+region = Rect2( 512, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 256, 128, 128 )
+region = Rect2( 640, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 256, 128, 128 )
+region = Rect2( 768, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 896, 256, 128, 128 )
+region = Rect2( 896, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 1024, 256, 128, 128 )
+region = Rect2( 0, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 128, 128, 128 )
+region = Rect2( 128, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 128, 128, 128 )
+region = Rect2( 256, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 128, 128, 128 )
+region = Rect2( 384, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 128, 128, 128 )
+region = Rect2( 512, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 3 )
-region = Rect2( 512, 128, 128, 128 )
+region = Rect2( 640, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 128, 128, 128 )
+region = Rect2( 768, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 128, 128, 128 )
+region = Rect2( 896, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 3 )
-region = Rect2( 896, 128, 128, 128 )
+region = Rect2( 1024, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 3 )
@@ -103,14 +103,14 @@ region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=25]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "level3",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "level2",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "level3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -122,6 +122,7 @@ animations = [ {
 [node name="FatStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 do_action_automatically = false
+description = "stores energy"
 
 [node name="FatLevelDisplay" type="Node2D" parent="." index="3"]
 
@@ -199,9 +200,9 @@ rotation = -3.61918e-05
 frames = SubResource( 25 )
 animation = "level1"
 
-[node name="ResourceDisplay" parent="." index="8"]
+[node name="ResourceDisplay" parent="." index="9"]
 resourceStorePath = NodePath("../../FatStation/ResourceStore")
 
-[node name="MusicPlayer" parent="." index="10"]
+[node name="MusicPlayer" parent="." index="13"]
 stream = ExtResource( 4 )
 [connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]

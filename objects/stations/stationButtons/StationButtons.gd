@@ -7,12 +7,20 @@ export (NodePath) var station_path;
 var station:Station = null;
 var player = null;
 
+signal player_entered
+signal player_left
+
 func _ready():
 	visible = false;
 	station = get_node(station_path);
 
 func _process(delta):
 	if (!visible): return;
+	
+	# BUILD station when in build mode and not built
+	var trigger_button_pressed = Input.is_action_pressed("trigger_action");
+	if (!station.active && trigger_button_pressed && station.build_mode):
+		station.build();
 
 	update_standard_buttons_visibility();
 
@@ -25,6 +33,7 @@ func update_standard_buttons_visibility():
 		$AddBrainTokenStationButton
 	]
 
+	# deactivate all buttons when not active
 	if !station.active:
 		for btn in buttons:
 			btn.visible = false
@@ -76,15 +85,25 @@ func are_idle_minions_available():
 func _on_StationButtons_body_entered(body):
 	# only handle player
 	if (body.name != "Player"): return;
+	
+	if (!station.active && station.build_mode):
+		station.get_node("BuildIcon").frame = 1;
 
 	visible = true;
 	player = body;
+	
+	emit_signal("player_entered", player);
 
 
 # hide the buttons when the player leaves the room
 func _on_StationButtons_body_exited(body):
 	# only handle player
 	if (body.name != "Player"): return;
+	
+	if (!station.active && station.build_mode):
+		station.get_node("BuildIcon").frame = 0;
 
 	visible = false;
 	player = null;
+	
+	emit_signal("player_left");

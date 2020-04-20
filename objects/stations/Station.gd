@@ -14,8 +14,11 @@ export var max_minions = 2;
 
 export var do_action_automatically = true;
 
+export var description = "";
+
+# BUILD mode vars
 export var active = false;
-export var build_mode = false;
+export var build_mode = false; 
 
 # update
 var can_be_updated setget ,get_can_be_updated;
@@ -39,6 +42,16 @@ func _ready():
 	$ResourceStore.max_energy = max_energy;
 	$ResourceStore.max_protein = max_protein;
 	$ResourceDisplay.updateRects();
+	
+	# set the description
+	$TextAnchor/DescriptionLabel.text = description;
+	$TextAnchor/DescriptionLabel.visible = false;
+	
+	if (active == false):
+		show_inactive_overlay();
+	else:
+		$LockIcon.visible = false;
+		$BuildIcon.visible = false;
 
 	# connect the station buttons to the trigger events
 	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
@@ -46,17 +59,45 @@ func _ready():
 	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
 	$StationButtons/AddBrainTokenStationButton.connect("button_action_triggered", self, "request_brain_token")
 
+
+# build mode functions
+
 func enter_build_mode():
 	print("Enter build mode")
 	build_mode = !active
+	show_build_icon();
 
 func exit_build_mode():
 	print("Exit build mode")
 	build_mode = false
+	hide_build_icon();
 
 func build():
 	active = true
+	hide_inactive_overlay()
 	emit_signal("built")
+
+func show_inactive_overlay():
+	$OverlayInactive.visible = true;
+	$OverlayInactive.modulate = Color(1, 1, 1, 0.7);
+	$ResourceDisplay.visible = false;
+	$LockIcon.visible = true;
+
+func hide_inactive_overlay():
+	$OverlayInactive.visible = false;
+	$ResourceDisplay.visible = true;
+	$LockIcon.visible = false;
+	$BuildIcon.visible = false;
+	
+func show_build_icon():
+	if (!active): $BuildIcon.visible = true;
+	$LockIcon.visible = false;
+	
+func hide_build_icon():
+	$BuildIcon.visible = false;
+	if (!active): $LockIcon.visible = true;
+
+
 
 # worker methods
 
@@ -227,3 +268,13 @@ func _on_Station_body_exited(body):
 func _on_BrainTokenResetTimer_timeout():
 	has_brain_token = false;
 	$ConcentrationIndicator.visible = false;
+
+
+# show description text when player enters room
+func _on_StationButtons_player_entered(player):
+	$TextAnchor/DescriptionLabel.visible = true;
+	# $TextAnchor/DescriptionTimer.start(10);
+
+
+func _on_StationButtons_player_left():
+	$TextAnchor/DescriptionLabel.visible = false;

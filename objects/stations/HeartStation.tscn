@@ -32,51 +32,51 @@ atlas = ExtResource( 3 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=19]
@@ -88,24 +88,25 @@ animations = [ {
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "level1",
+"name": "level3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "level3",
+"name": "level1",
 "speed": 5.0
 } ]
 
 [node name="HeartStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+description = "if out of energy – Game Over"
 active = true
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 19 )
 animation = "level1"
 
-[node name="MusicPlayer" parent="." index="11"]
+[node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 6 )
 
 [node name="EnergyTimer" type="Timer" parent="." index="14"]
