@@ -92,7 +92,6 @@ func _on_KidneyStation_minion_creation_requested():
 	get_tree().root.add_child(minion)
 	idle_minions.push_back(minion)
 	emit_signal(\"minion_created\", minion)
-
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -211,7 +210,7 @@ position = Vector2( 336, 384 )
 position = Vector2( 192, 384 )
 
 [node name="HeartStation" parent="Stations" instance=ExtResource( 12 )]
-position = Vector2( 48, 384 )
+position = Vector2( 240, 242 )
 
 [node name="BrainStation" parent="Stations" instance=ExtResource( 13 )]
 position = Vector2( 304, 96 )
@@ -226,7 +225,7 @@ position = Vector2( 98, 242 )
 position = Vector2( 384, 240 )
 
 [node name="FatStation" parent="Stations" instance=ExtResource( 17 )]
-position = Vector2( 240, 242 )
+position = Vector2( 56, 386 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
