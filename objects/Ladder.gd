@@ -11,7 +11,7 @@ func _ready():
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("Minion"):
+	if body.is_in_group("Minion") || body.is_in_group("Enemy"):
 		var global_pos = global_position
 		var bottom_position = Vector2(global_pos.x, global_pos.y + shape.extents.y)
 		var top_position = Vector2(global_pos.x, global_pos.y - relative_ladder_top)
@@ -21,7 +21,7 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Area2D_body_exited(body):
-	if body.is_in_group("Minion"):
+	if body.is_in_group("Minion") || body.is_in_group("Enemy"):
 		body.exit_ladder(area_2d.name)
 	elif (body.name == "Player"):
 		body.exit_ladder(name)
