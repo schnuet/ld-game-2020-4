@@ -150,7 +150,18 @@ func on_minion_assigned(minion):
 func on_minion_removed(minion):
 	$ResourceDisplay.update_worker_count();
 
+
+
+
 # energy methods
 
 func can_add_energy():
-	return !$ResourceStore.can_add_energy();
+	return !$ResourceStore.energy_is_full()
+
+	
+func need_energy():
+	return can_add_energy()
+
+func add_energy(energy):
+	$ResourceStore.add_energy(energy)
+

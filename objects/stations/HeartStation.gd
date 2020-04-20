@@ -14,12 +14,3 @@ func _process(delta):
 	
 	pass
 
-# energy methods
-func can_add_energy():
-	return !$ResourceStore.energy_is_full()
-	
-func add_energy(energy):
-	$ResourceStore.add_energy(energy)
-	
-func need_energy():
-	return can_add_energy()
