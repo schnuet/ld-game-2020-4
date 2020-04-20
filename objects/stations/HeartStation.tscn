@@ -107,4 +107,7 @@ animation = "level1"
 
 [node name="MusicPlayer" parent="." index="11"]
 stream = ExtResource( 6 )
+
+[node name="EnergyTimer" type="Timer" parent="." index="14"]
 [connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_energy_amount_changed"]
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
