@@ -263,3 +263,4 @@ position = Vector2( 56, 386 )
 position = Vector2( 398, 472 )
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
+[connection signal="request_station_boost_add" from="Stations/LungStation" to="." method="_on_LungStation_request_station_boost_add"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://sprites/stations/station_background.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/stations/Station.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://objects/stations/stationButtons/StationButtons.gd" type="Script" id=9]
 [ext_resource path="res://sprites/stations/room_background_2_frame.png" type="Texture" id=10]
 [ext_resource path="res://sprites/ui/Meterssmaller.png" type="Texture" id=11]
+[ext_resource path="res://sprites/stations/icons/icon_lung.png" type="Texture" id=12]
+[ext_resource path="res://sprites/stations/icons/icon_brain.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 48 )
@@ -26,7 +28,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 66, 16 )
 
-[node name="Station" type="Area2D"]
+[node name="Station" type="Area2D" groups=[
+"Station",
+]]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -51,6 +55,7 @@ autostart = true
 position = Vector2( 64, 64 )
 frames = SubResource( 2 )
 animation = "idle"
+playing = true
 
 [node name="ResourceStore" parent="." instance=ExtResource( 3 )]
 max_energy = 10
@@ -145,6 +150,18 @@ __meta__ = {
 position = Vector2( 64, 128 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="BoostIndicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 110, 17 )
+z_index = 50
+texture = ExtResource( 12 )
+
+[node name="ConcentrationIndicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 18, 17 )
+z_index = 50
+texture = ExtResource( 13 )
 [connection signal="body_entered" from="." to="." method="_on_Station_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Station_body_exited"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_ActionTimer_timeout"]

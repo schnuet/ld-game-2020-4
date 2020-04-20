@@ -25,7 +25,7 @@ signal worker_requested;
 signal worker_removed;
 signal station_protein_requested;
 
-var is_boosted_by_lung = false;
+var boost_by_lung = 1.0;
 
 
 
@@ -98,7 +98,10 @@ func change_animation_to_level(level:int):
 
 # activate action when action timer runs out:
 func _on_ActionTimer_timeout():
-	$ActionTimer.wait_time = action_timer_time;
+	# set action timer time
+	$ActionTimer.wait_time = action_timer_time * boost_by_lung;
+	
+	
 	if (do_action_automatically):
 		trigger_action();
 
