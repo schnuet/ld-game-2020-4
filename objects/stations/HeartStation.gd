@@ -16,3 +16,9 @@ func _process(delta):
 
 func remove_energy(amount:int):
 	$ResourceStore.remove_energy(amount)
+
+
+func _on_energy_amount_changed(energy):
+	if $ResourceStore.has_energy() == false:
+		print_debug("Heart is dead!")
+		emit_signal("heart_dead")

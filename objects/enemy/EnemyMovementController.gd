@@ -217,8 +217,7 @@ func _ladder_usage_direction(to_target):
 func enter_ladder(top_pos, bottom_pos, id):
 	if id != current_ladder_id:
 		current_ladder_id = id
-		current_moving_state = MovingState.AtLadder
-		print_debug("Enter ladder:", id)
+		current_moving_state = MovingState.AtLadder		
 		ladder_top = top_pos
 		ladder_bottom = bottom_pos	
 	
@@ -226,5 +225,4 @@ func enter_ladder(top_pos, bottom_pos, id):
 func exit_ladder(id):
 	if id == current_ladder_id:
 		current_ladder_id = ""
-		current_moving_state = MovingState.OnGround
-		print_debug("Leave ladder:", id)
+		current_moving_state = MovingState.OnGround		
