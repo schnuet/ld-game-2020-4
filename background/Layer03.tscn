@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/background/city/background_city_layer3.png" type="Texture" id=1]
+[ext_resource path="res://sprites/background/wood/Background_1_wald_layer3.png" type="Texture" id=2]
+[ext_resource path="res://sprites/background/sea/Background_3_sea_layer3.png" type="Texture" id=3]
+[ext_resource path="res://background/Layer.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "city_day",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "city_night",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "wood_day",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "wood_night",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "sea_day",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "sea_night",
+"speed": 5.0
+} ]
+
+[node name="Layer03" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "wood_day"
+script = ExtResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -1440, 16 )
+rect = Rect2( 0, 0, 1400, 20 )
+
+[node name="ExitNotifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 1500, 0 )
