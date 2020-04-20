@@ -10,6 +10,9 @@ export var snail_damage:int = 3
 export var bakterie_speed:int = 80
 export var bakterie_damage:int = 1
 
+export var spawn_time_range:Vector2 = Vector2(10,20)
+export var upgrades_needed_for_bigger_enemy = 10
+
 var enemy_path
 
 var snail_enemy = preload("res://objects/enemy/Snail/Snail.tscn")
@@ -25,6 +28,7 @@ func init(heart_station:Station, stomach_station:Station, navigation:Navigation2
 	self.heart_station = heart_station
 	self.stomach_station = stomach_station
 	self.nav2D = navigation
+	_start_timer()
 
 func spawn_snail():
 	var snail = snail_enemy.instance()
@@ -40,3 +44,27 @@ func _add_enemy_to_scene(enemy, speed, damage):
 	print(stomach_station.global_position)
 	add_child(enemy)
 	enemy.walk_path_and_then_to_heart(enemy_path.duplicate())
+
+
+func _on_SpawnTimer_timeout():
+	if _total_upgrades_in_scene() >= upgrades_needed_for_bigger_enemy:
+		var enemy_to_spawn = randi() % 2
+		if enemy_to_spawn == 0:
+			spawn_bakterie()
+		else:
+			spawn_snail()
+	else:
+		spawn_bakterie()
+	_start_timer()
+
+func _start_timer():
+	randomize()
+	var next_spawn_in_secs = rand_range(spawn_time_range.x, spawn_time_range.y)	
+	$SpawnTimer.start(next_spawn_in_secs)
+
+func _total_upgrades_in_scene():
+	var stations = get_tree().get_nodes_in_group("Station")
+	var total_count = 0
+	for station in stations:
+		total_count += station.upgrade_level
+	return total_count

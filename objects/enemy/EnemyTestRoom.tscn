@@ -267,5 +267,7 @@ position = Vector2( 56, 386 )
 position = Vector2( 398, 472 )
 
 [node name="EnemyManager" parent="." instance=ExtResource( 18 )]
+spawn_time_range = Vector2( 1, 10 )
+upgrades_needed_for_bigger_enemy = 2
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
