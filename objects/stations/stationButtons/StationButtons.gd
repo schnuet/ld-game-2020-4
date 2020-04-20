@@ -20,6 +20,7 @@ func update_standard_buttons_visibility():
 	var can_add_minion = $AddMinionStationButton.enabled;
 	var can_remove_minion = $RemoveMinionStationButton.enabled;
 	var can_add_protein = $PutProteinStationButton.enabled;
+	var can_add_brain_token = $AddBrainTokenStationButton.enabled;
 
 	# only show the relevant actions for the current moment:
 	var player_res = player.get_node("ResourceStore");
@@ -40,10 +41,18 @@ func update_standard_buttons_visibility():
 	# no idle workers
 	if (not are_idle_minions_available()):
 		can_add_minion = false;
+	
+	if (player.has_brain_token):
+		can_add_minion = false;
+		can_add_protein = false;
+		can_remove_minion = false;
+	else:
+		can_add_brain_token = false;
 
 	$AddMinionStationButton.visible = can_add_minion;
 	$RemoveMinionStationButton.visible = can_remove_minion;
 	$PutProteinStationButton.visible = can_add_protein;
+	$AddBrainTokenStationButton.visible = can_add_brain_token;
 
 func are_idle_minions_available():
 	var current_scene = get_tree().current_scene;

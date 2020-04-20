@@ -57,6 +57,7 @@ func _ready():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
+		station.connect(\"station_brain_token_requested\", self, \"on_station_brain_token_requested\")
 
 func on_worker_requested(station):
 	var m = idle_minions.pop_front()
@@ -91,6 +92,11 @@ func _remove_minion_from_station(station, minion):
 func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);
 	station.receive_protein_from($Player, 1);
+
+func on_station_brain_token_requested(station):
+	print(\"Station requested brain token\", station);
+	$Player.has_brain_token = false;
+	station.add_brain_token();
 
 # return stomach.
 # alternatively, return FatStation

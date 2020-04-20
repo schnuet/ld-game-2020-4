@@ -52,7 +52,7 @@ enabled = false
 
 [node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
 
-[node name="MusicPlayer" parent="." index="11"]
+[node name="MusicPlayer" parent="." index="13"]
 stream = ExtResource( 10 )
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]

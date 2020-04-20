@@ -32,11 +32,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "level3",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 20 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
 "loop": true,
 "name": "level2",
@@ -45,6 +40,11 @@ animations = [ {
 "frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 27 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "level1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "level3",
 "speed": 5.0
 } ]
 
@@ -55,8 +55,11 @@ script = ExtResource( 28 )
 frames = SubResource( 1 )
 animation = "level1"
 
+[node name="ResourceStore" parent="." index="4"]
+energy = 10
+
 [node name="ResourceDisplay" parent="." index="7"]
 resourceStorePath = NodePath("../../BrainStation/ResourceStore")
 
-[node name="MusicPlayer" parent="." index="9"]
+[node name="MusicPlayer" parent="." index="11"]
 stream = ExtResource( 29 )

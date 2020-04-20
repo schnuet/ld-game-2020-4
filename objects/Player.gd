@@ -8,6 +8,8 @@ const WALK_SPEED = 100
 var velocity = Vector2()
 var on_ladder = null
 
+var has_brain_token = false;
+
 func enter_ladder(ladder_name):
 	print("Enter ladder")
 	on_ladder = ladder_name

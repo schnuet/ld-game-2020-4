@@ -24,8 +24,10 @@ var action_timer_time = 1; # in seconds
 signal worker_requested;
 signal worker_removed;
 signal station_protein_requested;
+signal station_brain_token_requested;
 
 var boost_by_lung = 1.0;
+var has_brain_token = false;
 
 
 
@@ -38,6 +40,7 @@ func _ready():
 	$StationButtons/AddMinionStationButton.connect("button_action_triggered", self, "request_worker")
 	$StationButtons/RemoveMinionStationButton.connect("button_action_triggered", self, "remove_worker")
 	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
+	$StationButtons/AddBrainTokenStationButton.connect("button_action_triggered", self, "request_brain_token")
 
 
 # worker methods
@@ -56,6 +59,14 @@ func remove_worker():
 func add_protein():
 	emit_signal("station_protein_requested", self);
 
+func request_brain_token():
+	emit_signal("station_brain_token_requested", self);
+	
+func add_brain_token():
+	has_brain_token = true;
+	# let the brain token boost the station for 5 seconds
+	$BrainTokenResetTimer.start(5);
+	$ConcentrationIndicator.visible = true;
 
 
 
@@ -98,8 +109,11 @@ func change_animation_to_level(level:int):
 
 # activate action when action timer runs out:
 func _on_ActionTimer_timeout():
+	var new_action_wait_timer = action_timer_time * boost_by_lung;
+	if (has_brain_token):
+		new_action_wait_timer *= 0.5;
 	# set action timer time
-	$ActionTimer.wait_time = action_timer_time * boost_by_lung;
+	$ActionTimer.wait_time = new_action_wait_timer;
 	
 	
 	if (do_action_automatically):
@@ -189,3 +203,8 @@ func _on_Station_body_exited(body):
 	if body.name == "Player":
 		$Tween.interpolate_property($MusicPlayer, "volume_db", 0, -80, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		$Tween.start()
+
+
+func _on_BrainTokenResetTimer_timeout():
+	has_brain_token = false;
+	$ConcentrationIndicator.visible = false;

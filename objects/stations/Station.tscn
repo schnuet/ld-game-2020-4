@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/stations/station_background.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/stations/Station.gd" type="Script" id=2]
@@ -12,7 +12,8 @@
 [ext_resource path="res://sprites/stations/room_background_2_frame.png" type="Texture" id=10]
 [ext_resource path="res://sprites/ui/Meterssmaller.png" type="Texture" id=11]
 [ext_resource path="res://sprites/stations/icons/icon_lung.png" type="Texture" id=12]
-[ext_resource path="res://sprites/stations/icons/icon_brain.png" type="Texture" id=13]
+[ext_resource path="res://sprites/token/token_brain.png" type="Texture" id=13]
+[ext_resource path="res://objects/stations/stationButtons/AddBrainTokenStationButton.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 48 )
@@ -67,15 +68,15 @@ script = ExtResource( 9 )
 station_path = NodePath("..")
 
 [node name="AddMinionStationButton" parent="StationButtons" instance=ExtResource( 7 )]
-enabled = true
 
 [node name="RemoveMinionStationButton" parent="StationButtons" instance=ExtResource( 6 )]
 position = Vector2( 30, 0 )
-enabled = true
 
 [node name="PutProteinStationButton" parent="StationButtons" instance=ExtResource( 8 )]
 position = Vector2( 60, 0 )
-enabled = true
+
+[node name="AddBrainTokenStationButton" parent="StationButtons" instance=ExtResource( 14 )]
+position = Vector2( 46, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StationButtons"]
 position = Vector2( 64, 120 )
@@ -165,6 +166,9 @@ volume_db = -80.0
 autoplay = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="BrainTokenResetTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_Station_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Station_body_exited"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_ActionTimer_timeout"]
@@ -175,3 +179,4 @@ autoplay = true
 [connection signal="protein_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_protein_amount_changed"]
 [connection signal="body_entered" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_entered"]
 [connection signal="body_exited" from="StationButtons" to="StationButtons" method="_on_StationButtons_body_exited"]
+[connection signal="timeout" from="BrainTokenResetTimer" to="." method="_on_BrainTokenResetTimer_timeout"]
