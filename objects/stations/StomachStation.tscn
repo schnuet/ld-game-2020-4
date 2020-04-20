@@ -79,6 +79,7 @@ animations = [ {
 script = ExtResource( 1 )
 max_protein = 15
 do_action_automatically = false
+active = true
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 13 )

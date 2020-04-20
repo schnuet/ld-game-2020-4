@@ -14,6 +14,8 @@ export var max_minions = 2;
 
 export var do_action_automatically = true;
 
+export var active = false;
+
 # update
 var can_be_updated setget ,get_can_be_updated;
 var upgrade_level = 0;
@@ -87,6 +89,10 @@ func update():
 	$ResourceStore.set_max_protein(protein_needed_for_update);
 	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
 	$ActionTimer.wait_time *= 0.8;
+	perform_update_action()
+	
+func perform_update_action():
+	pass
 
 # listen for protein change: update if full
 func _on_ResourceStore_protein_amount_changed(amount):

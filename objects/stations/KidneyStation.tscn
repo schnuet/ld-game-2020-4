@@ -184,6 +184,7 @@ animations = [ {
 [node name="KidneyStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_minions = 1
+active = true
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 40 )

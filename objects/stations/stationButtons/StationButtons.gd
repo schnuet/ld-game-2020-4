@@ -3,6 +3,7 @@ extends Area2D
 # is only shown when the player is in the room
 
 export (NodePath) var station_path;
+
 var station:Station = null;
 var player = null;
 
@@ -17,6 +18,18 @@ func _process(delta):
 
 
 func update_standard_buttons_visibility():
+	var buttons = [
+		$AddMinionStationButton,
+		$RemoveMinionStationButton,
+		$PutProteinStationButton,
+		$AddBrainTokenStationButton
+	]
+
+	if !station.active:
+		for btn in buttons:
+			btn.visible = false
+		return
+
 	var can_add_minion = $AddMinionStationButton.enabled;
 	var can_remove_minion = $RemoveMinionStationButton.enabled;
 	var can_add_protein = $PutProteinStationButton.enabled;
