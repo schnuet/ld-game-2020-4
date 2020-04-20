@@ -39,6 +39,7 @@ animations = [ {
 [node name="KidneyStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_minions = 1
+active = true
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
@@ -49,5 +50,5 @@ energy = 10
 [node name="NewMinionPosition" type="Node2D" parent="." index="5"]
 position = Vector2( 48, 128 )
 
-[node name="MusicPlayer" parent="." index="10"]
+[node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 17 )

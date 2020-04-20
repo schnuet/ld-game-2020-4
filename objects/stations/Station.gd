@@ -14,6 +14,8 @@ export var max_minions = 2;
 
 export var do_action_automatically = true;
 
+export var active = false;
+
 # update
 var can_be_updated setget ,get_can_be_updated;
 var upgrade_level = 0;
