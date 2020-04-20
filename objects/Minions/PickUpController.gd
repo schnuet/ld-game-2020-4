@@ -46,7 +46,7 @@ func assign_to_station(station):
 	_go_back()
 
 func go_collecting_energy():
-	energy_source = god.get_energy_station()
+	energy_source = god.get_energy_source()
 
 	minion.move_to_pos(energy_source.get_position_for_minions())
 	current_state = CollectingState.GoingToSource
