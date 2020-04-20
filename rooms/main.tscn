@@ -147,7 +147,7 @@ func _on_KidneyStation_minion_creation_requested():
 	minion.god = self
 	minion.set_navigation_2d($Navigation2D)
 	minion.global_position = $Stations/KidneyStation/NewMinionPosition.global_position
-	get_tree().root.add_child(minion)
+	add_child(minion)
 	idle_minions.push_back(minion)
 	emit_signal(\"minion_created\", minion)
 
@@ -161,6 +161,10 @@ func _on_Station_built():
 func _on_HeartStation_heart_updated():
 	for station in find_node(\"Stations\").get_children():
 		station.enter_build_mode()
+
+
+func _on_heart_dead():
+	get_tree().change_scene(\"res://rooms/GameOverScene.tscn\")
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -307,6 +311,7 @@ stream = ExtResource( 18 )
 [node name="EnemyManager" parent="." instance=ExtResource( 19 )]
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
+[connection signal="heart_dead" from="Stations/HeartStation" to="." method="_on_heart_dead"]
 [connection signal="heart_updated" from="Stations/HeartStation" to="." method="_on_HeartStation_heart_updated"]
 [connection signal="request_station_boost_add" from="Stations/LungStation" to="." method="_on_LungStation_request_station_boost_add"]
 [connection signal="started_moving" from="Stations/MovingStation" to="." method="_on_MovingStation_started_moving"]
