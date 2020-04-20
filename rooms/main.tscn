@@ -67,7 +67,16 @@ func on_station_protein_requested(station):
 	print(\"Station requested protein\", station);
 	station.receive_protein_from($Player, 1);
 
+# return stomach.
+# alternatively, return FatStation
 func get_energy_source():
+	var fat_station_built = $Stations/FatStation.visible == true;
+	if (
+		fat_station_built && 
+		$Stations/StomachStation/ResourceStore.energy < 1 &&
+		$Stations/StomachStation/ResourceStore.energy > 1
+	):
+		return $Stations/FatStation;
 	return $Stations/StomachStation
 
 func _process(delta):
