@@ -15,6 +15,7 @@ export var max_minions = 2;
 export var do_action_automatically = true;
 
 export var active = false;
+export var build_mode = false;
 
 # update
 var can_be_updated setget ,get_can_be_updated;
@@ -27,6 +28,7 @@ signal worker_requested;
 signal worker_removed;
 signal station_protein_requested;
 signal station_brain_token_requested;
+signal built
 
 var boost_by_lung = 1.0;
 var has_brain_token = false;
@@ -44,6 +46,17 @@ func _ready():
 	$StationButtons/PutProteinStationButton.connect("button_action_triggered", self, "add_protein")
 	$StationButtons/AddBrainTokenStationButton.connect("button_action_triggered", self, "request_brain_token")
 
+func enter_build_mode():
+	print("Enter build mode")
+	build_mode = !active
+
+func exit_build_mode():
+	print("Exit build mode")
+	build_mode = false
+
+func build():
+	active = true
+	emit_signal("built")
 
 # worker methods
 
