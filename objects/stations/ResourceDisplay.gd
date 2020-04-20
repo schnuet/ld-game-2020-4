@@ -6,6 +6,11 @@ var resourceStore;
 var energy_rect_max_width = 22;
 var protein_rect_max_width = 22;
 
+var animated_protein_percent = 0;
+var animated_energy_percent = 0;
+
+var tween_duration = 0.2; #in seconds
+
 
 func _ready():
 	resourceStore = get_node(resourceStorePath);
@@ -16,14 +21,24 @@ func _ready():
 func updateRects():
 	updateEnergyRect();
 	updateProteinRect();
-	
 
 func updateEnergyRect():
-	$RectEnergy.rect_size.x = (float(resourceStore.energy) / float(resourceStore.max_energy)) * energy_rect_max_width;
+	var energy_percent = float(resourceStore.energy) / float(resourceStore.max_energy);
+	$TweenEnergy.interpolate_property(self, "animated_energy_percent",
+	        animated_energy_percent, energy_percent, tween_duration,
+	        Tween.TRANS_LINEAR, Tween.EASE_OUT);
+	$TweenEnergy.start();
 
 func updateProteinRect():
-	$RectProtein.rect_size.x = (float(resourceStore.protein) / float(resourceStore.max_protein)) * energy_rect_max_width;
+	var protein_percent = float(resourceStore.protein) / float(resourceStore.max_protein);
+	$TweenProtein.interpolate_property(self, "animated_protein_percent",
+	        animated_protein_percent, protein_percent, tween_duration,
+	        Tween.TRANS_LINEAR, Tween.EASE_OUT);
+	$TweenProtein.start();
 
+func _process(delta):
+	$RectEnergy.rect_size.x = animated_energy_percent * energy_rect_max_width;
+	$RectProtein.rect_size.x = animated_protein_percent * protein_rect_max_width;	
 
 # attach label changing when values change
 

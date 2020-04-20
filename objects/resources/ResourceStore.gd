@@ -1,7 +1,7 @@
 extends Node2D
 
-var energy:int = 0;
-var protein:int = 0;
+export var energy:int = 0;
+export var protein:int = 0;
 export var max_energy:int = 1;
 export var max_protein:int = 1;
 
