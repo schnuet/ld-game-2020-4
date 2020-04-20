@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/audio_room_engine.wav-d4c7d25a29ae2964197b625fbb1462f4.sample"
+
+[deps]
+
+source_file="res://sounds/audio_room_engine.wav"
+dest_files=[ "res://.import/audio_room_engine.wav-d4c7d25a29ae2964197b625fbb1462f4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
