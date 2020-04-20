@@ -176,3 +176,12 @@ func need_energy():
 func add_energy(energy):
 	$ResourceStore.add_energy(energy)
 
+
+func _on_Station_body_entered(body):
+	if body.name == "Player":
+		$MusicPlayer.play()
+
+func _on_Station_body_exited(body):
+	if body.name == "Player":
+		$MusicPlayer.stop()
+

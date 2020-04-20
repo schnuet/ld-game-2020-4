@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://objects/stations/StomachStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/stations/stomach/stomach_room4.png" type="Texture" id=7]
 [ext_resource path="res://objects/stations/stationButtons/TakeProteinStationButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/stations/StomachStation/StomachStationButtons.gd" type="Script" id=9]
+[ext_resource path="res://sounds/audio_room_stomach.wav" type="AudioStream" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -50,7 +51,9 @@ visible = false
 enabled = false
 
 [node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
-enabled = true
+
+[node name="MusicPlayer" parent="." index="11"]
+stream = ExtResource( 10 )
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
 [connection signal="button_action_triggered" from="StationButtons/TakeProteinStationButton" to="." method="_on_TakeProteinStationButton_button_action_triggered"]
