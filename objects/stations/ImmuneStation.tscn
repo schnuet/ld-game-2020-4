@@ -13,19 +13,19 @@
 [ext_resource path="res://sprites/stations/room_background_frame_left_corner.png" type="Texture" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 6 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 6 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 6 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
@@ -128,7 +128,7 @@ region = Rect2( 384, 0, 128, 128 )
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "level3_5minions",
+"name": "level1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
@@ -175,6 +175,9 @@ texture = ExtResource( 11 )
 
 [node name="ResourceDisplay" parent="." index="8"]
 resourceStorePath = NodePath("../../ImmuneStation/ResourceStore")
+
+[node name="MinionPosition" parent="." index="8"]
+position = Vector2( 64, 24 )
 
 [node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 10 )

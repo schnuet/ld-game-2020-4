@@ -57,6 +57,7 @@ func _ready():
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 	$EnemyManager.init($Stations/HeartStation, $Stations/StomachStation, $Navigation2D)
+	$Stations/ImmuneStation.init($EnemyManager)
 
 func on_worker_requested(station):
 	var m = idle_minions.pop_front()
@@ -253,6 +254,10 @@ position = Vector2( 304, 96 )
 
 [node name="ImmuneStation" parent="Stations" instance=ExtResource( 14 )]
 position = Vector2( 160, 96 )
+energy_needed_for_action = 1
+active = true
+initial_damage = 2
+projectile_speed = 400.0
 
 [node name="LungStation" parent="Stations" instance=ExtResource( 16 )]
 position = Vector2( 98, 242 )
