@@ -136,3 +136,6 @@ func is_minion_assigned_here(minion):
 
 func can_assign_minion():
 	return get_assigned_minions().size() < max_minions;
+
+func on_minion_assigned(minion):
+	$ResourceDisplay.update_worker_count();

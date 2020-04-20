@@ -18,6 +18,14 @@ func _ready():
 	energy_rect_max_width = $RectEnergy.rect_size.x;
 	updateRects();
 	
+
+
+func update_worker_count():
+	var minion_count = get_parent().get_assigned_minions().size();
+	$MinionCountLabel.text = str(minion_count);
+
+# update bars
+
 func updateRects():
 	updateEnergyRect();
 	updateProteinRect();
@@ -25,15 +33,15 @@ func updateRects():
 func updateEnergyRect():
 	var energy_percent = float(resourceStore.energy) / float(resourceStore.max_energy);
 	$TweenEnergy.interpolate_property(self, "animated_energy_percent",
-	        animated_energy_percent, energy_percent, tween_duration,
-	        Tween.TRANS_LINEAR, Tween.EASE_OUT);
+        animated_energy_percent, energy_percent, tween_duration,
+        Tween.TRANS_LINEAR, Tween.EASE_OUT);
 	$TweenEnergy.start();
 
 func updateProteinRect():
 	var protein_percent = float(resourceStore.protein) / float(resourceStore.max_protein);
 	$TweenProtein.interpolate_property(self, "animated_protein_percent",
-	        animated_protein_percent, protein_percent, tween_duration,
-	        Tween.TRANS_LINEAR, Tween.EASE_OUT);
+        animated_protein_percent, protein_percent, tween_duration,
+        Tween.TRANS_LINEAR, Tween.EASE_OUT);
 	$TweenProtein.start();
 
 func _process(delta):

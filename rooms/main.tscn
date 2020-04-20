@@ -58,6 +58,7 @@ func on_worker_requested(station):
 	var m = idle_minions.pop_front()
 	if m != null:
 		m.assign_to_station(station)
+		station.on_minion_assigned(m)
 
 func on_worker_removed(station):
 	print(\"Worker-remove received\", station)
