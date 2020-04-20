@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sprites/creature/kronenberg_back.png" type="Texture" id=1]
 [ext_resource path="res://sprites/creature/kauen/kronenberg_kauen_rough4.png" type="Texture" id=2]
@@ -10,32 +10,33 @@
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough1.png" type="Texture" id=8]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough3.png" type="Texture" id=9]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough4.png" type="Texture" id=10]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough4.png" type="Texture" id=11]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final9.png" type="Texture" id=11]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough7.png" type="Texture" id=12]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough2.png" type="Texture" id=13]
 [ext_resource path="res://sprites/creature/kauen/kronenberg_kauen_rough5.png" type="Texture" id=14]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough5.png" type="Texture" id=15]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough6.png" type="Texture" id=16]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough3.png" type="Texture" id=17]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final1.png" type="Texture" id=16]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final7.png" type="Texture" id=17]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough11.png" type="Texture" id=18]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough6.png" type="Texture" id=19]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough10.png" type="Texture" id=20]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough5.png" type="Texture" id=21]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough7.png" type="Texture" id=22]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final2.png" type="Texture" id=21]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final4.png" type="Texture" id=22]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough8.png" type="Texture" id=23]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough12.png" type="Texture" id=24]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final8.png" type="Texture" id=24]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough9.png" type="Texture" id=25]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough11.png" type="Texture" id=26]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough1.png" type="Texture" id=27]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough10.png" type="Texture" id=28]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough9.png" type="Texture" id=29]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final6.png" type="Texture" id=26]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final10.png" type="Texture" id=27]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final11.png" type="Texture" id=28]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final13.png" type="Texture" id=29]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough12.png" type="Texture" id=30]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough13.png" type="Texture" id=31]
 [ext_resource path="res://sprites/creature/schlucken/kronenberg_schlucken_rough14.png" type="Texture" id=32]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough8.png" type="Texture" id=33]
-[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_rough2.png" type="Texture" id=34]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final3.png" type="Texture" id=33]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final5.png" type="Texture" id=34]
 [ext_resource path="res://sprites/creature/kronenberg_front.png" type="Texture" id=35]
 [ext_resource path="res://Creature/Kronenberg.gd" type="Script" id=36]
+[ext_resource path="res://sprites/creature/fressen/kronenberg_fressen_final12.png" type="Texture" id=37]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -44,20 +45,20 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 27 ), ExtResource( 34 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 21 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 24 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 21 ), ExtResource( 33 ), ExtResource( 22 ), ExtResource( 34 ), ExtResource( 26 ), ExtResource( 17 ), ExtResource( 24 ), ExtResource( 11 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 37 ), ExtResource( 29 ) ],
 "loop": true,
 "name": "fressen",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "kauen",
-"speed": 9.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 12 ), ExtResource( 23 ), ExtResource( 25 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "schlucken",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "kauen",
+"speed": 9.0
 } ]
 
 [node name="Kronenberg" type="Node2D"]
@@ -71,7 +72,7 @@ texture = ExtResource( 1 )
 position = Vector2( 232, 0 )
 frames = SubResource( 1 )
 animation = "fressen"
-frame = 2
+frame = 12
 playing = true
 centered = false
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

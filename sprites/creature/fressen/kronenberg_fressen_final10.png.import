@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kronenberg_fressen_rough11.png-b740c49ed182b8fdeca7bf77ceb3ff26.stex"
+path="res://.import/kronenberg_fressen_final10.png-0fedcf8d5d30098f05a11910333a0521.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/creature/fressen/kronenberg_fressen_rough11.png"
-dest_files=[ "res://.import/kronenberg_fressen_rough11.png-b740c49ed182b8fdeca7bf77ceb3ff26.stex" ]
+source_file="res://sprites/creature/fressen/kronenberg_fressen_final10.png"
+dest_files=[ "res://.import/kronenberg_fressen_final10.png-0fedcf8d5d30098f05a11910333a0521.stex" ]
 
 [params]
 
