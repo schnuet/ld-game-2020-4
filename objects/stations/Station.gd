@@ -89,6 +89,8 @@ func update():
 	$ResourceStore.set_max_protein(protein_needed_for_update);
 	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
 	$ActionTimer.wait_time *= 0.8;
+	
+	change_animation_to_level(upgrade_level);
 
 # listen for protein change: update if full
 func _on_ResourceStore_protein_amount_changed(amount):
