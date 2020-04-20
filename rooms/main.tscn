@@ -64,6 +64,7 @@ func _ready():
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 		station.connect(\"station_brain_token_requested\", self, \"on_station_brain_token_requested\")
+		station.connect(\"built\", self, \"_on_Station_built\")
 
 func _reset_position():
 	$EfficiencyTween.stop_all()
@@ -152,6 +153,14 @@ func _on_KidneyStation_minion_creation_requested():
 
 func _on_MovingStation_started_moving():
 	_reset_position()
+
+func _on_Station_built():
+	for station in find_node(\"Stations\").get_children():
+		station.exit_build_mode()
+
+func _on_HeartStation_heart_updated():
+	for station in find_node(\"Stations\").get_children():
+		station.enter_build_mode()
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -298,5 +307,6 @@ stream = ExtResource( 18 )
 [node name="EnemyManager" parent="." instance=ExtResource( 19 )]
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
+[connection signal="heart_updated" from="Stations/HeartStation" to="." method="_on_HeartStation_heart_updated"]
 [connection signal="request_station_boost_add" from="Stations/LungStation" to="." method="_on_LungStation_request_station_boost_add"]
 [connection signal="started_moving" from="Stations/MovingStation" to="." method="_on_MovingStation_started_moving"]
