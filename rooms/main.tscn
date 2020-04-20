@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Test.gd" type="Script" id=2]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=3]
@@ -227,8 +227,6 @@ position = Vector2( 384, 240 )
 
 [node name="FatStation" parent="Stations" instance=ExtResource( 17 )]
 position = Vector2( 240, 242 )
-
-[node name="Minion" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
