@@ -43,3 +43,12 @@ frames = SubResource( 1 )
 
 [node name="NewMinionPosition" type="Node2D" parent="." index="5"]
 position = Vector2( 48, 128 )
+
+[node name="AddMinionStationButton" parent="StationButtons" index="0"]
+enabled = true
+
+[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+enabled = true
+
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true

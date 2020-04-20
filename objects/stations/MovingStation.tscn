@@ -31,5 +31,14 @@ script = ExtResource( 2 )
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
 
-[node name="ResourceDisplay" parent="." index="5"]
+[node name="AddMinionStationButton" parent="StationButtons" index="0"]
+enabled = true
+
+[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+enabled = true
+
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true
+
+[node name="ResourceDisplay" parent="." index="7"]
 resourceStorePath = NodePath("../../MovingStation/ResourceStore")

@@ -29,7 +29,6 @@ max_protein = 15
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 1 )
-animation = "producing"
 
 [node name="ProteinTimer" type="Timer" parent="." index="5"]
 wait_time = 2.5
@@ -49,7 +48,11 @@ enabled = false
 visible = false
 enabled = false
 
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true
+
 [node name="TakeProteinStationButton" parent="StationButtons" index="4" instance=ExtResource( 8 )]
+enabled = true
 [connection signal="timeout" from="ProteinTimer" to="." method="_on_ProteinTimer_timeout"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
 [connection signal="button_action_triggered" from="StationButtons/TakeProteinStationButton" to="." method="_on_TakeProteinStationButton_button_action_triggered"]
