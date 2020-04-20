@@ -13,27 +13,27 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "day",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "night",
 "speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 12 ) ],
+}, {
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "day",
 "speed": 5.0
-}, {
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
 "frames": [ ExtResource( 16 ) ],
 "loop": true,
 "name": "night",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "day",
 "speed": 5.0
 } ]
 
@@ -67,7 +67,7 @@ texture = ExtResource( 1 )
 
 [node name="Cloud" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -152 )
-frames = SubResource( 6 )
+frames = SubResource( 2 )
 animation = "day"
 
 [node name="SceneChangeTimer" type="Timer" parent="."]
