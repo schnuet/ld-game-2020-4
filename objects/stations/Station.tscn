@@ -145,6 +145,10 @@ __meta__ = {
 position = Vector2( 64, 128 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -80.0
+autoplay = true
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_Station_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Station_body_exited"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_ActionTimer_timeout"]
