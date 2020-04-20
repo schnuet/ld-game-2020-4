@@ -6,6 +6,7 @@ var enemy_manager:EnemyManager
 
 export var initial_damage:int = 1
 export var dmg_increase_multiplier_per_level:float = 1.5
+export var shoot_cooldwon_reduction_per_level:float = 0.5
 export var secs_between_shoots:float = 5
 export var projectile_speed:float = 20
 
@@ -26,6 +27,7 @@ func init(enemy_manager:EnemyManager):
 func update():
 	.update()	
 	initial_damage = ceil(initial_damage * dmg_increase_multiplier_per_level)
+	secs_between_shoots = max(secs_between_shoots - shoot_cooldwon_reduction_per_level, 1)
 
 func perform_action():
 	_try_to_fire()
