@@ -24,6 +24,7 @@ func update():
 		$FatLevelDisplay/Level3.visible = true;
 
 	change_animation_to_level(upgrade_level);
+	update_energy_level_display();
 
 
 
