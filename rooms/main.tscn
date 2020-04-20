@@ -26,6 +26,9 @@ var Minion = preload(\"res://objects/Minions/Minion.tscn\");
 var inGameMusicStream = preload(\"res://sounds/ingame_music.ogg\")
 
 export(Vector2) var end
+export var stomach_energy_timer_minimum = 1
+export var stomach_energy_timer_maximum = 10
+export var stomach_energy_handicap_duration = 60
 var nav2D : Navigation2D
 
 onready var kidney = $Stations/KidneyStation
@@ -53,10 +56,20 @@ func _ready():
 	$MusicPlayer.stream = inGameMusicStream
 	$MusicPlayer.play()
 	nav2D = get_node(\"Navigation2D\")
+	_reset_position()
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
+
+func _reset_position():
+	$EfficiencyTween.stop_all()
+	$EfficiencyTween.interpolate_property(
+		$Stations/StomachStation/EnergyTimer,
+		\"wait_time\", stomach_energy_timer_minimum,
+		stomach_energy_timer_maximum, stomach_energy_handicap_duration,
+		Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$EfficiencyTween.start()
 
 func on_worker_requested(station):
 	var m = idle_minions.pop_front()
@@ -128,6 +141,9 @@ func _on_KidneyStation_minion_creation_requested():
 	get_tree().root.add_child(minion)
 	idle_minions.push_back(minion)
 	emit_signal(\"minion_created\", minion)
+
+func _on_MovingStation_update_position():
+	pass
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -268,6 +284,8 @@ position = Vector2( 398, 472 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 18 )
+
+[node name="EfficiencyTween" type="Tween" parent="."]
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
 [connection signal="request_station_boost_add" from="Stations/LungStation" to="." method="_on_LungStation_request_station_boost_add"]
