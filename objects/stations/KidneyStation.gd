@@ -6,16 +6,22 @@ signal minion_creation_requested
 
 export var max_creatable_minions = 1;
 
+func can_do_action():
+	if (.can_do_action()):
+		return can_create_minion();
+	else:
+		return false;
 
 func perform_action():
 	create_minion();
 	
 func update():
 	.update();
-	max_creatable_minions = floor(max_creatable_minions * 1.25);
+	max_creatable_minions += upgrade_level;
 
 
-func get_can_create_minion():
+
+func can_create_minion():
 	return get_all_minions().size() < max_creatable_minions;
 
 func get_all_minions():
@@ -23,8 +29,6 @@ func get_all_minions():
 
 
 func create_minion():
-	if (get_all_minions().size() >= max_creatable_minions):
-		return false;
-	
+	if (!can_create_minion()): return false;
 	emit_signal("minion_creation_requested");
 	print(get_all_minions().size());
