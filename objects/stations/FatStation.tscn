@@ -42,63 +42,63 @@ region = Rect2( 1024, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 128, 128, 128 )
+region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 128, 128, 128 )
+region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 128, 128, 128 )
+region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 128, 128, 128 )
+region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 3 )
-region = Rect2( 512, 128, 128, 128 )
+region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 128, 128, 128 )
+region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 128, 128, 128 )
+region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 3 )
-region = Rect2( 896, 128, 128, 128 )
+region = Rect2( 0, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 128, 128 )
+region = Rect2( 128, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 128, 128 )
+region = Rect2( 256, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 128, 128 )
+region = Rect2( 384, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 128, 128 )
+region = Rect2( 512, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 3 )
-region = Rect2( 512, 0, 128, 128 )
+region = Rect2( 640, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 0, 128, 128 )
+region = Rect2( 768, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 128, 128 )
+region = Rect2( 896, 128, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=25]
 animations = [ {
@@ -107,24 +107,96 @@ animations = [ {
 "name": "level3",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "level2",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "level1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "level2",
 "speed": 5.0
 } ]
 
 [node name="FatStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="RoomMachine" parent="." index="3"]
+[node name="FatLevelDisplay" type="Node2D" parent="." index="3"]
+
+[node name="Level1" type="Node2D" parent="FatLevelDisplay" index="0"]
+
+[node name="RectA" type="ColorRect" parent="FatLevelDisplay/Level1" index="0"]
+margin_left = 73.0
+margin_top = 46.0
+margin_right = 86.0
+margin_bottom = 70.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( -22, 7 )
+color = Color( 0.933333, 0.713726, 0.415686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RectB" type="ColorRect" parent="FatLevelDisplay/Level1" index="1"]
+margin_left = 163.0
+margin_top = 46.0
+margin_right = 176.0
+margin_bottom = 70.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( -22, 7 )
+color = Color( 0.933333, 0.713726, 0.415686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level2" type="Node2D" parent="FatLevelDisplay" index="1"]
+visible = false
+
+[node name="RectC" type="ColorRect" parent="FatLevelDisplay/Level2" index="0"]
+margin_left = 73.0
+margin_top = 90.0
+margin_right = 86.0
+margin_bottom = 114.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( -22, 7 )
+color = Color( 0.933333, 0.713726, 0.415686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RectD" type="ColorRect" parent="FatLevelDisplay/Level2" index="1"]
+margin_left = 163.0
+margin_top = 90.0
+margin_right = 176.0
+margin_bottom = 114.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( -22, 7 )
+color = Color( 0.933333, 0.713726, 0.415686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level3" type="Node2D" parent="FatLevelDisplay" index="2"]
+visible = false
+
+[node name="Rect" type="ColorRect" parent="FatLevelDisplay/Level3" index="0"]
+margin_left = 95.0
+margin_top = 91.0
+margin_right = 151.0
+margin_bottom = 144.0
+rect_rotation = 180.0
+color = Color( 0.933333, 0.713726, 0.415686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="FatLevelDisplay" index="3"]
+
+[node name="RoomMachine" parent="." index="4"]
 rotation = -3.61918e-05
 frames = SubResource( 25 )
 animation = "level1"
 
-[node name="ResourceDisplay" parent="." index="7"]
+[node name="ResourceDisplay" parent="." index="8"]
 resourceStorePath = NodePath("../../FatStation/ResourceStore")
+[connection signal="energy_amount_changed" from="ResourceStore" to="." method="_on_ResourceStore_energy_amount_changed"]
