@@ -12,6 +12,8 @@ export var energy_needed_for_action = 10;
 
 export var max_minions = 2;
 
+export var do_action_automatically = true;
+
 # update
 var can_be_updated setget ,get_can_be_updated;
 var upgrade_level = 0;
@@ -22,6 +24,10 @@ var action_timer_time = 1; # in seconds
 signal worker_requested;
 signal worker_removed;
 signal station_protein_requested;
+
+var is_boosted_by_lung = false;
+
+
 
 func _ready():
 	$ResourceStore.max_energy = max_energy;
@@ -93,15 +99,20 @@ func change_animation_to_level(level:int):
 # activate action when action timer runs out:
 func _on_ActionTimer_timeout():
 	$ActionTimer.wait_time = action_timer_time;
-	trigger_action();
+	if (do_action_automatically):
+		trigger_action();
 
 # perform the action if there's enough energy for it:
 func trigger_action():
+	if (can_do_action()):
+		$ResourceStore.take_energy(energy_needed_for_action);
+		perform_action();
+
+func can_do_action():
 	if ($ResourceStore.energy < energy_needed_for_action):
 		return false;
 	else:
-		$ResourceStore.take_energy(energy_needed_for_action);
-		perform_action();
+		return true;
 
 # do the action
 func perform_action():
