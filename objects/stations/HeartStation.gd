@@ -24,9 +24,11 @@ func _process(delta):
 func remove_energy(amount:int):
 	$ResourceStore.remove_energy(amount)
 
-func perform_update_action():
+func update():
+	.update()
 	current_energy_consumption += energy_consumption_increase_per_level
 	emit_signal("heart_updated")
+	change_animation_to_level(upgrade_level)
 
 func _on_energy_amount_changed(energy):
 	if $ResourceStore.has_energy() == false:
