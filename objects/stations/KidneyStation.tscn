@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/KidneyStation.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sprites/stations/kidney/kidney_room_create minion1.png" type="Texture" id=14]
 [ext_resource path="res://sprites/stations/kidney/kidney_room_preparation10.png" type="Texture" id=15]
 [ext_resource path="res://sprites/stations/kidney/room_kidney_idle.png" type="Texture" id=16]
+[ext_resource path="res://sounds/audio_room_kidney.wav" type="AudioStream" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -47,3 +48,6 @@ energy = 10
 
 [node name="NewMinionPosition" type="Node2D" parent="." index="5"]
 position = Vector2( 48, 128 )
+
+[node name="MusicPlayer" parent="." index="10"]
+stream = ExtResource( 17 )
