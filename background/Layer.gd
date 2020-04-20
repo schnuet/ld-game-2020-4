@@ -22,8 +22,6 @@ func _process(delta):
 	position.x -= delta * pixels_per_second;
 	
 func create_layer_after_this():
-	print("moved out");
-	
 	var daytime_suffix = "_day";
 	if (is_night):
 		 daytime_suffix = "_night";
@@ -47,7 +45,6 @@ func switch_to_next_animation():
 	next_animation_index += 1;
 	if (next_animation_index >= animations.size()):
 		next_animation_index = 0;
-	print("switched to animation ", animations[next_animation_index]);
 
 func switch_daytime():
 	is_night = !is_night;
