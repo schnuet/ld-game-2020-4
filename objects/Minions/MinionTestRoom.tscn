@@ -20,6 +20,8 @@ var nav2D : Navigation2D
 onready var minion = $Minion
 var path = []
 
+var idle_minions
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
@@ -32,7 +34,7 @@ func _input(event):
 			# If it's the right button, set the ending point
 			end = event.position
 			print_debug(\"Clicked\")
-			minion.go_to_station(end)
+			minion.go_to_position(end)
 		# Reset the sprite position       
 		
 
@@ -40,7 +42,8 @@ func _input(event):
 func _ready():
 	nav2D = get_node(\"Navigation2D\")
 	minion.set_navigation_2d(nav2D)
-
+	minion.god = self
+	idle_minions = [minion]
 
 func _process(delta):
 	# Get the list of points that compose the path
@@ -53,6 +56,13 @@ func _draw():
 	for p in path:
 		#print_debug(p)
 		draw_circle(p, 10, Color(1, 1, 1))
+
+
+func _on_worker_requested(station):
+	idle_minions[0].assign_to_station(station)
+
+func get_energy_station():
+	return $Stations/StomachStation
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -174,3 +184,5 @@ position = Vector2( 48, 384 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
 position = Vector2( 398, 472 )
+[connection signal="worker_requested" from="Stations/StomachStation" to="." method="_on_worker_requested"]
+[connection signal="worker_requested" from="Stations/HeartStation" to="." method="_on_worker_requested"]

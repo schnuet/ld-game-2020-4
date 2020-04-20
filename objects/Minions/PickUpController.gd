@@ -10,7 +10,7 @@ var god
 var energy_source
 
 var collecting_energy:bool = false
-var current_energy_station
+
 
 enum CollectingState {
 	GoingToSource,
@@ -48,7 +48,7 @@ func assign_to_station(station):
 func go_collecting_energy():
 	energy_source = god.get_energy_station()
 
-	go_to_position(energy_source.get_position_for_minions())
+	minion.move_to_pos(energy_source.get_position_for_minions())
 	current_state = CollectingState.GoingToSource
 
 func _physics_process(delta):
@@ -70,18 +70,18 @@ func _on_MinionController_target_pos_reached():
 		_put_energy_in_station_if_not_full()
 
 func _collect_energy_if_available():
-	if current_energy_station != null:
-		if current_energy_station.has_energy():
+	if energy_source != null:
+		if energy_source.has_energy():
 			_collect_energy()
 			_go_back()
 
 func _collect_energy():
-	var energy = current_energy_station.take_energy()
+	var energy = energy_source.take_energy()
 	resource_store.add_energy(energy)
 
 func _go_back():
 	current_state = CollectingState.GoingBack
-	go_to_position(assigned_station.get_position_for_minions())
+	minion.move_to_pos(assigned_station.get_position_for_minions())
 
 func _put_energy_in_station_if_not_full():
 	if assigned_station.can_add_energy():
