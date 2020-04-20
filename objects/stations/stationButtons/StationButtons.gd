@@ -17,27 +17,42 @@ func _process(delta):
 
 
 func update_standard_buttons_visibility():
-	var can_add_minions = $AddMinionStationButton.enabled;
-	var can_remove_minions = $RemoveMinionStationButton.enabled;
+	var can_add_minion = $AddMinionStationButton.enabled;
+	var can_remove_minion = $RemoveMinionStationButton.enabled;
 	var can_add_protein = $PutProteinStationButton.enabled;
 
 	# only show the relevant actions for the current moment:
 	var player_res = player.get_node("ResourceStore");
 	if (player_res.protein > 0):
-		can_add_minions = false;
-		can_remove_minions = false;
+		can_add_minion = false;
+		can_remove_minion = false;
 		if not station.get_node("ResourceStore").can_add_protein():
 			can_add_protein = false;
 	else:
 		can_add_protein = false;
+		
+	var stations_minions = station.get_assigned_minions();
+	if (not stations_minions.empty()):
+		print(stations_minions);
 
-	# check mimion counts
-	if (station.assigned_workers.empty()):
-		can_remove_minions = false;
+	# check minion counts
+	if (station.get_assigned_minions().empty()):
+		can_remove_minion = false;
+	elif (not station.can_assign_minion()):
+		can_add_minion = false;
+	
+	# no idle workers
+	if (not are_idle_minions_available()):
+		can_add_minion = false;
 
-	$AddMinionStationButton.visible = can_add_minions;
-	$RemoveMinionStationButton.visible = can_remove_minions;
+	$AddMinionStationButton.visible = can_add_minion;
+	$RemoveMinionStationButton.visible = can_remove_minion;
 	$PutProteinStationButton.visible = can_add_protein;
+
+func are_idle_minions_available():
+	var current_scene = get_tree().current_scene;
+	if(current_scene.idle_minions.size() <= 0): return false;
+	return true;
 
 # show the buttons when the player enters the room
 func _on_StationButtons_body_entered(body):
