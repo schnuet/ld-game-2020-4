@@ -12,3 +12,6 @@ position = Vector2( 192, 512 )
 
 [node name="Waypoint2" type="Node2D" parent="EnemyPath"]
 position = Vector2( 192, 368 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
