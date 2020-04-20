@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/audio_room_brain.wav-e208e4d4550fb112a7d031b3a52f7072.sample"
+
+[deps]
+
+source_file="res://sounds/audio_room_brain.wav"
+dest_files=[ "res://.import/audio_room_brain.wav-e208e4d4550fb112a7d031b3a52f7072.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

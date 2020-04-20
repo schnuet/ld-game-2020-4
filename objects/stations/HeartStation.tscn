@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://objects/stations/HeartStation.gd" type="Script" id=1]
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/stations/heart/heartroomnoback2.png" type="Texture" id=3]
 [ext_resource path="res://sprites/stations/heart/heartroomnoback.png" type="Texture" id=4]
 [ext_resource path="res://sprites/stations/heart/heartroomnoback3.png" type="Texture" id=5]
+[ext_resource path="res://sounds/audio_room_heart.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -98,8 +99,10 @@ animations = [ {
 
 [node name="HeartStation" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-do_action_automatically = false
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 19 )
 animation = "level1"
+
+[node name="MusicPlayer" parent="." index="9"]
+stream = ExtResource( 6 )
