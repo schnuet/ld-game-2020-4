@@ -1,14 +1,20 @@
 extends Node2D
 
+class_name EnemyManager
+
+signal enemy_spawned
+
 var heart_station:Station
 var stomach_station:Station
 var nav2D:Navigation2D
 
 export var snail_speed:int = 50
 export var snail_damage:int = 3
+export var snail_health:int = 4
 
 export var bakterie_speed:int = 80
 export var bakterie_damage:int = 1
+export var bakterie_health:int = 1
 
 export var spawn_time_range:Vector2 = Vector2(10,20)
 export var upgrades_needed_for_bigger_enemy = 10
@@ -32,14 +38,14 @@ func init(heart_station:Station, stomach_station:Station, navigation:Navigation2
 
 func spawn_snail():
 	var snail = snail_enemy.instance()
-	_add_enemy_to_scene(snail, snail_speed, snail_damage)	
+	_add_enemy_to_scene(snail, snail_speed, snail_damage, snail_health)	
 
 func spawn_bakterie():
 	var bakterie = bakterie_enemy.instance()
-	_add_enemy_to_scene(bakterie, bakterie_speed, bakterie_damage)
+	_add_enemy_to_scene(bakterie, bakterie_speed, bakterie_damage, bakterie_health)
 	
-func _add_enemy_to_scene(enemy, speed, damage):
-	enemy.init(heart_station, nav2D, speed, damage)
+func _add_enemy_to_scene(enemy, speed, damage, health):
+	enemy.init(heart_station, nav2D, speed, damage, health)
 	enemy.global_position = stomach_station.get_position_for_minions()
 	print(stomach_station.global_position)
 	add_child(enemy)
@@ -47,6 +53,10 @@ func _add_enemy_to_scene(enemy, speed, damage):
 
 
 func _on_SpawnTimer_timeout():
+	_spawn_enemy()
+	_start_timer()
+
+func _spawn_enemy():
 	if _total_upgrades_in_scene() >= upgrades_needed_for_bigger_enemy:
 		var enemy_to_spawn = randi() % 2
 		if enemy_to_spawn == 0:
@@ -55,7 +65,7 @@ func _on_SpawnTimer_timeout():
 			spawn_snail()
 	else:
 		spawn_bakterie()
-	_start_timer()
+	emit_signal("enemy_spawned")
 
 func _start_timer():
 	randomize()

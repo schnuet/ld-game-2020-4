@@ -3,7 +3,7 @@ extends Node2D
 class_name Enemy
 
 var damage:int
-
+var health:int
 
 onready var movement_controller = $EnemyMovementController
 
@@ -11,11 +11,13 @@ var heart_station
 
 var current_path:Array
 
-func init(heart:Station, nav:Navigation2D, walk_speed:int=50, damage:int=3):
+
+func init(heart:Station, nav:Navigation2D, walk_speed:int=50, damage:int=3, health:int=2):
 	$EnemyMovementController.nav2D = nav
 	heart_station = heart
 	$EnemyMovementController.walk_speed = walk_speed
 	self.damage = damage
+	self.health = health
 	
 func enter_ladder(top_pos, bottom_pos, id):
 	movement_controller.enter_ladder(top_pos, bottom_pos, id)
@@ -31,6 +33,11 @@ func walk_path_and_then_to_heart(path:Array):
 	current_path.push_back(heart_station.get_position_for_minions())
 	var first_pos = current_path.pop_front()
 	go_to_position(first_pos)
+
+func take_damage(damage:int):
+	health -= damage
+	if health <= 0:
+		queue_free()
 
 func _physics_process(delta):
 	pass
