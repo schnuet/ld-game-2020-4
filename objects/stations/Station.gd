@@ -50,6 +50,9 @@ func remove_worker():
 func add_protein():
 	emit_signal("station_protein_requested", self);
 
+
+
+
 # update methods
 
 func get_can_be_updated():
@@ -67,6 +70,22 @@ func update():
 	$ResourceStore.set_max_protein(protein_needed_for_update);
 	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
 	$ActionTimer.wait_time *= 0.8;
+
+# listen for protein change: update if full
+func _on_ResourceStore_protein_amount_changed(amount):
+	if (get_can_be_updated()):
+		print("starting station update");
+		update();
+	else:
+		return false;
+
+func change_animation_to_level(level:int):
+	if (level == 2):
+		$RoomMachine.animation = "level2";
+	elif (level >= 3):
+		$RoomMachine.animation = "level3";
+
+
 
 
 # action methods
@@ -89,6 +108,7 @@ func perform_action():
 	pass;
 
 
+# protein methods
 
 # move protein to another object
 func give_protein_to(body, amount = 1):
@@ -103,21 +123,8 @@ func receive_protein_from(body, amount = 1):
 		$ResourceStore.add_protein(protein_taken);
 
 
-# listen for resource update readyness
-func _on_ResourceStore_protein_amount_changed(amount):
-	if (get_can_be_updated()):
-		print("starting station update");
-		update();
-	else:
-		return false;
 
-func remove_action_trigger_listener(body, method_as_string):
-	if (is_connected("action_triggered", body, method_as_string)):
-		disconnect("action_triggered", body, method_as_string);
-		return true;
-	else:
-		return false;
-
+# minion functions
 
 func get_position_for_minions():
 	return $MinionPosition.global_position;
@@ -139,3 +146,10 @@ func can_assign_minion():
 
 func on_minion_assigned(minion):
 	$ResourceDisplay.update_worker_count();
+	
+
+
+# energy methods
+
+func can_add_energy():
+	return !$ResourceStore.can_add_energy();
