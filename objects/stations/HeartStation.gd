@@ -14,5 +14,5 @@ func _process(delta):
 	
 	pass
 
-func take_energy(amount:int):
+func remove_energy(amount:int):
 	$ResourceStore.remove_energy(amount)

@@ -17,7 +17,7 @@
 [ext_resource path="res://objects/stations/MovingStation.tscn" type="PackedScene" id=15]
 [ext_resource path="res://objects/stations/LungStation.tscn" type="PackedScene" id=16]
 [ext_resource path="res://objects/stations/FatStation.tscn" type="PackedScene" id=17]
-[ext_resource path="res://objects/enemy/EnemyManager.gd" type="Script" id=18]
+[ext_resource path="res://objects/enemy/EnemyManager.tscn" type="PackedScene" id=18]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -43,8 +43,10 @@ func _input(event):
 				for minion in idle_minions:
 					minion.go_to_position(end)
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_E:
+		if event.pressed and event.scancode == KEY_K:
 			$EnemyManager.spawn_snail()
+		elif event.pressed and event.scancode == KEY_L:
+			$EnemyManager.spawn_bakterie()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -264,15 +266,6 @@ position = Vector2( 56, 386 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 398, 472 )
 
-[node name="EnemyManager" type="Node2D" parent="."]
-script = ExtResource( 18 )
-
-[node name="EnemyPath" type="Node2D" parent="EnemyManager"]
-
-[node name="Waypoint1" type="Node2D" parent="EnemyManager/EnemyPath"]
-position = Vector2( 192, 512 )
-
-[node name="Waypoint2" type="Node2D" parent="EnemyManager/EnemyPath"]
-position = Vector2( 192, 368 )
+[node name="EnemyManager" parent="." instance=ExtResource( 18 )]
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]

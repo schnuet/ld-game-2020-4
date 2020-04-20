@@ -2,7 +2,7 @@ extends Node2D
 
 var velocity:Vector2 = Vector2()
 
-export var walk_speed:int = 100
+export var walk_speed:int = 50
 export var idle_speed:int = 15
 export var time_to_idle:float = 1
 export var idle_range:float = 20
