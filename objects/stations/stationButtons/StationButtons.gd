@@ -31,10 +31,6 @@ func update_standard_buttons_visibility():
 	else:
 		can_add_protein = false;
 		
-	var stations_minions = station.get_assigned_minions();
-	if (not stations_minions.empty()):
-		print(stations_minions);
-
 	# check minion counts
 	if (station.get_assigned_minions().empty()):
 		can_remove_minion = false;
