@@ -54,6 +54,7 @@ __meta__ = {
 one_shot = true
 
 [node name="V" type="Sprite" parent="."]
+visible = false
 position = Vector2( 653.5, 332.75 )
 scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 6 )
