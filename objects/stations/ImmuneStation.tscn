@@ -28,83 +28,83 @@ atlas = ExtResource( 6 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 8 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 8 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 8 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 4 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 7 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 7 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 9 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 9 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 9 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=25]
@@ -116,27 +116,27 @@ animations = [ {
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "level2_3minions",
+"name": "level2_2minions",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "level3_3minions",
+"name": "level3_4minions",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
-"name": "level2_1minion",
+"name": "level3_3minions",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "level3_4minions",
+"name": "level2_1minion",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
-"name": "level2_2minions",
+"name": "level2_3minions",
 "speed": 5.0
 } ]
 
@@ -145,10 +145,26 @@ script = ExtResource( 2 )
 max_energy = 4
 energy_needed_for_action = 4
 description = "defense against parasites"
+projectile_speed = 40.0
 
 [node name="RoomMachine" parent="." index="3"]
 frames = SubResource( 25 )
 animation = "level1"
+
+[node name="ResourceStore" parent="." index="4"]
+energy = 10
+
+[node name="AddMinionStationButton" parent="StationButtons" index="0"]
+enabled = true
+
+[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+enabled = true
+
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true
+
+[node name="AddBrainTokenStationButton" parent="StationButtons" index="3"]
+enabled = true
 
 [node name="Border" parent="." index="7"]
 texture = ExtResource( 11 )
