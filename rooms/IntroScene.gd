@@ -12,4 +12,11 @@ func _ready():
 
 
 func _on_VideoPlayer_finished():
+	start();
+
+func _process(delta):
+	if (Input.is_action_pressed("trigger_action")):
+		start();
+	
+func start():
 	get_tree().change_scene("res://rooms/StartScreen.tscn")
