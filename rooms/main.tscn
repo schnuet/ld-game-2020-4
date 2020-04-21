@@ -65,6 +65,8 @@ func _ready():
 		station.connect(\"station_protein_requested\", self, \"on_station_protein_requested\")
 		station.connect(\"station_brain_token_requested\", self, \"on_station_brain_token_requested\")
 		station.connect(\"built\", self, \"_on_Station_built\")
+		
+	Utils.start_life_count();
 
 func _reset_position():
 	$EfficiencyTween.stop_all()
