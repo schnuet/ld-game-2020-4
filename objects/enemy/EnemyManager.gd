@@ -16,7 +16,8 @@ export var bakterie_speed:int = 80
 export var bakterie_damage:int = 1
 export var bakterie_health:int = 1
 
-export var spawn_time_range:Vector2 = Vector2(10,20)
+export var spawn_time_range:Vector2 = Vector2(20,30)
+export var spawn_time_reduction:float = 1
 export var upgrades_needed_for_bigger_enemy = 10
 
 var enemy_path
@@ -57,7 +58,9 @@ func _on_SpawnTimer_timeout():
 	_start_timer()
 
 func _spawn_enemy():
-	if _total_upgrades_in_scene() >= upgrades_needed_for_bigger_enemy:
+	var upgrades = _total_upgrades_in_scene()
+	spawn_time_range = spawn_time_range / (max(upgrades,1) * spawn_time_reduction)
+	if upgrades >= upgrades_needed_for_bigger_enemy:
 		var enemy_to_spawn = randi() % 2
 		if enemy_to_spawn == 0:
 			spawn_bakterie()
