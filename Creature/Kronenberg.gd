@@ -19,6 +19,11 @@ func _on_AnimatedSprite_animation_finished():
 				$AnimatedSprite.animation = "schlucken";
 		"schlucken":
 			$AnimatedSprite.animation = "idle";
-		"idle":
-			$AnimatedSprite.animation = "fressen";
+		
 			
+			
+
+
+func _on_StomachStation_eating_started():
+	if $AnimatedSprite.animation == "idle":
+		$AnimatedSprite.animation = "fressen"

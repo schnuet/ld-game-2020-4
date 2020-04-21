@@ -6,6 +6,7 @@ var protein_step_time setget set_protein_step_time, get_protein_step_time;
 
 signal player_requested_protein;
 
+signal eating_started
 
 
 # add resource to player
@@ -25,7 +26,7 @@ func _on_ProteinTimer_timeout():
 	
 func _on_EnergyTimer_timeout():
 	$ResourceStore.add_energy(1);
-
+	emit_signal("eating_started")
 
 
 # getters and setters for step time
