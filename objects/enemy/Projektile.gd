@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy
+var enemy setget set_enemy, get_enemy;
 var speed:float
 var damage:int
 
@@ -29,7 +29,17 @@ func _physics_process(delta):
 	
 
 func init(enemy, speed:float, damage:int):
+	if (not enemy.is_in_group("Enemy")):
+		print("ERROR: object assigned to bullet is not an enemy");
+		return;
 	self.enemy = enemy
 	self.speed = speed
 	self.damage = damage
 	$AnimatedSprite.play()
+	
+func set_enemy(e):
+	print("set enemy to " + str(enemy));
+	enemy = e;
+
+func get_enemy():
+	return enemy;
