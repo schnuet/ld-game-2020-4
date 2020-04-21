@@ -28,7 +28,8 @@ func update():
 	.update()	
 	initial_damage = ceil(initial_damage * dmg_increase_multiplier_per_level)
 	secs_between_shoots = max(secs_between_shoots - shoot_cooldwon_reduction_per_level, 1)
-
+	action_timer_time = secs_between_shoots
+	
 func perform_action():
 	_try_to_fire()
 

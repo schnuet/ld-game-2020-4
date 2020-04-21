@@ -286,6 +286,8 @@ position = Vector2( 192, 384 )
 
 [node name="HeartStation" parent="Stations" instance=ExtResource( 12 )]
 position = Vector2( 240, 242 )
+do_action_automatically = false
+energy_on_start = 10
 
 [node name="BrainStation" parent="Stations" instance=ExtResource( 13 )]
 position = Vector2( 304, 96 )
