@@ -30,9 +30,11 @@ func get_all_minions():
 
 func create_minion():
 	if (!can_create_minion()): return false;
+	is_working = true;
 	$RoomMachine.playing = true;
 
 
 func _on_RoomMachine_animation_finished():
 	$RoomMachine.stop();
 	emit_signal("minion_creation_requested");
+	is_working = false;

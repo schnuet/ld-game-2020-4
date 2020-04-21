@@ -36,6 +36,8 @@ signal built
 var boost_by_lung = 1.0;
 var has_brain_token = false;
 
+var is_working = false;
+
 
 
 func _ready():
@@ -63,12 +65,10 @@ func _ready():
 # build mode functions
 
 func enter_build_mode():
-	print("Enter build mode")
 	build_mode = !active
 	show_build_icon();
 
 func exit_build_mode():
-	print("Exit build mode")
 	build_mode = false
 	hide_build_icon();
 
@@ -142,7 +142,7 @@ func update():
 	protein_needed_for_update *= 2;
 	$ResourceStore.set_max_protein(protein_needed_for_update);
 	$ResourceStore.set_max_energy(floor($ResourceStore.max_energy * 1.5));
-	$ActionTimer.wait_time *= 0.8;
+	action_timer_time *= 0.8;
 	
 	change_animation_to_level(upgrade_level);
 
@@ -184,6 +184,8 @@ func trigger_action():
 		perform_action();
 
 func can_do_action():
+	if (is_working):
+		return false;
 	if ($ResourceStore.energy < energy_needed_for_action):
 		return false;
 	else:
