@@ -21,8 +21,7 @@ func _ready():
 	action_timer_time = secs_between_shoots
 
 func init(enemy_manager:EnemyManager):
-	self.enemy_manager = enemy_manager
-	$ResourceStore.add_energy(10)
+	self.enemy_manager = enemy_manager	
 
 func update():
 	.update()	

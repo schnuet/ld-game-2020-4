@@ -85,9 +85,9 @@ func on_worker_removed(station):
 	var assigned_minions = station.get_assigned_minions()
 	if assigned_minions.empty():
 		return
-		
-	var minion_removed = _try_to_remove_not_working_minion_from_station(station, assigned_minions)	
-	
+
+	var minion_removed = _try_to_remove_not_working_minion_from_station(station, assigned_minions)
+
 	if minion_removed == false:
 		_remove_minion_from_station(station, assigned_minions[0])
 
@@ -119,7 +119,7 @@ func on_station_brain_token_requested(station):
 func get_energy_source():
 	var fat_station_built = $Stations/FatStation.visible == true;
 	if (
-		fat_station_built && 
+		fat_station_built &&
 		$Stations/StomachStation/ResourceStore.energy < 1 &&
 		$Stations/StomachStation/ResourceStore.energy > 1
 	):
@@ -206,7 +206,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 3/name = "Navigation.png 3"
 3/texture = ExtResource( 5 )
 3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
+3/modulate = Color( 1, 1, 1, 0 )
 3/region = Rect2( 0, 0, 16, 16 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
@@ -252,7 +252,6 @@ position = Vector2( 488, 272 )
 script = ExtResource( 2 )
 
 [node name="Navigation" type="TileMap" parent="Navigation2D"]
-modulate = Color( 1, 1, 1, 0.223529 )
 z_index = 1
 tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
@@ -318,6 +317,7 @@ stream = ExtResource( 18 )
 
 [node name="LifeTimer" type="Timer" parent="."]
 autostart = true
+[connection signal="eating_started" from="Stations/StomachStation" to="Kronenberg" method="_on_StomachStation_eating_started"]
 [connection signal="player_requested_protein" from="Stations/StomachStation" to="." method="_on_StomachStation_player_requested_protein"]
 [connection signal="minion_creation_requested" from="Stations/KidneyStation" to="." method="_on_KidneyStation_minion_creation_requested"]
 [connection signal="heart_dead" from="Stations/HeartStation" to="." method="_on_heart_dead"]
