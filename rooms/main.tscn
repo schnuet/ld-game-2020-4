@@ -28,7 +28,7 @@ var inGameMusicStream = preload(\"res://sounds/ingame_music.ogg\")
 
 export(Vector2) var end
 export var stomach_energy_timer_minimum = 1
-export var stomach_energy_timer_maximum = 10
+export var stomach_energy_timer_maximum = 5
 export var stomach_energy_handicap_duration = 60
 var nav2D : Navigation2D
 

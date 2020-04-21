@@ -124,6 +124,8 @@ animations = [ {
 
 [node name="MovingStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+max_energy = 3
+energy_needed_for_action = 3
 description = "change terrain for more food"
 
 [node name="RoomMachine" parent="." index="3"]
