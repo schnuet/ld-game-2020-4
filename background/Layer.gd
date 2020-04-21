@@ -38,7 +38,6 @@ func create_layer_after_this():
 	get_parent().add_child_below_node(self, newLayer, false);
 
 func remove_self():
-	print("remove node");
 	queue_free();
 
 func switch_to_next_animation():
