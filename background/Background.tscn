@@ -72,10 +72,6 @@ position = Vector2( 0, -152 )
 frames = SubResource( 2 )
 animation = "day"
 
-[node name="SceneChangeTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
-
 [node name="NightDayTimer" type="Timer" parent="."]
 wait_time = 120.0
 autostart = true
