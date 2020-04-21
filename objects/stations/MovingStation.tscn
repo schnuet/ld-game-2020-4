@@ -130,6 +130,18 @@ description = "change terrain for more food"
 frames = SubResource( 25 )
 animation = "level1"
 
+[node name="AddMinionStationButton" parent="StationButtons" index="0"]
+enabled = true
+
+[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+enabled = true
+
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true
+
+[node name="AddBrainTokenStationButton" parent="StationButtons" index="3"]
+enabled = true
+
 [node name="Border" parent="." index="7"]
 texture = ExtResource( 6 )
 

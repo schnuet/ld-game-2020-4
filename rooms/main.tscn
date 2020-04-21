@@ -153,6 +153,7 @@ func _on_KidneyStation_minion_creation_requested():
 
 func _on_MovingStation_started_moving():
 	_reset_position()
+	$Background.change_environment();
 
 func _on_Station_built():
 	for station in find_node(\"Stations\").get_children():
