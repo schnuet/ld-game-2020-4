@@ -59,7 +59,7 @@ func _on_SpawnTimer_timeout():
 
 func _spawn_enemy():
 	var upgrades = _total_upgrades_in_scene()
-	spawn_time_range = spawn_time_range / (max(upgrades,1) * spawn_time_reduction)
+	#spawn_time_range = spawn_time_range / (float(max(upgrades,1.0)) * spawn_time_reduction)
 	if upgrades >= upgrades_needed_for_bigger_enemy:
 		var enemy_to_spawn = randi() % 2
 		if enemy_to_spawn == 0:
