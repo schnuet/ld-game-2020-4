@@ -51,6 +51,8 @@ animations = [ {
 
 [node name="BrainStation" instance=ExtResource( 1 )]
 script = ExtResource( 28 )
+max_energy = 4
+energy_needed_for_action = 4
 description = "produces room boosting token"
 
 [node name="RoomMachine" parent="." index="3"]

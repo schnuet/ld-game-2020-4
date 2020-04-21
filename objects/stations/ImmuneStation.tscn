@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://objects/stations/Station.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/stations/ImmuneStation.gd" type="Script" id=2]
-[ext_resource path="res://sprites/stations/immune/Orville_level3_5minions.png" type="Texture" id=3]
 [ext_resource path="res://sprites/stations/immune/Orville_level3_4minions.png" type="Texture" id=4]
 [ext_resource path="res://sprites/stations/immune/Orville_level3_3minions.png" type="Texture" id=5]
 [ext_resource path="res://sprites/stations/immune/Orville_level1_1minions.png" type="Texture" id=6]
@@ -108,23 +107,7 @@ region = Rect2( 256, 0, 128, 128 )
 atlas = ExtResource( 8 )
 region = Rect2( 384, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 6 )
-region = Rect2( 128, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 6 )
-region = Rect2( 256, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 6 )
-region = Rect2( 384, 0, 128, 128 )
-
-[sub_resource type="SpriteFrames" id=29]
+[sub_resource type="SpriteFrames" id=25]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
@@ -155,19 +138,16 @@ animations = [ {
 "loop": true,
 "name": "level2_2minions",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "level1",
-"speed": 5.0
 } ]
 
 [node name="ImmuneStation" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+max_energy = 4
+energy_needed_for_action = 4
 description = "defense against parasites"
 
 [node name="RoomMachine" parent="." index="3"]
-frames = SubResource( 29 )
+frames = SubResource( 25 )
 animation = "level1"
 
 [node name="Border" parent="." index="7"]
@@ -176,7 +156,7 @@ texture = ExtResource( 11 )
 [node name="ResourceDisplay" parent="." index="8"]
 resourceStorePath = NodePath("../../ImmuneStation/ResourceStore")
 
-[node name="MinionPosition" parent="." index="8"]
+[node name="MinionPosition" parent="." index="9"]
 position = Vector2( 64, 24 )
 
 [node name="MusicPlayer" parent="." index="12"]
