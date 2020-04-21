@@ -7,6 +7,9 @@ func _ready():
 	$SecondsAliveLabel.text = str(Utils.get_count()) + " seconds";
 	$SecondsAliveLabel.visible = false;
 	$RestartButton.visible = false;
+	
+	# reset the seconds alive
+	Utils.seconds_alive = 0;
 
 
 func _on_VideoPlayer_finished():

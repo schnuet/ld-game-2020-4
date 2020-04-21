@@ -14,7 +14,6 @@ static func filter(filter_function: FuncRef, candidate_array: Array)->Array:
     return filtered_array
 
 func count_up():
-	print("alive for " + str(seconds_alive) + " seconds");
 	seconds_alive += 1;
 
 func get_count():
