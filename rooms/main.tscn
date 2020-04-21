@@ -27,9 +27,6 @@ var Minion = preload(\"res://objects/Minions/Minion.tscn\");
 var inGameMusicStream = preload(\"res://sounds/ingame_music.ogg\")
 
 export(Vector2) var end
-export var stomach_energy_timer_minimum = 1
-export var stomach_energy_timer_maximum = 5
-export var stomach_energy_handicap_duration = 60
 var nav2D : Navigation2D
 
 onready var kidney = $Stations/KidneyStation
@@ -59,6 +56,7 @@ func _ready():
 	nav2D = get_node(\"Navigation2D\")
 	_reset_position()
 	$EnemyManager.init($Stations/HeartStation, $Stations/StomachStation, nav2D)
+	$Stations/ImmuneStation.init($EnemyManager)
 	for station in find_node(\"Stations\").get_children():
 		station.connect(\"worker_requested\", self, \"on_worker_requested\")
 		station.connect(\"worker_removed\", self, \"on_worker_removed\")
@@ -67,13 +65,7 @@ func _ready():
 		station.connect(\"built\", self, \"_on_Station_built\")
 
 func _reset_position():
-	$EfficiencyTween.stop_all()
-	$EfficiencyTween.interpolate_property(
-		$Stations/StomachStation/EnergyTimer,
-		\"wait_time\", stomach_energy_timer_minimum,
-		stomach_energy_timer_maximum, stomach_energy_handicap_duration,
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$EfficiencyTween.start()
+	$Stations/StomachStation.reset_food_efficiency();
 
 func on_worker_requested(station):
 	var m = idle_minions.pop_front()
@@ -296,6 +288,7 @@ position = Vector2( 304, 96 )
 
 [node name="ImmuneStation" parent="Stations" instance=ExtResource( 14 )]
 position = Vector2( 160, 96 )
+projectile_speed = 80.0
 
 [node name="LungStation" parent="Stations" instance=ExtResource( 16 )]
 position = Vector2( 98, 242 )
@@ -311,8 +304,6 @@ position = Vector2( 398, 472 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-
-[node name="EfficiencyTween" type="Tween" parent="."]
 
 [node name="EnemyManager" parent="." instance=ExtResource( 19 )]
 

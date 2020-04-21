@@ -8,11 +8,20 @@ signal player_requested_protein;
 
 signal eating_started
 
+export var efficiency_timer_minimum = 1;
+export var efficiency_timer_maximum = 5;
+export var energy_handicap_duration = 60;
+
+var energy_per_eating
+
+
+#func _process(delta):
+	#print(str($EnergyTimer.wait_time));
+
 
 # add resource to player
 func _on_TakeProteinStationButton_button_action_triggered():
 	emit_signal("player_requested_protein");
-
 
 
 # add resources on timeout
@@ -24,9 +33,32 @@ func _on_ProteinTimer_timeout():
 		$RoomMachine.playing = true;
 	$ResourceStore.add_protein(1);
 	
+	
 func _on_EnergyTimer_timeout():
+	eat();
+
+func eat():
 	$ResourceStore.add_energy(1);
-	emit_signal("eating_started")
+	emit_signal("eating_started");
+	$EnergyTimer.start();
+
+# food efficiency decreases steadily.
+func reset_food_efficiency():
+	$EfficiencyTween.stop_all();
+	$EfficiencyTween.interpolate_property(
+		$EnergyTimer,
+		"wait_time", efficiency_timer_minimum,
+		efficiency_timer_maximum, energy_handicap_duration,
+		Tween.TRANS_LINEAR, Tween.EASE_IN);
+	$EfficiencyTween.start();
+	eat();
+	print("reset food efficiency");
+
+
+func update():
+	.update()
+	efficiency_timer_minimum *= 0.9;
+	efficiency_timer_maximum *= 0.95;
 
 
 # getters and setters for step time
