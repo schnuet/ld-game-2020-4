@@ -35,7 +35,7 @@ func init(heart_station:Station, stomach_station:Station, navigation:Navigation2
 	self.heart_station = heart_station
 	self.stomach_station = stomach_station
 	self.nav2D = navigation
-	_start_timer()
+	$StartCooldownTimer.start();
 
 func spawn_snail():
 	var snail = snail_enemy.instance()
@@ -81,3 +81,7 @@ func _total_upgrades_in_scene():
 	for station in stations:
 		total_count += station.upgrade_level
 	return total_count
+
+
+func _on_StartCooldownTimer_timeout():
+	_start_timer()

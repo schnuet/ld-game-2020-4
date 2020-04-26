@@ -14,4 +14,9 @@ position = Vector2( 192, 512 )
 position = Vector2( 192, 368 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="StartCooldownTimer" type="Timer" parent="."]
+wait_time = 45.0
+one_shot = true
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="StartCooldownTimer" to="." method="_on_StartCooldownTimer_timeout"]
