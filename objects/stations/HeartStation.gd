@@ -1,9 +1,9 @@
 extends "res://objects/stations/Station.gd"
 
 export var energy_on_start:int = 5
-export var time_to_energy_consumption:int = 10
+export var time_to_energy_consumption:int = 6.5
 export var initial_energy_consumption:int = 1
-export var energy_consumption_increase_per_level:int = 1
+export var time_to_energy_consumption_decrease_per_level:float = 0.9
 
 var current_energy_consumption
 
@@ -28,7 +28,7 @@ func remove_energy(amount:int):
 
 func update():
 	.update()
-	current_energy_consumption += energy_consumption_increase_per_level
+	time_to_energy_consumption *= time_to_energy_consumption_decrease_per_level;
 	emit_signal("heart_updated")
 	change_animation_to_level(upgrade_level)
 

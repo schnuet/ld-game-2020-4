@@ -106,6 +106,18 @@ active = true
 frames = SubResource( 19 )
 animation = "level1"
 
+[node name="AddMinionStationButton" parent="StationButtons" index="0"]
+enabled = true
+
+[node name="RemoveMinionStationButton" parent="StationButtons" index="1"]
+enabled = true
+
+[node name="PutProteinStationButton" parent="StationButtons" index="2"]
+enabled = true
+
+[node name="AddBrainTokenStationButton" parent="StationButtons" index="3"]
+enabled = true
+
 [node name="MusicPlayer" parent="." index="12"]
 stream = ExtResource( 6 )
 
